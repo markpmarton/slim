@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.12.4](https://github.com/agntcy/slim/compare/slim-datapath-v0.12.3...slim-datapath-v0.12.4) - 2026-04-23
+
+### Other
+
+- *(datapath)* add pool remove and remove+insert cycle benchmarks ([#1529](https://github.com/agntcy/slim/pull/1529))
+
 ## [0.12.3](https://github.com/agntcy/slim/compare/slim-datapath-v0.12.2...slim-datapath-v0.12.3) - 2026-04-21
 
 ### Added
