@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Getting-Started-With-Slims on SLIM Documentation</title>
+		<link>//localhost:1313/getting-started-with-slim/</link>
+		<description>Recent content in Getting-Started-With-Slims on SLIM Documentation</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<atom:link href="//localhost:1313/getting-started-with-slim/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Getting Started</title>
+				<link>//localhost:1313/getting-started-with-slim/slim-howto/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/getting-started-with-slim/slim-howto/</guid>
+				<description>&lt;h1 id=&#34;getting-started-with-slim&#34;&gt;Getting Started with SLIM&lt;/h1&gt;&#xA;&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;&#xA;&lt;p&gt;SLIM is composed of multiple components, each with its own installation instructions. Choose the components you need based on your use case.&lt;/p&gt;&#xA;&lt;h3 id=&#34;slim-node&#34;&gt;SLIM Node&lt;/h3&gt;&#xA;&lt;p&gt;The SLIM Node is the core component that handles messaging operations.&lt;/p&gt;&#xA;&lt;p&gt;You can install the SLIM Node using Docker, Cargo, Helm, or the CLI binary. Choose the method that best fits your infrastructure.&lt;/p&gt;&#xA;&lt;h4 id=&#34;docker&#34;&gt;Docker&lt;/h4&gt;&#xA;&lt;p&gt;Pull the SLIM container image and run it with a configuration file:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Configuration Reference</title>
+				<link>//localhost:1313/getting-started-with-slim/slim-data-plane-config/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/getting-started-with-slim/slim-data-plane-config/</guid>
+				<description>&lt;h1 id=&#34;slim-data-plane-configuration&#34;&gt;SLIM Data Plane Configuration&lt;/h1&gt;&#xA;&lt;p&gt;This document provides comprehensive documentation for configuring the SLIM data plane. The configuration is written in YAML format and defines how the data plane runtime, services, authentication, and observability components operate.&lt;/p&gt;&#xA;&lt;p&gt;This documentation corresponds to the JSON schemas in the SLIM repository:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/agntcy/slim/blob/slim-v1.1.0/data-plane/core/config/src/grpc/schema/client-config.schema.json&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Client Configuration Schema&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/agntcy/slim/blob/slim-v1.1.0/data-plane/core/config/src/grpc/schema/server-config.schema.json&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Server Configuration Schema&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;configuration-structure-overview&#34;&gt;Configuration Structure Overview&lt;/h2&gt;&#xA;&lt;p&gt;The SLIM configuration file consists of three main sections:&lt;/p&gt;&#xA;&lt;h4 id=&#34;tracing&#34;&gt;Tracing&lt;/h4&gt;&#xA;&lt;p&gt;Observability and logging configuration&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

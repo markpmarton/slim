@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Getting Started | SLIM Documentation</title>
+  
+  
+  <link rel="stylesheet" href="/css/styles.min.css">
+  
+  <script>
+    
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+
+  <body class="is-doc">
+    <div class="app-container">
+      <header class="header">
+  <a href="/" class="logo-container" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+    <svg class="logo-svg" viewBox="0 0 492 112" xmlns="http://www.w3.org/2000/svg" style="height: 22px; width: auto; display: block; color: var(--primary);">
+      <path d="M436.006 111.94H-0.00390625V45.31C-0.00390625 20.29 20.2861 0 45.3061 0H491.826L435.996 111.94H436.006ZM40.8361 39.2L24.2661 94.15H50.3261L55.5561 75.07H71.7961V94.15H96.8761V17.83H65.2561C51.2961 17.83 45.8461 22.52 40.8361 39.2ZM60.6861 56.54L64.2861 43.68C66.0261 37.36 66.7961 36.48 70.6061 36.48H71.8061V56.54H60.6861ZM144.746 96.33C153.146 96.33 161.756 94.69 168.406 91.97V48.8H144.416V75.62H143.106C134.386 75.62 128.606 68.42 128.606 56.87C128.606 43.46 136.456 36.92 149.536 36.92C157.606 36.92 164.256 39.54 168.506 44.22V19.25C162.836 16.85 154.766 15.65 147.026 15.65C119.556 15.65 101.776 31.89 101.776 57.52C101.776 80.09 116.826 96.33 144.736 96.33H144.746ZM175.056 94.15H199.586V55.45C214.956 70.6 219.756 80.42 219.756 94.15H243.196V17.83H218.666V43.56L196.536 17.83H175.056V94.15ZM268.056 94.15H293.676V38.55H296.186C304.146 38.55 310.146 40.29 313.626 44.22V17.84H248.106V44.22C251.596 40.3 257.596 38.55 265.546 38.55H268.056V94.15ZM315.816 55.99C315.816 79.87 332.496 96.33 356.486 96.33C363.356 96.33 369.676 94.91 373.166 92.73V67.76C370.436 72.01 365.646 74.19 359.646 74.19C349.066 74.19 342.636 67.21 342.636 55.98C342.636 44.75 349.066 37.77 359.646 37.77C365.646 37.77 370.436 39.95 373.166 44.2V19.23C369.676 17.05 363.356 15.63 356.486 15.63C332.496 15.63 315.816 32.09 315.816 55.97V55.99ZM387.776 94.15H415.036L452.866 17.83H425.396L414.166 43.34L403.046 17.83H375.356L400.646 69.07L387.786 94.15H387.776Z" fill="currentColor"/>
+    </svg>
+    <span class="logo-divider" style="height: 16px; width: 1px; background-color: var(--border); margin: 0 0.25rem; display: inline-block;"></span>
+    <span class="logo-title">SLIM</span>
+  </a>
+  
+  <ul class="nav-links">
+    
+    
+      <li class="">
+        <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-controller/">Controller</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-integrations/slim-a2a/">Integrations</a>
+      </li>
+    
+  </ul>
+  
+  <div class="controls">
+    
+    <div class="search-container" id="search-container">
+      
+      <button class="search-toggle-btn" id="search-toggle-btn" aria-label="Toggle Search">
+        <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; display: block;">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      
+      <div class="search-input-wrapper" id="search-input-wrapper">
+        <svg class="search-icon-svg desktop-only-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" id="search-query-input" placeholder="Search docs..." autocomplete="off" spellcheck="false" aria-label="Search">
+        <span class="search-shortcut">/</span>
+        
+        
+        <button class="search-close-btn" id="search-close-btn" aria-label="Close Search">&times;</button>
+      </div>
+      
+      <div class="search-results-dropdown" id="search-results"></div>
+    </div>
+    
+    <a href="https://github.com/agntcy/slim" target="_blank" rel="noopener noreferrer" class="repo-tracker" aria-label="Go to Github Repository">
+      <div class="repo-tracker-full">
+        <div class="repo-tracker-row repo-tracker-row-top">
+          <div class="repo-tracker-title">
+            <svg class="repo-git-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: block; flex-shrink: 0;">
+              <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+            </svg>
+            <span class="repo-name">agntcy/slim</span>
+          </div>
+          <span class="repo-stat repo-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <span class="repo-stars-count">---</span>
+          </span>
+        </div>
+        <div class="repo-tracker-row repo-tracker-row-bottom">
+          <span class="repo-stat repo-forks">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 15V9a4 4 0 0 0-4-4H9"></path><line x1="6" y1="9" x2="6" y2="15"></line></svg>
+            <span class="repo-forks-count">---</span>
+          </span>
+          <span class="repo-stat repo-version">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <span class="repo-version-tag">---</span>
+          </span>
+        </div>
+      </div>
+      
+      <svg class="repo-tracker-compact-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
+        <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+      </svg>
+    </a>
+
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    
+    <button class="hamburger-btn" id="sidebar-toggle" aria-label="Toggle Sidebar">☰</button>
+  </div>
+</header>
+
+<script>
+  (function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    
+    function updateThemeIcons() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+    
+    updateThemeIcons();
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcons();
+      if (document.querySelector('.mermaid')) {
+        window.location.reload();
+      }
+    });
+    
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', () => {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+          sidebar.classList.toggle('open');
+        }
+      });
+    }
+
+    
+    fetch('https://api.github.com/repos/agntcy/slim')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          document.querySelector('.repo-stars-count').textContent = data.stargazers_count;
+        } else {
+          document.querySelector('.repo-stars-count').textContent = '24';
+        }
+        if (data.forks_count !== undefined) {
+          document.querySelector('.repo-forks-count').textContent = data.forks_count;
+        } else {
+          document.querySelector('.repo-forks-count').textContent = '12';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-stars-count').textContent = '24';
+        document.querySelector('.repo-forks-count').textContent = '12';
+      });
+
+    fetch('https://api.github.com/repos/agntcy/slim/releases/latest')
+      .then(res => res.json())
+      .then(data => {
+        if (data.tag_name !== undefined) {
+          document.querySelector('.repo-version-tag').textContent = data.tag_name;
+        } else {
+          document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+      });
+
+    
+    let searchIndex = null;
+    const searchContainer = document.getElementById('search-container');
+    const searchToggleBtn = document.getElementById('search-toggle-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+    const searchInput = document.getElementById('search-query-input');
+    const searchResults = document.getElementById('search-results');
+
+    async function loadSearchIndex() {
+      if (searchIndex) return;
+      try {
+        const response = await fetch('/index.json');
+        searchIndex = await response.json();
+      } catch (e) {
+        console.error("Failed to load search index", e);
+      }
+    }
+
+    searchToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.toggle('active');
+      if (searchContainer.classList.contains('active')) {
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+
+    searchCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.remove('active');
+      searchResults.innerHTML = '';
+      searchResults.classList.remove('active');
+    });
+
+    searchInput.addEventListener('focus', () => {
+      loadSearchIndex();
+      if (searchInput.value.trim().length > 0) {
+        searchResults.classList.add('active');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!searchContainer.contains(e.target)) {
+        searchResults.classList.remove('active');
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.remove('active');
+        }
+      }
+    });
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (query.length === 0) {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('active');
+        return;
+      }
+
+      if (!searchIndex) {
+        searchResults.innerHTML = '<div class="search-no-results">Loading index...</div>';
+        searchResults.classList.add('active');
+        return;
+      }
+
+      const filtered = searchIndex.filter(page => {
+        return page.title.toLowerCase().includes(query) || 
+               page.summary.toLowerCase().includes(query) || 
+               page.content.toLowerCase().includes(query);
+      }).slice(0, 7);
+
+      searchResults.innerHTML = '';
+      if (filtered.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+      } else {
+        filtered.forEach(page => {
+          const item = document.createElement('a');
+          item.href = page.permalink;
+          item.className = 'search-result-item';
+          item.innerHTML = `
+            <div class="search-result-title">${page.title}</div>
+            <div class="search-result-summary">${page.summary}</div>
+          `;
+          searchResults.appendChild(item);
+        });
+      }
+      searchResults.classList.add('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.add('active');
+        }
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+  })();
+</script>
+
+      
+      <div class="main-wrapper">
+        <aside class="sidebar">
+  <nav class="sidebar-nav">
+    
+    
+    <div class="sidebar-global-menu">
+      <h4 class="sidebar-section-title">Navigation</h4>
+      <ul class="sidebar-pages">
+        
+          <li>
+            <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+          </li>
+        
+          <li>
+            <a href="/slim-controller/">Controller</a>
+          </li>
+        
+          <li>
+            <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+          </li>
+        
+          <li>
+            <a href="/slim-integrations/slim-a2a/">Integrations</a>
+          </li>
+        
+      </ul>
+    </div>
+    
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Core Components</h4>
+        <ul class="sidebar-pages">
+          
+            <li class="">
+              <a href="/slim-controller/">SLIM Controller</a>
+            </li>
+          
+            <li class="">
+              <a href="/slim-controller-reference/">SLIM Controller Reference</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Getting-Started-With-Slims</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="active">
+                <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-data-plane-config/">Configuration Reference</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Groups</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group/">Group Creation and Management</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group-tutorial/">Group Communication Tutorial</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Integrations</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-a2a/">SLIM A2A</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-mcp/">MCP over SLIM</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-otel/">OpenTelemetry over SLIM</a>
+              </li>
+            
+          
+            
+              
+              <li class="sidebar-subsection">
+                <span class="sidebar-subsection-title" style="font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.5rem; color: var(--text-muted); display: block;">SLIMRPC</span>
+                <ul class="sidebar-pages" style="padding-left: 0.75rem; border-left: 1px solid var(--border); margin-left: 0.5rem; list-style: none;">
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-rpc/" style="font-size: 0.85rem;">Overview</a>
+                    </li>
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-slimrpc-compiler/" style="font-size: 0.85rem;">Protoc Plugin</a>
+                    </li>
+                  
+                </ul>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Messaging-Layers</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-data-plane/">Overview</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-session/">SLIM Sessions</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-authentication/">SLIM Authentication</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+    
+  </nav>
+</aside>
+
+        
+        <main class="content-container">
+          
+  <article class="markdown-content">
+    <h1 id="getting-started-with-slim">Getting Started with SLIM</h1>
+<h2 id="installation">Installation</h2>
+<p>SLIM is composed of multiple components, each with its own installation instructions. Choose the components you need based on your use case.</p>
+<h3 id="slim-node">SLIM Node</h3>
+<p>The SLIM Node is the core component that handles messaging operations.</p>
+<p>You can install the SLIM Node using Docker, Cargo, Helm, or the CLI binary. Choose the method that best fits your infrastructure.</p>
+<h4 id="docker">Docker</h4>
+<p>Pull the SLIM container image and run it with a configuration file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker pull ghcr.io/agntcy/slim:1.0.0
+</span></span></code></pre></div><p>Create a configuration file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># config.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">tracing</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">log_level</span><span class="p">:</span><span class="w"> </span><span class="l">info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">display_thread_names</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">display_thread_ids</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">runtime</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">n_cores</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">thread_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;slim-data-plane&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">drain_timeout</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">slim/0</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dataplane</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">servers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0.0.0.0:46357&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">insecure</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">clients</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span></span></span></code></pre></div><p>Run the container:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -it <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -v ./config.yaml:/config.yaml -p 46357:46357 <span class="se">\
+</span></span></span><span class="line"><span class="cl">    ghcr.io/agntcy/slim:1.0.0 /slim --config /config.yaml
+</span></span></code></pre></div><h4 id="cargo">Cargo</h4>
+<p>Install SLIM using Rust&rsquo;s package manager:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">RUSTFLAGS</span><span class="o">=</span><span class="s2">&#34;--cfg mls_build_async&#34;</span> cargo install agntcy-slim
+</span></span></code></pre></div><p>Create a configuration file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># config.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">tracing</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">log_level</span><span class="p">:</span><span class="w"> </span><span class="l">info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">display_thread_names</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">display_thread_ids</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">runtime</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">n_cores</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">thread_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;slim-data-plane&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">drain_timeout</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">slim/0</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dataplane</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">servers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0.0.0.0:46357&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">insecure</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">clients</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span></span></span></code></pre></div><p>Run SLIM:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">~/.cargo/bin/slim --config ./config.yaml
+</span></span></code></pre></div><h4 id="helm">Helm</h4>
+<p>For Kubernetes deployments, use the official Helm chart:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">helm pull oci://ghcr.io/agntcy/slim/helm/slim --version v1.1.0
+</span></span></code></pre></div>
+<div class="callout info">
+  <div class="callout-icon">
+    
+      ℹ️
+    
+  </div>
+  <div class="callout-body">
+    <p><strong>Configuration</strong></p>
+<p>For detailed configuration options, see the <a href="https://github.com/agntcy/slim/blob/slim-v1.1.0/charts/slim/values.yaml" target="_blank" rel="noopener noreferrer">values.yaml</a>
+ in the repository.</p>
+
+  </div>
+</div>
+
+<h4 id="cli-binary">CLI Binary</h4>
+<p>For local development and testing, use the <code>slimctl</code> binary.</p>
+<p>Install the <code>slimctl</code> binary following the <a href="#slimctl">instructions below</a>
+.</p>
+<h5 id="default-configuration">Default Configuration</h5>
+<p>Run with default settings:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slimctl slim start
+</span></span></code></pre></div><h5 id="custom-configuration">Custom Configuration</h5>
+<p>Create a configuration file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># config.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">tracing</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">log_level</span><span class="p">:</span><span class="w"> </span><span class="l">info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">display_thread_names</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">display_thread_ids</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">runtime</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">n_cores</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">thread_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;slim-data-plane&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">drain_timeout</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">slim/0</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dataplane</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">servers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0.0.0.0:46357&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">insecure</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">clients</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span></span></span></code></pre></div><p>Start SLIM with the configuration:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slimctl slim start --config ./config.yaml
+</span></span></code></pre></div><p>For more configuration options, see the <a href="/getting-started-with-slim/slim-data-plane-config/">SLIM Configuration reference</a>
+.</p>
+<h3 id="slim-controller">SLIM Controller</h3>
+<p>The SLIM Controller manages SLIM Nodes and provides a user-friendly interface for configuration.</p>
+<h4 id="docker-1">Docker</h4>
+<p>Pull the controller image:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker pull ghcr.io/agntcy/slim/control-plane:1.0.0
+</span></span></code></pre></div><p>Create a configuration file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># slim-control-plane.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">northbound</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">httpHost</span><span class="p">:</span><span class="w"> </span><span class="m">0.0.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">httpPort</span><span class="p">:</span><span class="w"> </span><span class="m">50051</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">logging</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l">INFO</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">southbound</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">httpHost</span><span class="p">:</span><span class="w"> </span><span class="m">0.0.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">httpPort</span><span class="p">:</span><span class="w"> </span><span class="m">50052</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">logging</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l">INFO</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">reconciler</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">maxRequeues</span><span class="p">:</span><span class="w"> </span><span class="m">15</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">maxNumOfParallelReconciles</span><span class="p">:</span><span class="w"> </span><span class="m">1000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">logging</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l">INFO</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">database</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">filePath</span><span class="p">:</span><span class="w"> </span><span class="l">/db/controlplane.db</span><span class="w">
+</span></span></span></code></pre></div><p>Run the controller:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -it <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -v ./slim-control-plane.yaml:/config.yaml -v .:/db <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -p 50051:50051 -p 50052:50052                      <span class="se">\
+</span></span></span><span class="line"><span class="cl">    ghcr.io/agntcy/slim/control-plane:1.0.0           <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -config /config.yaml
+</span></span></code></pre></div><h4 id="helm-1">Helm</h4>
+<p>For Kubernetes deployments:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">helm pull oci://ghcr.io/agntcy/slim/helm/slim-control-plane --version v1.1.0
+</span></span></code></pre></div><h3 id="slim-bindings">SLIM Bindings</h3>
+<p>Language bindings allow you to integrate SLIM with your applications.</p>
+<h4 id="python">Python</h4>
+<p>Install using pip:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install slim-bindings
+</span></span></code></pre></div><p>Or add to your <code>pyproject.toml</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">project</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c"># ...</span>
+</span></span><span class="line"><span class="cl"><span class="nx">dependencies</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;slim-bindings~=1.0&#34;</span><span class="p">]</span>
+</span></span></code></pre></div><p>For more information on the SLIM bindings, see the <a href="../../slim-messaging-layer/slim-data-plane/">Messaging Layer Tutorial</a>
+ and the <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples" target="_blank" rel="noopener noreferrer">Python Examples</a>
+.</p>
+<h4 id="go">Go</h4>
+<p>Install the Go bindings:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go get github.com/agntcy/slim-bindings-go@v1.1.0
+</span></span></code></pre></div><p>Run the setup tool to install native libraries:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go run github.com/agntcy/slim-bindings-go/cmd/slim-bindings-setup
+</span></span></code></pre></div><p>Add to your <code>go.mod</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">require</span><span class="w"> </span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">agntcy</span><span class="o">/</span><span class="nx">slim</span><span class="o">-</span><span class="nx">bindings</span><span class="o">-</span><span class="k">go</span><span class="w"> </span><span class="nx">v1</span><span class="mf">.1.0</span><span class="w">
+</span></span></span></code></pre></div>
+<div class="callout warning">
+  <div class="callout-icon">
+    
+      ⚠️
+    
+  </div>
+  <div class="callout-body">
+    <p><strong>C Compiler Required</strong></p>
+<p>The Go bindings use native libraries via <a href="https://pkg.go.dev/cmd/cgo" target="_blank" rel="noopener noreferrer">CGO</a>
+, so you&rsquo;ll need a C compiler installed on your system.</p>
+
+  </div>
+</div>
+
+<p>For more information on the Go bindings, see the <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/go/examples" target="_blank" rel="noopener noreferrer">Go Examples</a>
+.</p>
+<h4 id="kotlin">Kotlin</h4>
+<p>Add the Kotlin bindings to your Gradle project:</p>
+<h5 id="maven-central">Maven Central</h5>
+<p>Add to your <code>build.gradle.kts</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">implementation</span><span class="p">(</span><span class="s2">&#34;io.agntcy.slim:slim-bindings-kotlin:1.2.0&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>mavenCentral()</code> is the default repository in Gradle, so no additional repository configuration is needed.</p>
+<h5 id="github-packages">GitHub Packages</h5>
+<p>Add the GitHub Packages repository and dependency to your <code>build.gradle.kts</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">repositories</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">maven</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">url</span> <span class="p">=</span> <span class="n">uri</span><span class="p">(</span><span class="s2">&#34;https://maven.pkg.github.com/agntcy/slim&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">credentials</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">username</span> <span class="p">=</span> <span class="n">project</span><span class="p">.</span><span class="n">findProperty</span><span class="p">(</span><span class="s2">&#34;gpr.user&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">String</span><span class="p">?</span> <span class="o">?:</span> <span class="nc">System</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&#34;GITHUB_ACTOR&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">password</span> <span class="p">=</span> <span class="n">project</span><span class="p">.</span><span class="n">findProperty</span><span class="p">(</span><span class="s2">&#34;gpr.key&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">String</span><span class="p">?</span> <span class="o">?:</span> <span class="nc">System</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&#34;GITHUB_TOKEN&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">implementation</span><span class="p">(</span><span class="s2">&#34;io.agntcy.slim:slim-bindings-kotlin:1.2.0&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>
+<div class="callout info">
+  <div class="callout-icon">
+    
+      ℹ️
+    
+  </div>
+  <div class="callout-body">
+    <p><strong>GitHub Token Required</strong></p>
+<p>To use GitHub Packages, you need a personal access token with <code>read:packages</code> scope. Set <code>GITHUB_ACTOR</code> (your username) and <code>GITHUB_TOKEN</code> (your token) as environment variables, or use <code>gpr.user</code> and <code>gpr.key</code> in <code>gradle.properties</code>.</p>
+
+  </div>
+</div>
+
+
+<div class="callout info">
+  <div class="callout-icon">
+    
+      ℹ️
+    
+  </div>
+  <div class="callout-body">
+    <p><strong>JDK 17+ Required</strong></p>
+<p>The Kotlin bindings use <a href="https://github.com/java-native-access/jna" target="_blank" rel="noopener noreferrer">JNA</a>
+ for native library loading and require JDK 17 or higher.</p>
+
+  </div>
+</div>
+
+<p>For more information on the Kotlin bindings, see the <a href="https://github.com/agntcy/slim/tree/slim-bindings-v1.2.0/data-plane/bindings/kotlin/examples" target="_blank" rel="noopener noreferrer">Kotlin Examples</a>
+.</p>
+<h3 id="slimctl">Slimctl</h3>
+<p><code>slimctl</code> is a command-line tool for managing SLIM Nodes and Controllers.</p>
+<h4 id="installation-1">Installation</h4>
+<p>Choose your platform:</p>
+<h4 id="macos-apple-silicon">macOS (Apple Silicon)</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -LO https://github.com/agntcy/slim/releases/download/slimctl-v1.2.0/slimctl_1.2.0_darwin_arm64.tar.gz
+</span></span><span class="line"><span class="cl">tar -xzf slimctl_1.2.0_darwin_arm64.tar.gz
+</span></span><span class="line"><span class="cl">sudo mv slimctl /usr/local/bin/slimctl
+</span></span><span class="line"><span class="cl">sudo chmod +x /usr/local/bin/slimctl
+</span></span></code></pre></div>
+<div class="callout warning">
+  <div class="callout-icon">
+    
+      ⚠️
+    
+  </div>
+  <div class="callout-body">
+    <p><strong>macOS Security</strong></p>
+<p>You may need to allow the binary to run if blocked by Gatekeeper:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo xattr -rd com.apple.quarantine /usr/local/bin/slimctl
+</span></span></code></pre></div><p>Alternatively, go to <strong>System Settings &gt; Privacy &amp; Security</strong> and allow the application when prompted.</p>
+
+  </div>
+</div>
+
+<h4 id="macos-intel">macOS (Intel)</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -LO https://github.com/agntcy/slim/releases/download/slimctl-v1.2.0/slimctl_1.2.0_darwin_amd64.tar.gz
+</span></span><span class="line"><span class="cl">tar -xzf slimctl_1.2.0_darwin_amd64.tar.gz
+</span></span><span class="line"><span class="cl">sudo mv slimctl /usr/local/bin/slimctl
+</span></span><span class="line"><span class="cl">sudo chmod +x /usr/local/bin/slimctl
+</span></span></code></pre></div><h4 id="linux-amd64">Linux (AMD64)</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -LO https://github.com/agntcy/slim/releases/download/slimctl-v1.2.0/slimctl_1.2.0_linux_amd64.tar.gz
+</span></span><span class="line"><span class="cl">tar -xzf slimctl_1.2.0_linux_amd64.tar.gz
+</span></span><span class="line"><span class="cl">sudo mv slimctl /usr/local/bin/slimctl
+</span></span><span class="line"><span class="cl">sudo chmod +x /usr/local/bin/slimctl
+</span></span></code></pre></div><h4 id="linux-arm64">Linux (ARM64)</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -LO https://github.com/agntcy/slim/releases/download/slimctl-v1.2.0/slimctl_1.2.0_linux_arm64.tar.gz
+</span></span><span class="line"><span class="cl">tar -xzf slimctl_1.2.0_linux_arm64.tar.gz
+</span></span><span class="line"><span class="cl">sudo mv slimctl /usr/local/bin/slimctl
+</span></span><span class="line"><span class="cl">sudo chmod +x /usr/local/bin/slimctl
+</span></span></code></pre></div><h4 id="windows-amd64">Windows (AMD64)</h4>
+<p>Download and extract the Windows binary:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Using PowerShell</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">&#34;https://github.com/agntcy/slim/releases/download/slimctl-v1.2.0/slimctl-windows-amd64.zip&#34;</span> <span class="n">-OutFile</span> <span class="s2">&#34;slimctl.zip&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Expand-Archive</span> <span class="n">-Path</span> <span class="s2">&#34;slimctl.zip&#34;</span> <span class="n">-DestinationPath</span> <span class="s2">&#34;.&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Move to a directory in your PATH (e.g., C:\Program Files\slimctl\)</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Or add the current directory to your PATH</span>
+</span></span></code></pre></div><p>Alternatively, download directly from the <a href="https://github.com/agntcy/slim/releases/download/slimctl-v1.2.0/slimctl-windows-amd64.zip" target="_blank" rel="noopener noreferrer">releases page</a>
+.</p>
+<h4 id="windows-arm64">Windows (ARM64)</h4>
+<p>Download and extract the Windows binary:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Using PowerShell</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">&#34;https://github.com/agntcy/slim/releases/download/slimctl-v1.2.0/slimctl-windows-arm64.zip&#34;</span> <span class="n">-OutFile</span> <span class="s2">&#34;slimctl.zip&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Expand-Archive</span> <span class="n">-Path</span> <span class="s2">&#34;slimctl.zip&#34;</span> <span class="n">-DestinationPath</span> <span class="s2">&#34;.&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Move to a directory in your PATH (e.g., C:\Program Files\slimctl\)</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Or add the current directory to your PATH</span>
+</span></span></code></pre></div><p>Alternatively, download directly from the <a href="https://github.com/agntcy/slim/releases/download/slimctl-v1.2.0/slimctl-windows-arm64.zip" target="_blank" rel="noopener noreferrer">releases page</a>
+.</p>
+<p>Check the <a href="../../slim-controller/">slimctl documentation</a>
+ for additional installation methods.</p>
+<h4 id="verification">Verification</h4>
+<p>Verify the installation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slimctl <span class="nb">help</span>
+</span></span></code></pre></div><p>This should display help information and available commands.</p>
+<h2 id="building-from-source">Building from Source</h2>
+<p>You can build SLIM from source.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Install the following tools on your system:</p>
+<ul>
+<li><a href="https://taskfile.dev/" target="_blank" rel="noopener noreferrer">Taskfile</a>
+</li>
+<li><a href="https://rustup.rs/" target="_blank" rel="noopener noreferrer">Rust</a>
+</li>
+<li><a href="https://go.dev/doc/install" target="_blank" rel="noopener noreferrer">Go</a>
+</li>
+</ul>
+<h3 id="building-slim">Building SLIM</h3>
+<p>Once all prerequisites are installed, clone the repository and build the components:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Clone the SLIM repository</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/agntcy/slim
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> slim
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Build the data plane (Rust)</span>
+</span></span><span class="line"><span class="cl">task data-plane:build
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Build the control plane (Go)</span>
+</span></span><span class="line"><span class="cl">task control-plane:build
+</span></span></code></pre></div><p>For more information on the build system and development workflow, see the <a href="https://github.com/agntcy/slim" target="_blank" rel="noopener noreferrer">SLIM repository</a>
+.</p>
+<h2 id="next-steps">Next Steps</h2>
+<p>You&rsquo;ve installed SLIM! Here&rsquo;s what to do next:</p>
+<ol>
+<li>Read the <a href="../../slim-messaging-layer/slim-data-plane/">messaging layer documentation</a>
+</li>
+<li>Explore the <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/" target="_blank" rel="noopener noreferrer">example applications</a>
+</li>
+<li>Learn about <a href="../slim-data-plane-config/">configuration options</a>
+</li>
+<li>Join us on <a href="https://join.slack.com/t/agntcy/shared_invite/zt-3hb4p7bo0-5H2otGjxGt9OQ1g5jzK_GQ" target="_blank" rel="noopener noreferrer">Slack</a>
+</li>
+</ol>
+<h2 id="need-help">Need Help?</h2>
+<p>If you get stuck, check the <a href="../../">detailed documentation</a>
+, ask questions in our <a href="https://join.slack.com/t/agntcy/shared_invite/zt-3hb4p7bo0-5H2otGjxGt9OQ1g5jzK_GQ" target="_blank" rel="noopener noreferrer">community forums</a>
+, or report issues on <a href="https://github.com/agntcy/slim" target="_blank" rel="noopener noreferrer">GitHub</a>
+.</p>
+
+  </article>
+
+        </main>
+      </div>
+      
+      <footer class="footer">
+  <div>&copy; 2026 AGNTCY Contributors. All rights reserved.</div>
+</footer>
+
+<script>
+  (function() {
+    const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+      script.onload = function() {
+        mermaidBlocks.forEach(codeBlock => {
+          const pre = codeBlock.parentNode;
+          const div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = codeBlock.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: isDark ? 'dark' : 'default',
+          securityLevel: 'loose'
+        });
+      };
+      document.body.appendChild(script);
+    }
+  })();
+</script>
+
+    </div>
+  </body>
+</html>

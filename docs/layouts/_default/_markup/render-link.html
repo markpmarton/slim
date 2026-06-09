@@ -1,0 +1,15 @@
+{{- $url := .Destination -}}
+{{- if strings.HasSuffix $url "slim-howto.md" -}}
+  {{- $url = "/getting-started-with-slim/slim-howto/" | relURL -}}
+{{- else if strings.HasSuffix $url "slim-controller.md" -}}
+  {{- $url = "/slim-controller/" | relURL -}}
+{{- else if strings.HasSuffix $url "slim-controller-reference.md" -}}
+  {{- $url = "/slim-controller-reference/" | relURL -}}
+{{- else if strings.Contains $url ".md" -}}
+  {{- $url = replace $url ".md" "/" -}}
+  {{- $url = replace $url "../" "/" -}}
+  {{- $url = replace $url "./" "/" -}}
+  {{- $url = replace $url "//" "/" -}}
+  {{- $url = $url | relURL -}}
+{{- end -}}
+<a href="{{ $url | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Slim-Groups on SLIM Documentation</title>
+		<link>//localhost:1313/slim-groups/</link>
+		<description>Recent content in Slim-Groups on SLIM Documentation</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<atom:link href="//localhost:1313/slim-groups/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Group Creation and Management</title>
+				<link>//localhost:1313/slim-groups/slim-group/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/slim-groups/slim-group/</guid>
+				<description>&lt;h1 id=&#34;slim-group-creation-and-management&#34;&gt;SLIM Group Creation and Management&lt;/h1&gt;&#xA;&lt;p&gt;One of the key features of &lt;a href=&#34;../../&#34;&gt;SLIM&lt;/a&gt;&#xA; is its support for secure group communication.&#xA;In SLIM, a group consists of multiple clients that communicate through a shared&#xA;channel. Each channel is identified by a unique name, as described in the &lt;a href=&#34;//localhost:1313/slim-messaging-layer/slim-data-plane/&#34;&gt;SLIM&#xA;Messaging Layer&lt;/a&gt;&#xA;. When MLS is enabled, group&#xA;communication benefits from end-to-end encryption.&lt;/p&gt;&#xA;&lt;p&gt;This guide provides all the information you need to create and manage groups within a&#xA;SLIM network. A full tutorial with examples is available in&#xA;&lt;a href=&#34;../slim-group-tutorial/&#34;&gt;Group Communication Tutorial&lt;/a&gt;&#xA;.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Group Communication Tutorial</title>
+				<link>//localhost:1313/slim-groups/slim-group-tutorial/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/slim-groups/slim-group-tutorial/</guid>
+				<description>&lt;h1 id=&#34;slim-group-communication-tutorial&#34;&gt;SLIM Group Communication Tutorial&lt;/h1&gt;&#xA;&lt;p&gt;This tutorial shows how to set up secure group communication using&#xA;SLIM. The group is created by defining a group session and inviting&#xA;participants. Messages are sent to a shared channel where every member can read&#xA;and write. All messages are end-to-end encrypted using the&#xA;&lt;a href=&#34;https://datatracker.ietf.org/doc/html/rfc9420&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;MLS protocol&lt;/a&gt;&#xA;. This tutorial is&#xA;based on the&#xA;&lt;a href=&#34;https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples/group.py&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;group.py&lt;/a&gt;&#xA;&#xA;example in the SLIM repo.&lt;/p&gt;&#xA;&lt;h2 id=&#34;key-features&#34;&gt;Key Features&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Name-based Addressing&lt;/strong&gt;: In SLIM, all endpoints (channels and clients) have&#xA;a name, and messages use a name-based addressing scheme for content routing.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Session Management&lt;/strong&gt;: Allows for the creation and management of sessions using&#xA;both the SLIM Python Bindings and the SLIM Controller.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Broadcast Messaging&lt;/strong&gt;: Facilitates broadcast messaging to multiple&#xA;subscribers.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;End-to-End Encryption&lt;/strong&gt;: Ensures secure communication using the &lt;a href=&#34;https://datatracker.ietf.org/doc/html/rfc9420&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;MLS&#xA;protocol&lt;/a&gt;&#xA;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;configure-client-identity-and-implement-the-slim-app&#34;&gt;Configure Client Identity and Implement the SLIM App&lt;/h2&gt;&#xA;&lt;p&gt;Every participant in a group requires a unique identity for authentication and for use by the MLS protocol. This section explains how to set up identity and create a SLIM application instance.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

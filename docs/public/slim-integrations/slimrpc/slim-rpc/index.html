@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overview | SLIM Documentation</title>
+  
+  
+  <link rel="stylesheet" href="/css/styles.min.css">
+  
+  <script>
+    
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+
+  <body class="is-doc">
+    <div class="app-container">
+      <header class="header">
+  <a href="/" class="logo-container" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+    <svg class="logo-svg" viewBox="0 0 492 112" xmlns="http://www.w3.org/2000/svg" style="height: 22px; width: auto; display: block; color: var(--primary);">
+      <path d="M436.006 111.94H-0.00390625V45.31C-0.00390625 20.29 20.2861 0 45.3061 0H491.826L435.996 111.94H436.006ZM40.8361 39.2L24.2661 94.15H50.3261L55.5561 75.07H71.7961V94.15H96.8761V17.83H65.2561C51.2961 17.83 45.8461 22.52 40.8361 39.2ZM60.6861 56.54L64.2861 43.68C66.0261 37.36 66.7961 36.48 70.6061 36.48H71.8061V56.54H60.6861ZM144.746 96.33C153.146 96.33 161.756 94.69 168.406 91.97V48.8H144.416V75.62H143.106C134.386 75.62 128.606 68.42 128.606 56.87C128.606 43.46 136.456 36.92 149.536 36.92C157.606 36.92 164.256 39.54 168.506 44.22V19.25C162.836 16.85 154.766 15.65 147.026 15.65C119.556 15.65 101.776 31.89 101.776 57.52C101.776 80.09 116.826 96.33 144.736 96.33H144.746ZM175.056 94.15H199.586V55.45C214.956 70.6 219.756 80.42 219.756 94.15H243.196V17.83H218.666V43.56L196.536 17.83H175.056V94.15ZM268.056 94.15H293.676V38.55H296.186C304.146 38.55 310.146 40.29 313.626 44.22V17.84H248.106V44.22C251.596 40.3 257.596 38.55 265.546 38.55H268.056V94.15ZM315.816 55.99C315.816 79.87 332.496 96.33 356.486 96.33C363.356 96.33 369.676 94.91 373.166 92.73V67.76C370.436 72.01 365.646 74.19 359.646 74.19C349.066 74.19 342.636 67.21 342.636 55.98C342.636 44.75 349.066 37.77 359.646 37.77C365.646 37.77 370.436 39.95 373.166 44.2V19.23C369.676 17.05 363.356 15.63 356.486 15.63C332.496 15.63 315.816 32.09 315.816 55.97V55.99ZM387.776 94.15H415.036L452.866 17.83H425.396L414.166 43.34L403.046 17.83H375.356L400.646 69.07L387.786 94.15H387.776Z" fill="currentColor"/>
+    </svg>
+    <span class="logo-divider" style="height: 16px; width: 1px; background-color: var(--border); margin: 0 0.25rem; display: inline-block;"></span>
+    <span class="logo-title">SLIM</span>
+  </a>
+  
+  <ul class="nav-links">
+    
+    
+      <li class="">
+        <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-controller/">Controller</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-integrations/slim-a2a/">Integrations</a>
+      </li>
+    
+  </ul>
+  
+  <div class="controls">
+    
+    <div class="search-container" id="search-container">
+      
+      <button class="search-toggle-btn" id="search-toggle-btn" aria-label="Toggle Search">
+        <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; display: block;">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      
+      <div class="search-input-wrapper" id="search-input-wrapper">
+        <svg class="search-icon-svg desktop-only-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" id="search-query-input" placeholder="Search docs..." autocomplete="off" spellcheck="false" aria-label="Search">
+        <span class="search-shortcut">/</span>
+        
+        
+        <button class="search-close-btn" id="search-close-btn" aria-label="Close Search">&times;</button>
+      </div>
+      
+      <div class="search-results-dropdown" id="search-results"></div>
+    </div>
+    
+    <a href="https://github.com/agntcy/slim" target="_blank" rel="noopener noreferrer" class="repo-tracker" aria-label="Go to Github Repository">
+      <div class="repo-tracker-full">
+        <div class="repo-tracker-row repo-tracker-row-top">
+          <div class="repo-tracker-title">
+            <svg class="repo-git-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: block; flex-shrink: 0;">
+              <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+            </svg>
+            <span class="repo-name">agntcy/slim</span>
+          </div>
+          <span class="repo-stat repo-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <span class="repo-stars-count">---</span>
+          </span>
+        </div>
+        <div class="repo-tracker-row repo-tracker-row-bottom">
+          <span class="repo-stat repo-forks">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 15V9a4 4 0 0 0-4-4H9"></path><line x1="6" y1="9" x2="6" y2="15"></line></svg>
+            <span class="repo-forks-count">---</span>
+          </span>
+          <span class="repo-stat repo-version">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <span class="repo-version-tag">---</span>
+          </span>
+        </div>
+      </div>
+      
+      <svg class="repo-tracker-compact-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
+        <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+      </svg>
+    </a>
+
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    
+    <button class="hamburger-btn" id="sidebar-toggle" aria-label="Toggle Sidebar">☰</button>
+  </div>
+</header>
+
+<script>
+  (function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    
+    function updateThemeIcons() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+    
+    updateThemeIcons();
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcons();
+      if (document.querySelector('.mermaid')) {
+        window.location.reload();
+      }
+    });
+    
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', () => {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+          sidebar.classList.toggle('open');
+        }
+      });
+    }
+
+    
+    fetch('https://api.github.com/repos/agntcy/slim')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          document.querySelector('.repo-stars-count').textContent = data.stargazers_count;
+        } else {
+          document.querySelector('.repo-stars-count').textContent = '24';
+        }
+        if (data.forks_count !== undefined) {
+          document.querySelector('.repo-forks-count').textContent = data.forks_count;
+        } else {
+          document.querySelector('.repo-forks-count').textContent = '12';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-stars-count').textContent = '24';
+        document.querySelector('.repo-forks-count').textContent = '12';
+      });
+
+    fetch('https://api.github.com/repos/agntcy/slim/releases/latest')
+      .then(res => res.json())
+      .then(data => {
+        if (data.tag_name !== undefined) {
+          document.querySelector('.repo-version-tag').textContent = data.tag_name;
+        } else {
+          document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+      });
+
+    
+    let searchIndex = null;
+    const searchContainer = document.getElementById('search-container');
+    const searchToggleBtn = document.getElementById('search-toggle-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+    const searchInput = document.getElementById('search-query-input');
+    const searchResults = document.getElementById('search-results');
+
+    async function loadSearchIndex() {
+      if (searchIndex) return;
+      try {
+        const response = await fetch('/index.json');
+        searchIndex = await response.json();
+      } catch (e) {
+        console.error("Failed to load search index", e);
+      }
+    }
+
+    searchToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.toggle('active');
+      if (searchContainer.classList.contains('active')) {
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+
+    searchCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.remove('active');
+      searchResults.innerHTML = '';
+      searchResults.classList.remove('active');
+    });
+
+    searchInput.addEventListener('focus', () => {
+      loadSearchIndex();
+      if (searchInput.value.trim().length > 0) {
+        searchResults.classList.add('active');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!searchContainer.contains(e.target)) {
+        searchResults.classList.remove('active');
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.remove('active');
+        }
+      }
+    });
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (query.length === 0) {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('active');
+        return;
+      }
+
+      if (!searchIndex) {
+        searchResults.innerHTML = '<div class="search-no-results">Loading index...</div>';
+        searchResults.classList.add('active');
+        return;
+      }
+
+      const filtered = searchIndex.filter(page => {
+        return page.title.toLowerCase().includes(query) || 
+               page.summary.toLowerCase().includes(query) || 
+               page.content.toLowerCase().includes(query);
+      }).slice(0, 7);
+
+      searchResults.innerHTML = '';
+      if (filtered.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+      } else {
+        filtered.forEach(page => {
+          const item = document.createElement('a');
+          item.href = page.permalink;
+          item.className = 'search-result-item';
+          item.innerHTML = `
+            <div class="search-result-title">${page.title}</div>
+            <div class="search-result-summary">${page.summary}</div>
+          `;
+          searchResults.appendChild(item);
+        });
+      }
+      searchResults.classList.add('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.add('active');
+        }
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+  })();
+</script>
+
+      
+      <div class="main-wrapper">
+        <aside class="sidebar">
+  <nav class="sidebar-nav">
+    
+    
+    <div class="sidebar-global-menu">
+      <h4 class="sidebar-section-title">Navigation</h4>
+      <ul class="sidebar-pages">
+        
+          <li>
+            <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+          </li>
+        
+          <li>
+            <a href="/slim-controller/">Controller</a>
+          </li>
+        
+          <li>
+            <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+          </li>
+        
+          <li>
+            <a href="/slim-integrations/slim-a2a/">Integrations</a>
+          </li>
+        
+      </ul>
+    </div>
+    
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Core Components</h4>
+        <ul class="sidebar-pages">
+          
+            <li class="">
+              <a href="/slim-controller/">SLIM Controller</a>
+            </li>
+          
+            <li class="">
+              <a href="/slim-controller-reference/">SLIM Controller Reference</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Getting-Started-With-Slims</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-data-plane-config/">Configuration Reference</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Groups</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group/">Group Creation and Management</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group-tutorial/">Group Communication Tutorial</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Integrations</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-a2a/">SLIM A2A</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-mcp/">MCP over SLIM</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-otel/">OpenTelemetry over SLIM</a>
+              </li>
+            
+          
+            
+              
+              <li class="sidebar-subsection">
+                <span class="sidebar-subsection-title" style="font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.5rem; color: var(--text-muted); display: block;">SLIMRPC</span>
+                <ul class="sidebar-pages" style="padding-left: 0.75rem; border-left: 1px solid var(--border); margin-left: 0.5rem; list-style: none;">
+                  
+                    <li class="active">
+                      <a href="/slim-integrations/slimrpc/slim-rpc/" style="font-size: 0.85rem;">Overview</a>
+                    </li>
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-slimrpc-compiler/" style="font-size: 0.85rem;">Protoc Plugin</a>
+                    </li>
+                  
+                </ul>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Messaging-Layers</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-data-plane/">Overview</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-session/">SLIM Sessions</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-authentication/">SLIM Authentication</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+    
+  </nav>
+</aside>
+
+        
+        <main class="content-container">
+          
+  <article class="markdown-content">
+    <h1 id="slimrpc-slim-remote-procedure-call">SLIMRPC (SLIM Remote Procedure Call)</h1>
+<p>SLIMRPC, or SLIM Remote Procedure Call, is a mechanism designed to enable
+Protocol Buffers (protobuf) RPC over SLIM (Secure Low-latency Inter-process
+Messaging). This is analogous to gRPC, which leverages HTTP/2 as its underlying
+transport layer for protobuf RPC.</p>
+<p>A key advantage of SLIMRPC lies in its ability to seamlessly integrate SLIM as
+the transport protocol for inter-application message exchange. This
+significantly simplifies development: a protobuf file can be compiled to
+generate code that utilizes SLIM for communication. Application developers can
+then interact with the generated code much like they would with standard gRPC,
+while benefiting from the inherent security features and efficiency provided by
+the SLIM protocol.</p>
+<p>This documentation explains how SLIMRPC works and
+how you can implement it in your applications. For detailed instructions on
+compiling a protobuf file to obtain the necessary SLIMRPC stub code, please
+refer to the dedicated <a href="/slim-integrations/slimrpc/slim-slimrpc-compiler/">SLIMRPC compiler
+documentation</a>
+.</p>
+<h2 id="slim-naming-in-slimrpc">SLIM naming in SLIMRPC</h2>
+<p>In SLIMRPC, each service and its individual RPC handlers are assigned a SLIM
+name, facilitating efficient message routing and processing. Consider the
+<a href="https://github.com/agntcy/slim/blob/slim-bindings-v1.1.1/data-plane/bindings/python/examples/slimrpc/simple/example.proto" target="_blank" rel="noopener noreferrer">example
+protobuf</a>
+
+definition, which defines four distinct services:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-proto" data-lang="proto"><span class="line"><span class="cl"><span class="n">syntax</span> <span class="o">=</span> <span class="s">&#34;proto3&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">example_service</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="kd">service</span> <span class="n">Test</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl">  <span class="k">rpc</span> <span class="n">ExampleUnaryUnary</span><span class="p">(</span><span class="n">ExampleRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">ExampleResponse</span><span class="p">);</span><span class="err">
+</span></span></span><span class="line"><span class="cl">  <span class="k">rpc</span> <span class="n">ExampleUnaryStream</span><span class="p">(</span><span class="n">ExampleRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">stream</span> <span class="n">ExampleResponse</span><span class="p">);</span><span class="err">
+</span></span></span><span class="line"><span class="cl">  <span class="k">rpc</span> <span class="n">ExampleStreamUnary</span><span class="p">(</span><span class="n">stream</span> <span class="n">ExampleRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">ExampleResponse</span><span class="p">);</span><span class="err">
+</span></span></span><span class="line"><span class="cl">  <span class="k">rpc</span> <span class="n">ExampleStreamStream</span><span class="p">(</span><span class="n">stream</span> <span class="n">ExampleRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">stream</span> <span class="n">ExampleResponse</span><span class="p">);</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="kd">message</span> <span class="nc">ExampleRequest</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl">  <span class="kt">string</span> <span class="n">example_string</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl">  <span class="kt">int64</span>  <span class="n">example_integer</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="kd">message</span> <span class="nc">ExampleResponse</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl">  <span class="kt">string</span> <span class="n">example_string</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl">  <span class="kt">int64</span>  <span class="n">example_integer</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">
+</span></span></span></code></pre></div><p>This example showcases the four primary communication patterns supported by
+gRPC:</p>
+<ul>
+<li>Unary-Unary</li>
+<li>Unary-Stream</li>
+<li>Stream-Unary</li>
+<li>Stream-Stream</li>
+</ul>
+<p>For SLIMRPC, a specific SLIM name is generated for each handler within a
+service. This naming convention allows an application exposing the service to
+listen for its name and process messages intended for a particular RPC method. The format
+for these names is:</p>
+<pre tabindex="0"><code>{package-name}.{service-name}-{handler_name}
+</code></pre><p>Based on the example_service.Test definition, the names for each handler would
+be:</p>
+<pre tabindex="0"><code>example_service.Test-ExampleUnaryUnary
+example_service.Test-ExampleUnaryStream
+example_service.Test-ExampleStreamUnary
+example_service.Test-ExampleStreamStream
+</code></pre><p>This handler name is appended to the second component of the SLIM name
+associated with the running application. For instance, to receive messages for
+<code>example_service.Test-ExampleUnaryUnary</code>, an application would subscribe to:</p>
+<pre tabindex="0"><code>component[0]/component[1]/component[2]-example_service.Test-ExampleUnaryUnary/component[3]
+</code></pre><p>The subscription process is entirely managed by the SLIMRPC package. Application
+developers are not required to explicitly handle SLIM name subscriptions.
+Instead, they only need to implement the specific functions that will be invoked
+when a message arrives for a defined RPC method, exactly as they would with
+standard gRPC.</p>
+<h2 id="example">Example</h2>
+<p>This section provides a detailed walkthrough of a basic SLIMRPC client-server
+interaction in python, leveraging the simple example provided in
+<a href="https://github.com/agntcy/slim/blob/slim-bindings-v1.1.1/data-plane/bindings/python/examples/slimrpc/simple" target="_blank" rel="noopener noreferrer">example</a>
+
+folder.</p>
+<h3 id="generated-code">Generated Code</h3>
+<p>The foundation of this example is the <code>example.proto</code> file, which is a standard
+Protocol Buffers definition file. This file is compiled using the <a href="/slim-integrations/slimrpc/slim-slimrpc-compiler/">SLIMRPC
+compiler</a>
+ to generate the necessary Python stub
+code. The generated code is available in two files:
+<a href="https://github.com/agntcy/slim/blob/slim-bindings-v1.1.1/data-plane/bindings/python/examples/slimrpc/simple/types/example_pb2.py" target="_blank" rel="noopener noreferrer">example_pb2.py</a>
+
+and
+<a href="https://github.com/agntcy/slim/blob/slim-bindings-v1.1.1/data-plane/bindings/python/examples/slimrpc/simple/types/example_pb2_slimrpc.py" target="_blank" rel="noopener noreferrer">example_pb2_slimrpc.py</a>
+.
+Specifically, <code>example_pb2_slimrpc.py</code> contains the SLIMRPC-specific stubs for
+both client and server implementations. Below are the key classes and functions
+generated by the compiler:</p>
+<p><em>Client Stub (TestStub)</em>: The TestStub class represents the client-side
+interface for interacting with the Test service. It provides methods for each
+RPC defined in example.proto, allowing clients to initiate calls to the server.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TestStub</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Client stub for Test.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Constructor.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        Args:
+</span></span></span><span class="line"><span class="cl"><span class="s2">            channel: A slim_bindings.Channel.
+</span></span></span><span class="line"><span class="cl"><span class="s2">        &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">_channel</span> <span class="o">=</span> <span class="n">channel</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">ExampleUnaryUnary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleRequest</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleResponse</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Call ExampleUnaryUnary method.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response_bytes</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channel</span><span class="o">.</span><span class="n">call_unary_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;example_service.Test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;ExampleUnaryUnary&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleRequest</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">(</span><span class="n">request</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">timeout</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">metadata</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleResponse</span><span class="o">.</span><span class="n">FromString</span><span class="p">(</span><span class="n">response_bytes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">ExampleUnaryStream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleRequest</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Call ExampleUnaryStream method.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response_stream</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channel</span><span class="o">.</span><span class="n">call_unary_stream_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;example_service.Test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;ExampleUnaryStream&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleRequest</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">(</span><span class="n">request</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">timeout</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">metadata</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stream_msg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response_stream</span><span class="o">.</span><span class="n">next_async</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">stream_msg</span><span class="o">.</span><span class="n">is_end</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">stream_msg</span><span class="o">.</span><span class="n">is_error</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">                <span class="k">raise</span> <span class="n">stream_msg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">stream_msg</span><span class="o">.</span><span class="n">is_data</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">                <span class="k">yield</span> <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleResponse</span><span class="o">.</span><span class="n">FromString</span><span class="p">(</span><span class="n">stream_msg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">ExampleStreamUnary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request_iterator</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleResponse</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Call ExampleStreamUnary method.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">request_stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channel</span><span class="o">.</span><span class="n">call_stream_unary</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;example_service.Test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;ExampleStreamUnary&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">timeout</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">metadata</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">async</span> <span class="k">for</span> <span class="n">request</span> <span class="ow">in</span> <span class="n">request_iterator</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">request_stream</span><span class="o">.</span><span class="n">send_async</span><span class="p">(</span><span class="n">pb2</span><span class="o">.</span><span class="n">ExampleRequest</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response_bytes</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request_stream</span><span class="o">.</span><span class="n">finalize_async</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleResponse</span><span class="o">.</span><span class="n">FromString</span><span class="p">(</span><span class="n">response_bytes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">ExampleStreamStream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request_iterator</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Call ExampleStreamStream method.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bidi_stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channel</span><span class="o">.</span><span class="n">call_stream_stream</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;example_service.Test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;ExampleStreamStream&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">timeout</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">metadata</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">async</span> <span class="k">def</span> <span class="nf">send_requests</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="k">async</span> <span class="k">for</span> <span class="n">request</span> <span class="ow">in</span> <span class="n">request_iterator</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">await</span> <span class="n">bidi_stream</span><span class="o">.</span><span class="n">send_async</span><span class="p">(</span><span class="n">pb2</span><span class="o">.</span><span class="n">ExampleRequest</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">bidi_stream</span><span class="o">.</span><span class="n">close_send_async</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">async</span> <span class="k">def</span> <span class="nf">receive_responses</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stream_msg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">bidi_stream</span><span class="o">.</span><span class="n">recv_async</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">stream_msg</span><span class="o">.</span><span class="n">is_end</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">stream_msg</span><span class="o">.</span><span class="n">is_error</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">raise</span> <span class="n">stream_msg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">stream_msg</span><span class="o">.</span><span class="n">is_data</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">yield</span> <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleResponse</span><span class="o">.</span><span class="n">FromString</span><span class="p">(</span><span class="n">stream_msg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># Start sending in background</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">import</span> <span class="nn">asyncio</span>
+</span></span><span class="line"><span class="cl">        <span class="n">send_task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">send_requests</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">async</span> <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">receive_responses</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">                <span class="k">yield</span> <span class="n">response</span>
+</span></span><span class="line"><span class="cl">        <span class="k">finally</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">send_task</span>
+</span></span></code></pre></div><p><em>Server Servicer (TestServicer)</em>: The TestServicer class defines the server-side
+interface. Developers implement this class to provide the actual logic
+for each RPC method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TestServicer</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Server servicer for Test. Implement this class to provide your service logic.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">ExampleUnaryUnary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Method for ExampleUnaryUnary. Implement your service logic here.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">RpcError</span><span class="o">.</span><span class="n">Rpc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span><span class="o">=</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">RpcCode</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">message</span><span class="o">=</span><span class="s2">&#34;Method not implemented!&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">details</span><span class="o">=</span><span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">ExampleUnaryStream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Method for ExampleUnaryStream. Implement your service logic here.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">RpcError</span><span class="o">.</span><span class="n">Rpc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span><span class="o">=</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">RpcCode</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">message</span><span class="o">=</span><span class="s2">&#34;Method not implemented!&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">details</span><span class="o">=</span><span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">ExampleStreamUnary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request_iterator</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Method for ExampleStreamUnary. Implement your service logic here.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">RpcError</span><span class="o">.</span><span class="n">Rpc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span><span class="o">=</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">RpcCode</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">message</span><span class="o">=</span><span class="s2">&#34;Method not implemented!&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">details</span><span class="o">=</span><span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">ExampleStreamStream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request_iterator</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Method for ExampleStreamStream. Implement your service logic here.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">RpcError</span><span class="o">.</span><span class="n">Rpc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span><span class="o">=</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">RpcCode</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">message</span><span class="o">=</span><span class="s2">&#34;Method not implemented!&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">details</span><span class="o">=</span><span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span></code></pre></div><p><em>Handler Classes</em>: The generated code includes internal handler classes that wrap
+each servicer method. These handlers manage request deserialization, response
+serialization, and error handling. Below is an example of the unary-unary handler:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">_TestServicer_ExampleUnaryUnary_Handler</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">servicer</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">servicer</span> <span class="o">=</span> <span class="n">servicer</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">request_msg</span> <span class="o">=</span> <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleRequest</span><span class="o">.</span><span class="n">FromString</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">servicer</span><span class="o">.</span><span class="n">ExampleUnaryUnary</span><span class="p">(</span><span class="n">request_msg</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">pb2</span><span class="o">.</span><span class="n">ExampleResponse</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">RpcError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">RpcError</span><span class="o">.</span><span class="n">Rpc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">code</span><span class="o">=</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">RpcCode</span><span class="o">.</span><span class="n">INTERNAL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">details</span><span class="o">=</span><span class="kc">None</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span></code></pre></div><p>Similar handler classes are generated for unary-stream, stream-unary, and
+stream-stream patterns, each implementing the appropriate async handling logic
+for their respective communication patterns.</p>
+<p><em>Server Registration Function (add_TestServicer_to_server)</em>: This utility
+function registers an implemented TestServicer instance with an SLIMRPC server.
+It maps RPC method names to their corresponding handler instances.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">add_TestServicer_to_server</span><span class="p">(</span><span class="n">servicer</span><span class="p">,</span> <span class="n">server</span><span class="p">:</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Server</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server</span><span class="o">.</span><span class="n">register_unary_unary</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">service_name</span><span class="o">=</span><span class="s2">&#34;example_service.Test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">method_name</span><span class="o">=</span><span class="s2">&#34;ExampleUnaryUnary&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handler</span><span class="o">=</span><span class="n">_TestServicer_ExampleUnaryUnary_Handler</span><span class="p">(</span><span class="n">servicer</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server</span><span class="o">.</span><span class="n">register_unary_stream</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">service_name</span><span class="o">=</span><span class="s2">&#34;example_service.Test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">method_name</span><span class="o">=</span><span class="s2">&#34;ExampleUnaryStream&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handler</span><span class="o">=</span><span class="n">_TestServicer_ExampleUnaryStream_Handler</span><span class="p">(</span><span class="n">servicer</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server</span><span class="o">.</span><span class="n">register_stream_unary</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">service_name</span><span class="o">=</span><span class="s2">&#34;example_service.Test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">method_name</span><span class="o">=</span><span class="s2">&#34;ExampleStreamUnary&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handler</span><span class="o">=</span><span class="n">_TestServicer_ExampleStreamUnary_Handler</span><span class="p">(</span><span class="n">servicer</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server</span><span class="o">.</span><span class="n">register_stream_stream</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">service_name</span><span class="o">=</span><span class="s2">&#34;example_service.Test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">method_name</span><span class="o">=</span><span class="s2">&#34;ExampleStreamStream&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handler</span><span class="o">=</span><span class="n">_TestServicer_ExampleStreamStream_Handler</span><span class="p">(</span><span class="n">servicer</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><h3 id="server-implementation">Server implementation</h3>
+<p>The server-side logic is defined in
+<a href="https://github.com/agntcy/slim/blob/slim-bindings-v1.1.1/data-plane/bindings/python/examples/slimrpc/simple/server.py" target="_blank" rel="noopener noreferrer">server.py</a>
+.
+Similar to standard gRPC implementations, the core service functionality is
+provided by the TestService class, which inherits from TestServicer (as
+introduced in the previous section). This class contains the concrete
+implementations for each of the defined RPC methods.</p>
+<p>The SLIM-specific code and configuration is handled within the amain()
+asynchronous function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">amain</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">slim_bindings</span><span class="o">.</span><span class="n">uniffi_set_event_loop</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Initialize service</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tracing_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_tracing_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">runtime_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_runtime_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">service_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_service_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">tracing_config</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s2">&#34;info&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">slim_bindings</span><span class="o">.</span><span class="n">initialize_with_configs</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tracing_config</span><span class="o">=</span><span class="n">tracing_config</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">runtime_config</span><span class="o">=</span><span class="n">runtime_config</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">service_config</span><span class="o">=</span><span class="p">[</span><span class="n">service_config</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">service</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">get_global_service</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create local name</span>
+</span></span><span class="line"><span class="cl">    <span class="n">local_name</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="s2">&#34;agntcy&#34;</span><span class="p">,</span> <span class="s2">&#34;grpc&#34;</span><span class="p">,</span> <span class="s2">&#34;server&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Connect to SLIM</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_insecure_client_config</span><span class="p">(</span><span class="s2">&#34;http://localhost:46357&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conn_id</span> <span class="o">=</span> <span class="k">await</span> <span class="n">service</span><span class="o">.</span><span class="n">connect_async</span><span class="p">(</span><span class="n">client_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create app with shared secret</span>
+</span></span><span class="line"><span class="cl">    <span class="n">local_app</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">create_app_with_secret</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">local_name</span><span class="p">,</span> <span class="s2">&#34;my_shared_secret_for_testing_purposes_only&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Subscribe to local name</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">local_app</span><span class="o">.</span><span class="n">subscribe_async</span><span class="p">(</span><span class="n">local_name</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create server</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">new_with_connection</span><span class="p">(</span><span class="n">local_app</span><span class="p">,</span> <span class="n">local_name</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Add servicer</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_TestServicer_to_server</span><span class="p">(</span><span class="n">TestService</span><span class="p">(),</span> <span class="n">server</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Run server</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">server</span><span class="o">.</span><span class="n">serve_async</span><span class="p">()</span>
+</span></span></code></pre></div><p>The server setup begins by setting the event loop for the SLIM bindings with
+<code>uniffi_set_event_loop()</code>, which is required for proper async operation. The
+service is then initialized with tracing, runtime, and service configurations.
+The log level is set to &ldquo;info&rdquo; for appropriate logging verbosity.</p>
+<p>A local SLIM name is created using <code>slim_bindings.Name(&quot;agntcy&quot;, &quot;grpc&quot;, &quot;server&quot;)</code>. This name is used to construct the full SLIMRPC names for each
+method:</p>
+<pre tabindex="0"><code>agntcy/grpc/server-example_service.Test-ExampleUnaryUnary
+agntcy/grpc/server-example_service.Test-ExampleUnaryStream
+agntcy/grpc/server-example_service.Test-ExampleStreamUnary
+agntcy/grpc/server-example_service.Test-ExampleStreamStream
+</code></pre><p>The server connects to a SLIM node running at <code>http://localhost:46357</code> using an
+insecure client configuration (TLS disabled for simplicity in this example). A
+local app is created with a shared secret for initializing the Message Layer
+Security (MLS) protocol.</p>
+<p>After subscribing to the local name on the connection, a SLIMRPC server is
+created with <code>slim_bindings.Server.new_with_connection()</code>. The
+<code>add_TestServicer_to_server()</code> function is then called to register the
+implemented <code>TestService</code> with the server, making its RPC methods available:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="c1"># Add servicer</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_TestServicer_to_server</span><span class="p">(</span><span class="n">TestService</span><span class="p">(),</span> <span class="n">server</span><span class="p">)</span>
+</span></span></code></pre></div><p>Finally, the server starts serving requests with <code>await server.serve_async()</code>,
+which runs indefinitely until interrupted.</p>
+<h3 id="client-implementation">Client implementation</h3>
+<p>The client-side implementation, found in
+<a href="https://github.com/agntcy/slim/blob/slim-bindings-v1.1.1/data-plane/bindings/python/examples/slimrpc/simple/client.py" target="_blank" rel="noopener noreferrer">client.py</a>
+,
+largely mirrors the structure of a standard gRPC client. The client
+initialization follows the same pattern as the server:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">amain</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Initialize service</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tracing_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_tracing_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">runtime_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_runtime_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">service_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_service_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">tracing_config</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s2">&#34;info&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">slim_bindings</span><span class="o">.</span><span class="n">initialize_with_configs</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tracing_config</span><span class="o">=</span><span class="n">tracing_config</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">runtime_config</span><span class="o">=</span><span class="n">runtime_config</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">service_config</span><span class="o">=</span><span class="p">[</span><span class="n">service_config</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">service</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">get_global_service</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create local and remote names</span>
+</span></span><span class="line"><span class="cl">    <span class="n">local_name</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="s2">&#34;agntcy&#34;</span><span class="p">,</span> <span class="s2">&#34;grpc&#34;</span><span class="p">,</span> <span class="s2">&#34;client&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">remote_name</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="s2">&#34;agntcy&#34;</span><span class="p">,</span> <span class="s2">&#34;grpc&#34;</span><span class="p">,</span> <span class="s2">&#34;server&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Connect to SLIM</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_insecure_client_config</span><span class="p">(</span><span class="s2">&#34;http://localhost:46357&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conn_id</span> <span class="o">=</span> <span class="k">await</span> <span class="n">service</span><span class="o">.</span><span class="n">connect_async</span><span class="p">(</span><span class="n">client_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create app with shared secret</span>
+</span></span><span class="line"><span class="cl">    <span class="n">local_app</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">create_app_with_secret</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">local_name</span><span class="p">,</span> <span class="s2">&#34;my_shared_secret_for_testing_purposes_only&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Subscribe to local name</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">local_app</span><span class="o">.</span><span class="n">subscribe_async</span><span class="p">(</span><span class="n">local_name</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create channel</span>
+</span></span><span class="line"><span class="cl">    <span class="n">channel</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Channel</span><span class="o">.</span><span class="n">new_with_connection</span><span class="p">(</span><span class="n">local_app</span><span class="p">,</span> <span class="n">remote_name</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create stubs</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stubs</span> <span class="o">=</span> <span class="n">TestStub</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+</span></span></code></pre></div><p>The client initialization is very similar to the server setup. After initializing
+the service with configurations, the client creates both a local name
+(<code>agntcy/grpc/client</code>) and a remote name (<code>agntcy/grpc/server</code>). The local name
+identifies the client in the SLIM network and is used by the server to send back
+responses.</p>
+<p>Like the server, the client connects to the SLIM node at
+<code>http://localhost:46357</code> using an insecure client configuration, creates an app
+with a shared secret for MLS initialization, and subscribes to its local name.</p>
+<p>The key distinction from the server is the channel creation. The client uses
+<code>slim_bindings.Channel.new_with_connection()</code> with the remote name
+(<code>agntcy/grpc/server</code>) to establish a channel to the target server. This channel
+is then used to create the <code>TestStub</code>, which provides type-safe access to all
+the RPC methods defined in the protobuf.</p>
+<p>Once the stub is created, the client can invoke RPC methods using async/await
+syntax:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="c1"># Unary-Unary call</span>
+</span></span><span class="line"><span class="cl">    <span class="n">request</span> <span class="o">=</span> <span class="n">ExampleRequest</span><span class="p">(</span><span class="n">example_integer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">example_string</span><span class="o">=</span><span class="s2">&#34;hello&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stubs</span><span class="o">.</span><span class="n">ExampleUnaryUnary</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Unary-Stream call</span>
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">for</span> <span class="n">resp</span> <span class="ow">in</span> <span class="n">stubs</span><span class="o">.</span><span class="n">ExampleUnaryStream</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">2</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Stream Response: </span><span class="si">{</span><span class="n">resp</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Stream-Unary call</span>
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">stream_requests</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">ExampleRequest</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">ExampleRequest</span><span class="p">(</span><span class="n">example_integer</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">example_string</span><span class="o">=</span><span class="sa">f</span><span class="s2">&#34;Request </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stubs</span><span class="o">.</span><span class="n">ExampleStreamUnary</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stream_requests</span><span class="p">(),</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Stream-Stream call</span>
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">for</span> <span class="n">resp</span> <span class="ow">in</span> <span class="n">stubs</span><span class="o">.</span><span class="n">ExampleStreamStream</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stream_requests</span><span class="p">(),</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Stream Stream Response: </span><span class="si">{</span><span class="n">resp</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>All RPC calls support timeout parameters and use Python&rsquo;s async/await patterns.
+Streaming requests are provided as async generators, and streaming responses are
+consumed using <code>async for</code> loops.</p>
+<h2 id="slimrpc-under-the-hood">SLIMRPC under the Hood</h2>
+<p>SLIMRPC was introduced to simplify the integration of existing applications with
+SLIM. From a developer&rsquo;s perspective, using SLIMRPC or gRPC is almost identical.
+Application developers do not need to manage endpoint names or connectivity
+details, as these aspects are handled automatically by SLIMRPC and SLIM.</p>
+<p>All RPC services underneath utilize a point-to-point session. The SLIM
+session creation is implemented inside SLIMRPC in
+<a href="https://github.com/agntcy/slim/blob/slim-bindings-v1.1.1/data-plane/bindings/rust/src/slimrpc/channel.rs#L657-L670" target="_blank" rel="noopener noreferrer">channel.rs</a>
+:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">slim_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slim_session</span>::<span class="n">session_config</span>::<span class="n">SessionConfig</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">session_type</span>: <span class="nc">ProtoSessionType</span>::<span class="n">PointToPoint</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">mls_enabled</span>: <span class="nc">true</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">max_retries</span>: <span class="nb">Some</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">interval</span>: <span class="nb">Some</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_secs</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">initiator</span>: <span class="nc">true</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">metadata</span>: <span class="nc">ctx</span><span class="p">.</span><span class="n">metadata</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Create session to the method-specific subscription name
+</span></span></span><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">session_ctx</span><span class="p">,</span><span class="w"> </span><span class="n">completion</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">create_session</span><span class="p">(</span><span class="n">slim_config</span><span class="p">,</span><span class="w"> </span><span class="n">method_subscription_name</span><span class="p">.</span><span class="n">clone</span><span class="p">(),</span><span class="w"> </span><span class="nb">None</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="k">await</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">map_err</span><span class="p">(</span><span class="o">|</span><span class="n">e</span><span class="o">|</span><span class="w"> </span><span class="n">Status</span>::<span class="n">unavailable</span><span class="p">(</span><span class="fm">format!</span><span class="p">(</span><span class="s">&#34;Failed to create session: </span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)))</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>The session used by SLIMRPC is also reliable. For each message, the sender
+waits for an acknowledgment (ACK) packet for 1 second
+(<code>timeout=datetime.timedelta(seconds=1)</code>). If no acknowledgment is received, the
+message will be re-sent up to 10 times (<code>max_retries=10</code>) before notifying the
+application of a communication error.</p>
+<p>All messages in a streaming communication will be
+forwarded to the same application instance. Let&rsquo;s illustrate this with an
+example using the client and server applications described above.</p>
+<p>Imagine two server instances running the same RPC service. In this example we will
+focus on the Stream-Unary service, which is served by both server instances
+under the general name
+<code>agntcy/grpc/server-example_service.Test-ExampleStreamUnary</code>. In SLIM, each
+application receives a unique ID. Thus, the full service name will include a
+fourth component containing the server&rsquo;s ID. This ID is generated by SLIM itself
+(see the <a href="../../../slim-messaging-layer/slim-data-plane/">doc</a>
+ for more details). Here we will use
+instance-1 and instance-2 for simplicity. So, the two full names for the
+services will be:</p>
+<ul>
+<li><code>agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1</code></li>
+<li><code>agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-2</code></li>
+</ul>
+<p>Now, if a new client wants to use the Stream-Unary service it only needs to know
+the general name
+<code>agntcy/grpc/server-example_service.Test-ExampleStreamUnary</code>. SLIMRPC will
+leverage SLIM&rsquo;s capabilities to first discover one of the available services,
+and then SLIMRPC will use its full, specific name to consistently communicate
+with that same endpoint.</p>
+<p>The client will register to SLIM with the name <code>agntcy/grpc/client</code>, and it will
+get an unique ID assigned by SLIM, for example <code>instance-1</code>. So the full name of
+the client will be <code>agntcy/grpc/client/instance-1</code>.</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+    autonumber
+
+    participant Client (instance-1)
+    participant SLIM Node
+    participant Server (instance-1)
+    participant Server (instance-2)
+
+
+    Note over Client (instance-1),Server (instance-1): Discovery
+    Client (instance-1)-&gt;&gt;SLIM Node: Discover agntcy/grpc/server-example_service.Test-ExampleStreamUnary
+    SLIM Node-&gt;&gt;Server (instance-1): Discover agntcy/grpc/server-example_service.Test-ExampleStreamUnary
+    Server (instance-1)-&gt;&gt;SLIM Node: Ack from agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+    SLIM Node-&gt;&gt;Client (instance-1): Ack from agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+
+    Note over Client (instance-1),Server (instance-1): Stream
+    Client (instance-1)-&gt;&gt;SLIM Node: Msg to agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+    SLIM Node-&gt;&gt;Server (instance-1): Msg to agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+    Server (instance-1)-&gt;&gt;SLIM Node: Ack from agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+    SLIM Node-&gt;&gt;Client (instance-1): Ack from agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+
+    Client (instance-1)-&gt;&gt;SLIM Node: Msg to agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+    SLIM Node-&gt;&gt;Server (instance-1): Msg to agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+    Server (instance-1)-&gt;&gt;SLIM Node: Ack from agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+    SLIM Node-&gt;&gt;Client (instance-1): Ack from agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+
+    Note over Client (instance-1),Server (instance-1): Unary
+    Server (instance-1)-&gt;&gt;SLIM Node: Msg to agntcy/grpc/client/instance-1
+    SLIM Node-&gt;&gt;Client (instance-1): Msg to agntcy/grpc/client/instance-1
+    Client (instance-1)-&gt;&gt;SLIM Node: Ack to agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+    SLIM Node-&gt;&gt;Server (instance-1): Ack to agntcy/grpc/server-example_service.Test-ExampleStreamUnary/instance-1
+</code></pre><p>The initial messages in the sequence diagram are used for the discovery phase.
+After this step, the client application knows the specific name of the service
+running on instance-1. It&rsquo;s important to note that the first message in the
+discovery phase is sent in anycast from the SLIM node, meaning it could be
+forwarded to <strong>either of the two running servers</strong>. For instance, a subsequent
+call of the same RPC from the same client might be served by the server
+with id <code>instance-2</code>.</p>
+<p>After the discovery, the client will always send messages to the same endpoint,
+as demonstrated in the streaming session phase in the example.</p>
+<p>Finally, the server is expected to send one message to the client to close the
+service. The server learns the client&rsquo;s address (where to forward the message)
+by examining the source field of the received messages.</p>
+
+  </article>
+
+        </main>
+      </div>
+      
+      <footer class="footer">
+  <div>&copy; 2026 AGNTCY Contributors. All rights reserved.</div>
+</footer>
+
+<script>
+  (function() {
+    const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+      script.onload = function() {
+        mermaidBlocks.forEach(codeBlock => {
+          const pre = codeBlock.parentNode;
+          const div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = codeBlock.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: isDark ? 'dark' : 'default',
+          securityLevel: 'loose'
+        });
+      };
+      document.body.appendChild(script);
+    }
+  })();
+</script>
+
+    </div>
+  </body>
+</html>

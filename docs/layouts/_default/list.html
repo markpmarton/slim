@@ -1,0 +1,28 @@
+{{ define "main" }}
+  <article class="markdown-content">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    
+    {{ if gt (len .Pages) 0 }}
+      <div class="card-grid" style="--grid-cols: 2; margin-top: 2rem;">
+        {{ range .Pages }}
+          <a href="{{ .RelPermalink }}" class="card-link">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-icon">📄</span>
+                <h3 class="card-title">{{ .Title }}</h3>
+              </div>
+              <div class="card-subtitle">
+                {{ if .Description }}
+                  {{ .Description }}
+                {{ else }}
+                  {{ .Summary | truncate 120 }}
+                {{ end }}
+              </div>
+            </div>
+          </a>
+        {{ end }}
+      </div>
+    {{ end }}
+  </article>
+{{ end }}

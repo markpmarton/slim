@@ -1,0 +1,59 @@
+# Copyright AGNTCY Contributors (https://github.com/agntcy)
+# SPDX-License-Identifier: CC-BY-4.0
+#
+# Documentation tasks. From repo root: task docs:run
+# Or: task -t docs/Taskfile.yml run
+
+version: "3"
+
+interval: "500ms"
+
+vars:
+  REPO:
+    sh: git rev-parse --show-toplevel
+  DOCS_DIR: "{{.REPO}}/docs"
+  BUILD_SITE: "{{.REPO}}/.build/site"
+  CONTENT_DIR: "{{.DOCS_DIR}}/content"
+
+tasks:
+  default:
+    desc: List tasks
+    cmds:
+      - task --list
+
+  build:
+    desc: Build documentation site using Hugo to .build/site
+    cmds:
+      - mkdir -p "{{.BUILD_SITE}}"
+      - cd "{{.DOCS_DIR}}" && hugo --destination "{{.BUILD_SITE}}" --cleanDestinationDir
+      - 'echo "Docs built: file://{{.BUILD_SITE}}/index.html"'
+
+  run:
+    desc: >-
+      Run hugo server (live reload). Picks the first free port in 1313–1322 unless HUGO_PORT
+      is set.
+    cmds:
+      - |
+        set -e
+        cd "{{.DOCS_DIR}}"
+        if [ -n "${HUGO_PORT:-}" ]; then
+          exec hugo server --port "$HUGO_PORT" --buildDrafts
+        fi
+        for port in 1313 1314 1315 1316 1317 1318 1319 1320 1321 1322; do
+          if ! lsof -nP -iTCP:"$port" -sTCP:LISTEN >/dev/null 2>&1; then
+            echo "hugo server on 127.0.0.1:$port (set HUGO_PORT to override)"
+            exec hugo server --port "$port" --buildDrafts
+          fi
+        done
+        echo "No free port between 1313 and 1322. Free one or set HUGO_PORT." >&2
+        exit 1
+
+  ci:
+    desc: CI checks (build)
+    cmds:
+      - task: build
+
+  test:
+    desc: Run build validation check
+    cmds:
+      - cd "{{.DOCS_DIR}}" && hugo --gc

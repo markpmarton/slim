@@ -1,0 +1,55 @@
+{{ define "main" }}
+  <div class="hero-card">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <span class="hero-badge">v1.0.0 Stable</span>
+      <h1>Secure Low-Latency Interactive Messaging</h1>
+      <p>A secure, scalable, and developer-friendly messaging framework that provides the transport layer for agent communication protocols.</p>
+      <a href="{{ "/getting-started-with-slim/slim-howto/" | relURL }}" class="hero-btn">Get Started &rarr;</a>
+    </div>
+  </div>
+
+  <article class="markdown-content">
+    {{ .Content }}
+  </article>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const listItems = document.querySelectorAll('.homepage-container article > ul > li');
+      listItems.forEach(li => {
+        const text = li.textContent || '';
+        let icon = '📄';
+        
+        if (text.includes("gRPC") || text.includes("performance") || text.includes("reliability")) {
+          icon = '🚀';
+        } else if (text.includes("Messaging") || text.includes("capabilities") || text.includes("channels")) {
+          icon = '💬';
+        } else if (text.includes("encryption") || text.includes("Security") || text.includes("MLS")) {
+          icon = '🛡️';
+        } else if (text.includes("RPC") || text.includes("SRPC")) {
+          icon = '💻';
+        } else if (text.includes("Distributed") || text.includes("planes") || text.includes("architecture")) {
+          icon = '🌐';
+        } else if (text.includes("flexibility") || text.includes("flexible") || text.includes("protocol")) {
+          icon = '🧩';
+        }
+        
+        const iconDiv = document.createElement('div');
+        iconDiv.className = 'card-icon';
+        iconDiv.style.marginBottom = '0.75rem';
+        iconDiv.style.width = '36px';
+        iconDiv.style.height = '36px';
+        iconDiv.style.display = 'flex';
+        iconDiv.style.alignItems = 'center';
+        iconDiv.style.justifyContent = 'center';
+        iconDiv.style.background = 'var(--sidebar-active)';
+        iconDiv.style.borderRadius = '8px';
+        iconDiv.style.color = 'var(--primary)';
+        iconDiv.style.fontSize = '1.2rem';
+        iconDiv.innerHTML = icon;
+        
+        li.prepend(iconDiv);
+      });
+    });
+  </script>
+{{ end }}

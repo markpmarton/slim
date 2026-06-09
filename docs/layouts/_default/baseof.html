@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Locale | default "en-us" }}">
+  {{ partial "head.html" . }}
+  <body class="{{ if .IsHome }}is-home{{ else }}is-doc{{ end }}">
+    <div class="app-container">
+      {{ partial "header.html" . }}
+      
+      <div class="main-wrapper">
+        {{ partial "sidebar.html" . }}
+        
+        <main class="{{ if .IsHome }}homepage-container{{ else }}content-container{{ end }}">
+          {{ block "main" . }}{{ end }}
+        </main>
+      </div>
+      
+      {{ partial "footer.html" . }}
+    </div>
+  </body>
+</html>

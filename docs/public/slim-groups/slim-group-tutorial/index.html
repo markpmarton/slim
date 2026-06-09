@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Group Communication Tutorial | SLIM Documentation</title>
+  
+  
+  <link rel="stylesheet" href="/css/styles.min.css">
+  
+  <script>
+    
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+
+  <body class="is-doc">
+    <div class="app-container">
+      <header class="header">
+  <a href="/" class="logo-container" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+    <svg class="logo-svg" viewBox="0 0 492 112" xmlns="http://www.w3.org/2000/svg" style="height: 22px; width: auto; display: block; color: var(--primary);">
+      <path d="M436.006 111.94H-0.00390625V45.31C-0.00390625 20.29 20.2861 0 45.3061 0H491.826L435.996 111.94H436.006ZM40.8361 39.2L24.2661 94.15H50.3261L55.5561 75.07H71.7961V94.15H96.8761V17.83H65.2561C51.2961 17.83 45.8461 22.52 40.8361 39.2ZM60.6861 56.54L64.2861 43.68C66.0261 37.36 66.7961 36.48 70.6061 36.48H71.8061V56.54H60.6861ZM144.746 96.33C153.146 96.33 161.756 94.69 168.406 91.97V48.8H144.416V75.62H143.106C134.386 75.62 128.606 68.42 128.606 56.87C128.606 43.46 136.456 36.92 149.536 36.92C157.606 36.92 164.256 39.54 168.506 44.22V19.25C162.836 16.85 154.766 15.65 147.026 15.65C119.556 15.65 101.776 31.89 101.776 57.52C101.776 80.09 116.826 96.33 144.736 96.33H144.746ZM175.056 94.15H199.586V55.45C214.956 70.6 219.756 80.42 219.756 94.15H243.196V17.83H218.666V43.56L196.536 17.83H175.056V94.15ZM268.056 94.15H293.676V38.55H296.186C304.146 38.55 310.146 40.29 313.626 44.22V17.84H248.106V44.22C251.596 40.3 257.596 38.55 265.546 38.55H268.056V94.15ZM315.816 55.99C315.816 79.87 332.496 96.33 356.486 96.33C363.356 96.33 369.676 94.91 373.166 92.73V67.76C370.436 72.01 365.646 74.19 359.646 74.19C349.066 74.19 342.636 67.21 342.636 55.98C342.636 44.75 349.066 37.77 359.646 37.77C365.646 37.77 370.436 39.95 373.166 44.2V19.23C369.676 17.05 363.356 15.63 356.486 15.63C332.496 15.63 315.816 32.09 315.816 55.97V55.99ZM387.776 94.15H415.036L452.866 17.83H425.396L414.166 43.34L403.046 17.83H375.356L400.646 69.07L387.786 94.15H387.776Z" fill="currentColor"/>
+    </svg>
+    <span class="logo-divider" style="height: 16px; width: 1px; background-color: var(--border); margin: 0 0.25rem; display: inline-block;"></span>
+    <span class="logo-title">SLIM</span>
+  </a>
+  
+  <ul class="nav-links">
+    
+    
+      <li class="">
+        <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-controller/">Controller</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-integrations/slim-a2a/">Integrations</a>
+      </li>
+    
+  </ul>
+  
+  <div class="controls">
+    
+    <div class="search-container" id="search-container">
+      
+      <button class="search-toggle-btn" id="search-toggle-btn" aria-label="Toggle Search">
+        <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; display: block;">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      
+      <div class="search-input-wrapper" id="search-input-wrapper">
+        <svg class="search-icon-svg desktop-only-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" id="search-query-input" placeholder="Search docs..." autocomplete="off" spellcheck="false" aria-label="Search">
+        <span class="search-shortcut">/</span>
+        
+        
+        <button class="search-close-btn" id="search-close-btn" aria-label="Close Search">&times;</button>
+      </div>
+      
+      <div class="search-results-dropdown" id="search-results"></div>
+    </div>
+    
+    <a href="https://github.com/agntcy/slim" target="_blank" rel="noopener noreferrer" class="repo-tracker" aria-label="Go to Github Repository">
+      <div class="repo-tracker-full">
+        <div class="repo-tracker-row repo-tracker-row-top">
+          <div class="repo-tracker-title">
+            <svg class="repo-git-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: block; flex-shrink: 0;">
+              <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+            </svg>
+            <span class="repo-name">agntcy/slim</span>
+          </div>
+          <span class="repo-stat repo-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <span class="repo-stars-count">---</span>
+          </span>
+        </div>
+        <div class="repo-tracker-row repo-tracker-row-bottom">
+          <span class="repo-stat repo-forks">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 15V9a4 4 0 0 0-4-4H9"></path><line x1="6" y1="9" x2="6" y2="15"></line></svg>
+            <span class="repo-forks-count">---</span>
+          </span>
+          <span class="repo-stat repo-version">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <span class="repo-version-tag">---</span>
+          </span>
+        </div>
+      </div>
+      
+      <svg class="repo-tracker-compact-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
+        <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+      </svg>
+    </a>
+
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    
+    <button class="hamburger-btn" id="sidebar-toggle" aria-label="Toggle Sidebar">☰</button>
+  </div>
+</header>
+
+<script>
+  (function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    
+    function updateThemeIcons() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+    
+    updateThemeIcons();
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcons();
+      if (document.querySelector('.mermaid')) {
+        window.location.reload();
+      }
+    });
+    
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', () => {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+          sidebar.classList.toggle('open');
+        }
+      });
+    }
+
+    
+    fetch('https://api.github.com/repos/agntcy/slim')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          document.querySelector('.repo-stars-count').textContent = data.stargazers_count;
+        } else {
+          document.querySelector('.repo-stars-count').textContent = '24';
+        }
+        if (data.forks_count !== undefined) {
+          document.querySelector('.repo-forks-count').textContent = data.forks_count;
+        } else {
+          document.querySelector('.repo-forks-count').textContent = '12';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-stars-count').textContent = '24';
+        document.querySelector('.repo-forks-count').textContent = '12';
+      });
+
+    fetch('https://api.github.com/repos/agntcy/slim/releases/latest')
+      .then(res => res.json())
+      .then(data => {
+        if (data.tag_name !== undefined) {
+          document.querySelector('.repo-version-tag').textContent = data.tag_name;
+        } else {
+          document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+      });
+
+    
+    let searchIndex = null;
+    const searchContainer = document.getElementById('search-container');
+    const searchToggleBtn = document.getElementById('search-toggle-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+    const searchInput = document.getElementById('search-query-input');
+    const searchResults = document.getElementById('search-results');
+
+    async function loadSearchIndex() {
+      if (searchIndex) return;
+      try {
+        const response = await fetch('/index.json');
+        searchIndex = await response.json();
+      } catch (e) {
+        console.error("Failed to load search index", e);
+      }
+    }
+
+    searchToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.toggle('active');
+      if (searchContainer.classList.contains('active')) {
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+
+    searchCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.remove('active');
+      searchResults.innerHTML = '';
+      searchResults.classList.remove('active');
+    });
+
+    searchInput.addEventListener('focus', () => {
+      loadSearchIndex();
+      if (searchInput.value.trim().length > 0) {
+        searchResults.classList.add('active');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!searchContainer.contains(e.target)) {
+        searchResults.classList.remove('active');
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.remove('active');
+        }
+      }
+    });
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (query.length === 0) {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('active');
+        return;
+      }
+
+      if (!searchIndex) {
+        searchResults.innerHTML = '<div class="search-no-results">Loading index...</div>';
+        searchResults.classList.add('active');
+        return;
+      }
+
+      const filtered = searchIndex.filter(page => {
+        return page.title.toLowerCase().includes(query) || 
+               page.summary.toLowerCase().includes(query) || 
+               page.content.toLowerCase().includes(query);
+      }).slice(0, 7);
+
+      searchResults.innerHTML = '';
+      if (filtered.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+      } else {
+        filtered.forEach(page => {
+          const item = document.createElement('a');
+          item.href = page.permalink;
+          item.className = 'search-result-item';
+          item.innerHTML = `
+            <div class="search-result-title">${page.title}</div>
+            <div class="search-result-summary">${page.summary}</div>
+          `;
+          searchResults.appendChild(item);
+        });
+      }
+      searchResults.classList.add('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.add('active');
+        }
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+  })();
+</script>
+
+      
+      <div class="main-wrapper">
+        <aside class="sidebar">
+  <nav class="sidebar-nav">
+    
+    
+    <div class="sidebar-global-menu">
+      <h4 class="sidebar-section-title">Navigation</h4>
+      <ul class="sidebar-pages">
+        
+          <li>
+            <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+          </li>
+        
+          <li>
+            <a href="/slim-controller/">Controller</a>
+          </li>
+        
+          <li>
+            <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+          </li>
+        
+          <li>
+            <a href="/slim-integrations/slim-a2a/">Integrations</a>
+          </li>
+        
+      </ul>
+    </div>
+    
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Core Components</h4>
+        <ul class="sidebar-pages">
+          
+            <li class="">
+              <a href="/slim-controller/">SLIM Controller</a>
+            </li>
+          
+            <li class="">
+              <a href="/slim-controller-reference/">SLIM Controller Reference</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Getting-Started-With-Slims</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-data-plane-config/">Configuration Reference</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Groups</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group/">Group Creation and Management</a>
+              </li>
+            
+          
+            
+              <li class="active">
+                <a href="/slim-groups/slim-group-tutorial/">Group Communication Tutorial</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Integrations</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-a2a/">SLIM A2A</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-mcp/">MCP over SLIM</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-otel/">OpenTelemetry over SLIM</a>
+              </li>
+            
+          
+            
+              
+              <li class="sidebar-subsection">
+                <span class="sidebar-subsection-title" style="font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.5rem; color: var(--text-muted); display: block;">SLIMRPC</span>
+                <ul class="sidebar-pages" style="padding-left: 0.75rem; border-left: 1px solid var(--border); margin-left: 0.5rem; list-style: none;">
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-rpc/" style="font-size: 0.85rem;">Overview</a>
+                    </li>
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-slimrpc-compiler/" style="font-size: 0.85rem;">Protoc Plugin</a>
+                    </li>
+                  
+                </ul>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Messaging-Layers</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-data-plane/">Overview</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-session/">SLIM Sessions</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-authentication/">SLIM Authentication</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+    
+  </nav>
+</aside>
+
+        
+        <main class="content-container">
+          
+  <article class="markdown-content">
+    <h1 id="slim-group-communication-tutorial">SLIM Group Communication Tutorial</h1>
+<p>This tutorial shows how to set up secure group communication using
+SLIM. The group is created by defining a group session and inviting
+participants. Messages are sent to a shared channel where every member can read
+and write. All messages are end-to-end encrypted using the
+<a href="https://datatracker.ietf.org/doc/html/rfc9420" target="_blank" rel="noopener noreferrer">MLS protocol</a>
+. This tutorial is
+based on the
+<a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples/group.py" target="_blank" rel="noopener noreferrer">group.py</a>
+
+example in the SLIM repo.</p>
+<h2 id="key-features">Key Features</h2>
+<ul>
+<li><strong>Name-based Addressing</strong>: In SLIM, all endpoints (channels and clients) have
+a name, and messages use a name-based addressing scheme for content routing.</li>
+<li><strong>Session Management</strong>: Allows for the creation and management of sessions using
+both the SLIM Python Bindings and the SLIM Controller.</li>
+<li><strong>Broadcast Messaging</strong>: Facilitates broadcast messaging to multiple
+subscribers.</li>
+<li><strong>End-to-End Encryption</strong>: Ensures secure communication using the <a href="https://datatracker.ietf.org/doc/html/rfc9420" target="_blank" rel="noopener noreferrer">MLS
+protocol</a>
+.</li>
+</ul>
+<h2 id="configure-client-identity-and-implement-the-slim-app">Configure Client Identity and Implement the SLIM App</h2>
+<p>Every participant in a group requires a unique identity for authentication and for use by the MLS protocol. This section explains how to set up identity and create a SLIM application instance.</p>
+<h3 id="slim-app">SLIM App</h3>
+<p>Every SLIM application requires both a unique identity and an authentication mechanism. The identity is used for end-to-end encryption via the MLS protocol, while authentication verifies the application to the SLIM network. In this tutorial, we use shared secret authentication for simplicity. For more advanced authentication methods (JWT, SPIRE), see the <a href="../../slim-messaging-layer/slim-authentication/">SLIM documentation</a>
+.</p>
+<p>The example code provides a <code>create_local_app</code> helper function (from <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples/common.py" target="_blank" rel="noopener noreferrer">common.py</a>
+) that simplifies the app creation and connection process.</p>
+<p>The <code>create_local_app</code> function handles three main tasks:</p>
+<ol>
+<li>Initialize the Global Service: Sets up the SLIM runtime and global service instance</li>
+<li>Create Authentication: Determines the authentication mode (SPIRE, JWT, or shared secret) based on configuration</li>
+<li>Connect to SLIM Server: Establishes connection to the SLIM network</li>
+</ol>
+<p>Here&rsquo;s how the function works:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">create_local_app</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">BaseConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">App</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Build a Slim application instance using the global service.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Resolution precedence for auth:
+</span></span></span><span class="line"><span class="cl"><span class="s2">      1. If SPIRE options provided -&gt; SPIRE dynamic identity flow.
+</span></span></span><span class="line"><span class="cl"><span class="s2">      2. Else if jwt + bundle + audience provided -&gt; JWT/JWKS flow.
+</span></span></span><span class="line"><span class="cl"><span class="s2">      3. Else -&gt; shared secret (must be provided).
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Args:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        config: BaseConfig instance containing all configuration.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Returns:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        tuple[App, int]: Slim application instance and connection ID.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Initialize tracing and global state</span>
+</span></span><span class="line"><span class="cl">    <span class="n">service</span> <span class="o">=</span> <span class="n">setup_service</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Convert local identifier to a strongly typed Name.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">local_name</span> <span class="o">=</span> <span class="n">split_id</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">local</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Connect to SLIM server (returns connection ID)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_insecure_client_config</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">slim</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conn_id</span> <span class="o">=</span> <span class="k">await</span> <span class="n">service</span><span class="o">.</span><span class="n">connect_async</span><span class="p">(</span><span class="n">client_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Determine authentication mode</span>
+</span></span><span class="line"><span class="cl">    <span class="n">auth_mode</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_auth_mode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">auth_mode</span> <span class="o">==</span> <span class="n">AuthMode</span><span class="o">.</span><span class="n">SPIRE</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Using SPIRE dynamic identity authentication.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">provider_config</span><span class="p">,</span> <span class="n">verifier_config</span> <span class="o">=</span> <span class="n">spire_identity</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">socket_path</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">spire_socket_path</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">target_spiffe_id</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">spire_target_spiffe_id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">jwt_audiences</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">spire_jwt_audience</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">local_app</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">create_app</span><span class="p">(</span><span class="n">local_name</span><span class="p">,</span> <span class="n">provider_config</span><span class="p">,</span> <span class="n">verifier_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">auth_mode</span> <span class="o">==</span> <span class="n">AuthMode</span><span class="o">.</span><span class="n">JWT</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Using JWT + JWKS authentication.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># These should always be set if auth_mode is JWT</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">jwt</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">spire_trust_bundle</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;JWT and SPIRE trust bundle are required for JWT auth mode&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">provider_config</span><span class="p">,</span> <span class="n">verifier_config</span> <span class="o">=</span> <span class="n">jwt_identity</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">config</span><span class="o">.</span><span class="n">jwt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">config</span><span class="o">.</span><span class="n">spire_trust_bundle</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">str</span><span class="p">(</span><span class="n">local_name</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">aud</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">audience</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">local_app</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">create_app</span><span class="p">(</span><span class="n">local_name</span><span class="p">,</span> <span class="n">provider_config</span><span class="p">,</span> <span class="n">verifier_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Using shared-secret authentication.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">local_app</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">create_app_with_secret</span><span class="p">(</span><span class="n">local_name</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">shared_secret</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Provide feedback to user (instance numeric id).</span>
+</span></span><span class="line"><span class="cl">    <span class="n">format_message_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">local_app</span><span class="o">.</span><span class="n">id</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span> <span class="s2">&#34;Created app&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Subscribe to the local name</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">local_app</span><span class="o">.</span><span class="n">subscribe_async</span><span class="p">(</span><span class="n">local_name</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">local_app</span><span class="p">,</span> <span class="n">conn_id</span>
+</span></span></code></pre></div><h3 id="key-authentication-options">Key Authentication Options</h3>
+<p>The following key authentication options are available:</p>
+<h4 id="spire-recommended-for-production">SPIRE (Recommended for production)</h4>
+<p>Uses the SPIRE Workload API for dynamic identity. Requires a running SPIRE agent. See <a href="../../slim-messaging-layer/slim-authentication/">SLIM documentation</a>
+ for setup details.</p>
+<h4 id="jwtjwks-production">JWT/JWKS (Production)</h4>
+<p>Uses static JWT files with JWKS for verification. Suitable for environments with an existing JWT infrastructure.</p>
+<h4 id="shared-secret-development-only">Shared Secret (Development only)</h4>
+<p>Simple symmetric key authentication.</p>
+<h2 id="group-communication-using-the-python-bindings">Group Communication Using the Python Bindings</h2>
+<p>Now that you know how to set up a SLIM application, we can see how to create a group where multiple participants can exchange messages. We start by showing how to create a group session using the Python bindings.</p>
+<p>In this setting, one participant acts as moderator: it creates the group session and invites participants by sending invitation control messages. A detailed description of group sessions and the invitation process is available in the <a href="../../slim-messaging-layer/slim-session/">SLIM documentation</a>
+.</p>
+<h3 id="creating-the-group-session-and-inviting-members">Creating the Group Session and Inviting Members</h3>
+<p>The creator of the group session invites other members to join the group. The
+session will be identified by a unique session ID, and the group communication
+will take place over a specific channel name. The session creator is responsible
+for managing the session lifecycle, including creating, updating, and
+terminating the session as needed.</p>
+<p>As each participant is provided with an identity, setting up MLS for end-to-end
+encryption is straightforward: the session is created with the
+<code>mls_enabled</code> flag set to <code>True</code>, which will enable the MLS protocol for the
+session. This ensures that all messages exchanged within the session are
+end-to-end encrypted, providing confidentiality and integrity for the group
+communication.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Create group session configuration</span>
+</span></span><span class="line"><span class="cl"><span class="n">session_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">SessionConfig</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session_type</span><span class="o">=</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">SessionType</span><span class="o">.</span><span class="n">GROUP</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">enable_mls</span><span class="o">=</span><span class="n">enable_mls</span><span class="p">,</span>  <span class="c1"># Enable Messaging Layer Security for end-to-end encrypted &amp; authenticated group communication.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">max_retries</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>  <span class="c1"># Max per-message resend attempts upon missing ack before reporting a delivery failure.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">interval</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>  <span class="c1"># Ack / delivery wait window; after this duration a retry is triggered (until max_retries).</span>
+</span></span><span class="line"><span class="cl">    <span class="n">metadata</span><span class="o">=</span><span class="p">{},</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create session - returns a SessionContext</span>
+</span></span><span class="line"><span class="cl"><span class="n">session</span> <span class="o">=</span> <span class="n">local_app</span><span class="o">.</span><span class="n">create_session</span><span class="p">(</span><span class="n">session_config</span><span class="p">,</span> <span class="n">chat_channel</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Wait for session to be established</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">completion</span><span class="o">.</span><span class="n">wait_async</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">created_session</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">session</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Invite each provided participant</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">invite</span> <span class="ow">in</span> <span class="n">invites</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">invite_name</span> <span class="o">=</span> <span class="n">split_id</span><span class="p">(</span><span class="n">invite</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">local_app</span><span class="o">.</span><span class="n">set_route_async</span><span class="p">(</span><span class="n">invite_name</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">handle</span> <span class="o">=</span> <span class="k">await</span> <span class="n">created_session</span><span class="o">.</span><span class="n">invite_async</span><span class="p">(</span><span class="n">invite_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">handle</span><span class="o">.</span><span class="n">wait_async</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">local</span><span class="si">}</span><span class="s2"> -&gt; add </span><span class="si">{</span><span class="n">invite_name</span><span class="si">}</span><span class="s2"> to the group&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>This code comes from the
+<a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples/group.py" target="_blank" rel="noopener noreferrer">group.py</a>
+
+example.</p>
+<p>A new group session is created by calling <code>local_app.create_session(...)</code> which returns a <code>SessionContext</code>
+object containing both the session and a completion handle. The completion handle must be awaited to ensure
+the session is fully established.</p>
+<p>Key configuration parameters for <code>SessionConfig</code>:</p>
+<ul>
+<li><code>session_type</code>: Set to <code>SessionType.GROUP</code> for group/multicast sessions.</li>
+<li><code>enable_mls</code>: Set to <code>True</code> to enable MLS for end-to-end encryption.</li>
+<li><code>max_retries</code>: Maximum number of retransmission attempts (upon missing ack) before notifying the application of delivery failure.</li>
+<li><code>interval</code>: Duration to wait for an acknowledgment; if the ack is not received in time, a retry is triggered. If omitted / None, the session is unreliable (no retry/ack flow).</li>
+<li><code>metadata</code>: Optional key-value pairs for session metadata.</li>
+</ul>
+<p>After session creation, the moderator invites participants via <code>created_session.invite_async(invite_name)</code>.
+Each invite call returns a completion handle that should be awaited to ensure the invitation completes.</p>
+<h3 id="implement-participants-and-receive-messages">Implement Participants and Receive Messages</h3>
+<p>The group participants are implemented in a similar way, but they
+do not create the session. They create the SLIM service instance and wait
+for invites. Once they receive the invite, they can read and write on the shared channel.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">receive_loop</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">local_app</span><span class="p">:</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">App</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">created_session</span><span class="p">:</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Session</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session_ready</span><span class="p">:</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Event</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">shared_session_container</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Receive messages for the bound session.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Behavior:
+</span></span></span><span class="line"><span class="cl"><span class="s2">      * If not moderator: wait for a new group session (listen_for_session_async()).
+</span></span></span><span class="line"><span class="cl"><span class="s2">      * If moderator: reuse the created_session reference.
+</span></span></span><span class="line"><span class="cl"><span class="s2">      * Loop forever until cancellation or an error occurs.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">created_session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_formatted_text</span><span class="p">(</span><span class="s2">&#34;Waiting for session...&#34;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">custom_style</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">session</span> <span class="o">=</span> <span class="k">await</span> <span class="n">local_app</span><span class="o">.</span><span class="n">listen_for_session_async</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">session</span> <span class="o">=</span> <span class="n">created_session</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Make session available to other tasks</span>
+</span></span><span class="line"><span class="cl">    <span class="n">shared_session_container</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">session</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session_ready</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Get source and destination names for display</span>
+</span></span><span class="line"><span class="cl">    <span class="n">source_name</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Await next inbound message from the group session.</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Returns a ReceivedMessage object with context and payload.</span>
+</span></span><span class="line"><span class="cl">            <span class="n">received_msg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">get_message_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">timeout</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ctx</span> <span class="o">=</span> <span class="n">received_msg</span><span class="o">.</span><span class="n">context</span>
+</span></span><span class="line"><span class="cl">            <span class="n">payload</span> <span class="o">=</span> <span class="n">received_msg</span><span class="o">.</span><span class="n">payload</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># Display sender name and message</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sender</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">source_name</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="s2">&#34;source_name&#34;</span><span class="p">)</span> <span class="k">else</span> <span class="n">source_name</span>
+</span></span><span class="line"><span class="cl">            <span class="n">print_formatted_text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">sender</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="n">payload</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">style</span><span class="o">=</span><span class="n">custom_style</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># if the message metadata contains PUBLISH_TO this message is a reply</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># to a previous one. In this case we do not reply to avoid loops</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="s2">&#34;PUBLISH_TO&#34;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">reply</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;message received by </span><span class="si">{</span><span class="n">source_name</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">publish_to_async</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">reply</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">CancelledError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Graceful shutdown path (ctrl-c or program exit).</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Break if session is closed, otherwise continue listening</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="s2">&#34;session closed&#34;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span></code></pre></div><p>Each non-moderator participant listens for an incoming session using
+<code>local_app.listen_for_session_async(None)</code>. The <code>None</code> parameter means wait indefinitely for a session.
+This returns a session object containing metadata such as session ID, type, source name, and destination name.
+The moderator already holds this information and therefore reuses the existing
+<code>created_session</code> (see <code>session = created_session</code>).</p>
+<p>Once a session is established, the function retrieves the source name using <code>session.source()</code> for display purposes.
+Participants (including the moderator) then call <code>received_msg = await session.get_message_async(timeout=...)</code> to receive
+messages. The returned <code>ReceivedMessage</code> object has two attributes: <code>context</code> (with source, destination, message type, and metadata)
+and <code>payload</code> (the raw message bytes).</p>
+<p>The function displays each received message showing the sender&rsquo;s name and payload. Additionally, it automatically sends
+an acknowledgment reply using <code>session.publish_to_async(ctx, reply, None, metadata)</code>, unless the received message already
+contains &ldquo;PUBLISH_TO&rdquo; in its metadata (indicating it&rsquo;s a reply), which prevents infinite reply loops.</p>
+<h3 id="publish-messages-to-the-session">Publish Messages to the Session</h3>
+<p>All participants can publish messages on the shared channel:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">keyboard_loop</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">created_session</span><span class="p">:</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Session</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session_ready</span><span class="p">:</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Event</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">shared_session_container</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">Session</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">local_app</span><span class="p">:</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">App</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Interactive loop allowing participants to publish messages.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Typing &#39;exit&#39; or &#39;quit&#39; (case-insensitive) terminates the loop.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Typing &#39;remove NAME&#39; removes a participant from the group
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Typing &#39;invite NAME&#39; invites a participant to the group
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Each line is published to the group channel as UTF-8 bytes.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 1. Initialize an async session</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prompt_session</span> <span class="o">=</span> <span class="n">PromptSession</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="n">custom_style</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Wait for the session to be established</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">session_ready</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">session</span> <span class="o">=</span> <span class="n">shared_session_container</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">source_name</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dest_name</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">destination</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">created_session</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">print_formatted_text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="sa">f</span><span class="s2">&#34;Welcome to the group </span><span class="si">{</span><span class="n">dest_name</span><span class="si">}</span><span class="s2">!</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;Commands:</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;  - Type a message to send it to the group</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;  - &#39;remove NAME&#39; to remove a participant</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;  - &#39;invite NAME&#39; to invite a participant</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;  - &#39;exit&#39; or &#39;quit&#39; to leave the group&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">style</span><span class="o">=</span><span class="n">custom_style</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">print_formatted_text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="sa">f</span><span class="s2">&#34;Welcome to the group </span><span class="si">{</span><span class="n">dest_name</span><span class="si">}</span><span class="s2">!</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;Commands:</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;  - Type a message to send it to the group</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;  - &#39;exit&#39; or &#39;quit&#39; to leave the group&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">style</span><span class="o">=</span><span class="n">custom_style</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Run blocking input() in a worker thread so we do not block the event loop.</span>
+</span></span><span class="line"><span class="cl">            <span class="n">user_input</span> <span class="o">=</span> <span class="k">await</span> <span class="n">prompt_session</span><span class="o">.</span><span class="n">prompt_async</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">source_name</span><span class="si">}</span><span class="s2"> &gt; &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">user_input</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&#34;exit&#34;</span><span class="p">,</span> <span class="s2">&#34;quit&#34;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">created_session</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="c1"># Delete the session</span>
+</span></span><span class="line"><span class="cl">                <span class="n">handle</span> <span class="o">=</span> <span class="k">await</span> <span class="n">local_app</span><span class="o">.</span><span class="n">delete_session_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">shared_session_container</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">await</span> <span class="n">handle</span><span class="o">.</span><span class="n">wait_async</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">user_input</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;invite &#34;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">created_session</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">invite_id</span> <span class="o">=</span> <span class="n">user_input</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>  <span class="c1"># Skip &#34;invite &#34; (7 chars)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">await</span> <span class="n">handle_invite</span><span class="p">(</span><span class="n">shared_session_container</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">invite_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">user_input</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;remove &#34;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">created_session</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">remove_id</span> <span class="o">=</span> <span class="n">user_input</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>  <span class="c1"># Skip &#34;remove &#34; (7 chars)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">await</span> <span class="n">handle_remove</span><span class="p">(</span><span class="n">shared_session_container</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">remove_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># Send message to the channel_name specified when creating the session.</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># As the session is group, all participants will receive it.</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">shared_session_container</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">publish_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">user_input</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Handle Ctrl+C gracefully</span>
+</span></span><span class="line"><span class="cl">        <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">CancelledError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Handle task cancellation gracefully</span>
+</span></span><span class="line"><span class="cl">        <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_formatted_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;-&gt; Error sending message: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Messages are sent using <code>session.publish_async(payload, payload_type, metadata)</code>.
+The payload is the message bytes, while payload_type and metadata are optional.
+There is no explicit destination because the group channel was fixed at session creation and delivery
+fans out to all participants.</p>
+<p>The <code>keyboard_loop</code> function provides different interfaces depending on whether the application is a moderator or a regular participant:</p>
+<ul>
+<li>
+<p>Moderators (who created the session) have additional commands:</p>
+<ul>
+<li><code>invite NAME</code> - Dynamically invite a new participant to the group using the <code>handle_invite()</code> helper</li>
+<li><code>remove NAME</code> - Remove a participant from the group using the <code>handle_remove()</code> helper</li>
+<li><code>exit</code> or <code>quit</code> - Delete the session, which notifies all participants</li>
+</ul>
+</li>
+<li>
+<p>Regular participants can:</p>
+<ul>
+<li>Type messages to broadcast to the group</li>
+<li><code>exit</code> or <code>quit</code> - Leave the group (local session only)</li>
+</ul>
+</li>
+</ul>
+<p>When a user types <code>exit</code> or <code>quit</code> as a moderator, the application calls <code>local_app.delete_session_async()</code>
+which returns a completion handle that must be awaited to ensure proper session cleanup before
+terminating the loop. When the moderator closes the session,
+all other participants are automatically notified, causing their receive loops to terminate
+and their sessions to close gracefully. If the session closure is initiated by a participant,
+only its local session is closed.</p>
+<h3 id="run-the-group-communication-example">Run the Group Communication Example</h3>
+<p>Now we will show how to run a new group session and
+how to enable group communication on top of SLIM. The full code can be found in
+<a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples/group.py" target="_blank" rel="noopener noreferrer">group.py</a>
+
+in the SLIM repo. To run the example, follow the steps listed here:</p>
+<h4 id="run-slim">Run SLIM</h4>
+<p>As all members of the group are communicating via a SLIM network, we can set
+up a SLIM instance representing the SLIM network. We use the pre-built
+docker image for this purpose.</p>
+<p>First execute this command to create the SLIM configuration file. Details about
+the configuration can be found in the SLIM repository documentation.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; ./config.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">tracing:
+</span></span></span><span class="line"><span class="cl"><span class="s">  log_level: info
+</span></span></span><span class="line"><span class="cl"><span class="s">  display_thread_names: true
+</span></span></span><span class="line"><span class="cl"><span class="s">  display_thread_ids: true
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">runtime:
+</span></span></span><span class="line"><span class="cl"><span class="s">  n_cores: 0
+</span></span></span><span class="line"><span class="cl"><span class="s">  thread_name: &#34;slim-data-plane&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  drain_timeout: 10s
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">services:
+</span></span></span><span class="line"><span class="cl"><span class="s">  slim/0:
+</span></span></span><span class="line"><span class="cl"><span class="s">    dataplane:
+</span></span></span><span class="line"><span class="cl"><span class="s">      servers:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - endpoint: &#34;0.0.0.0:46357&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          tls:
+</span></span></span><span class="line"><span class="cl"><span class="s">            insecure: true
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">      clients: []
+</span></span></span><span class="line"><span class="cl"><span class="s">    controller:
+</span></span></span><span class="line"><span class="cl"><span class="s">      servers: []
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></div><p>This configuration starts a SLIM instance with a server listening on port
+46357, without TLS encryption for simplicity. Messages are still encrypted
+using the MLS protocol, but the connections between SLIM nodes do not use TLS.
+In a production environment, it is recommended to always use TLS and configure
+proper authentication and authorization mechanisms.</p>
+<p>You can run the SLIM instance using Docker:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -it <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -v ./config.yaml:/config.yaml -p 46357:46357 <span class="se">\
+</span></span></span><span class="line"><span class="cl">    ghcr.io/agntcy/slim:1.0.0 /slim --config /config.yaml
+</span></span></code></pre></div><p>If everything goes fine, you should see an output like this one:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">2026-01-28T15:03:38.408128Z  INFO main ThreadId<span class="o">(</span>01<span class="o">)</span> application_lifecycle: slim: 52: Runtime started
+</span></span><span class="line"><span class="cl">2026-01-28T15:03:38.414090Z  INFO main ThreadId<span class="o">(</span>01<span class="o">)</span> application_lifecycle: slim_service::service: 338: dataplane server started <span class="nv">endpoint</span><span class="o">=</span>0.0.0.0:46357
+</span></span><span class="line"><span class="cl">2026-01-28T15:03:38.414813Z  INFO main ThreadId<span class="o">(</span>01<span class="o">)</span> application_lifecycle: slim_service::service: 225: no controller configuration provided, skipping controller startup
+</span></span><span class="line"><span class="cl">2026-01-28T15:03:38.414823Z  INFO main ThreadId<span class="o">(</span>01<span class="o">)</span> application_lifecycle: slim: 65: service started <span class="nv">service</span><span class="o">=</span>slim/0
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></div><h4 id="start-the-participants">Start the Participants</h4>
+<p>In this example, we use two participants: <code>agntcy/ns/client-1</code> and <code>agntcy/ns/client-2</code>.</p>
+<p>First, clone the SLIM repository and install the dependencies:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone --branch slim-v1.1.0 https://github.com/agntcy/slim.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> slim/data-plane/bindings/python
+</span></span><span class="line"><span class="cl">task python:bindings:build
+</span></span><span class="line"><span class="cl">task python:bindings:install-examples
+</span></span></code></pre></div><p>Now run these commands in two different terminals from the <code>slim/data-plane/bindings/python</code> directory:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">task python:example:group:client-1
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">task python:example:group:client-2
+</span></span></code></pre></div><p>This starts two participants authenticated with a shared secret.
+The output of these commands should look like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">2026-01-28T15:20:54.595284Z  INFO slim slim_service::service: 402: client connected <span class="nv">endpoint</span><span class="o">=</span>http://127.0.0.1:46357 <span class="nv">conn_id</span><span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">Using shared-secret authentication.
+</span></span><span class="line"><span class="cl"><span class="m">12628940569466571367</span>                         Created app
+</span></span><span class="line"><span class="cl">Waiting <span class="k">for</span> session...
+</span></span></code></pre></div><h4 id="create-the-group">Create the Group</h4>
+<p>Run the moderator application to create the session and invite the two
+participants. In another terminal, from the <code>slim/data-plane/bindings/python</code> directory, run:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">task python:example:group:moderator
+</span></span></code></pre></div><p>The result should look like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">2026-01-28T15:22:08.907149Z  INFO slim slim_service::service: 402: client connected <span class="nv">endpoint</span><span class="o">=</span>http://127.0.0.1:46357 <span class="nv">conn_id</span><span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">Using shared-secret authentication.
+</span></span><span class="line"><span class="cl"><span class="m">2704185522498177164</span>                          Created app
+</span></span><span class="line"><span class="cl">Creating new group session <span class="o">(</span>moderator<span class="o">)</span>... agntcy/ns/moderator/ffffffffffffffff
+</span></span><span class="line"><span class="cl">agntcy/ns/moderator -&gt; add agntcy/ns/client-1/ffffffffffffffff to the group
+</span></span><span class="line"><span class="cl">agntcy/ns/moderator -&gt; add agntcy/ns/client-2/ffffffffffffffff to the group
+</span></span><span class="line"><span class="cl">Welcome to the group agntcy/ns/chat/ffffffffffffffff!
+</span></span><span class="line"><span class="cl">Commands:
+</span></span><span class="line"><span class="cl">  - Type a message to send it to the group
+</span></span><span class="line"><span class="cl">  - <span class="s1">&#39;remove NAME&#39;</span> to remove a participant
+</span></span><span class="line"><span class="cl">  - <span class="s1">&#39;invite NAME&#39;</span> to invite a participant
+</span></span><span class="line"><span class="cl">  - <span class="s1">&#39;exit&#39;</span> or <span class="s1">&#39;quit&#39;</span> to leave the group
+</span></span><span class="line"><span class="cl">agntcy/ns/moderator/25873267c342088c &gt;
+</span></span></code></pre></div><p>Now <code>client-1</code> and <code>client-2</code> are invited to the group, so on both of their terminals you should
+be able to see a welcome message such as:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Welcome to the group agntcy/ns/chat/ffffffffffffffff!
+</span></span><span class="line"><span class="cl">Commands:
+</span></span><span class="line"><span class="cl">  - Type a message to send it to the group
+</span></span><span class="line"><span class="cl">  - <span class="s1">&#39;exit&#39;</span> or <span class="s1">&#39;quit&#39;</span> to leave the group
+</span></span><span class="line"><span class="cl">agntcy/ns/client-1/af43028974930a67 &gt;
+</span></span></code></pre></div><p>At this point, you can write messages from any terminal and they will be received by all other group participants.</p>
+<p>Writing &rsquo;exit&rsquo; or &lsquo;quit&rsquo; from the moderator will close all the applications.
+You can also remove and add participants by using the <code>remove</code> and <code>invite</code> commands from the moderator.</p>
+<h2 id="group-communication-using-the-slim-controller">Group Communication Using the SLIM Controller</h2>
+<p>Previously, we saw how to run group communication using the Python bindings with an in-application moderator.
+This participant creates the group session and invites all other participants.
+In this section, we describe how to create and orchestrate a group using the SLIM Controller, and we show how all
+these functions can be delegated to the controller. We reuse the same group example code in this section as well.</p>
+<h3 id="application-differences">Application Differences</h3>
+<p>With the controller, you do not need to set up a moderator in your application. All participants can be run as we did for <code>client-1</code> and <code>client-2</code> in the previous examples. In code, this means you can avoid creating a new group session (using <code>local_app.create_session</code>) and the invitation loop. You only need to implement the <code>receive_loop</code> where the application waits for new sessions. This greatly simplifies your code.</p>
+<h3 id="run-the-group-communication-example-1">Run the Group Communication Example</h3>
+<p>Now we will show how to set up a group using the SLIM Controller. The reference code for the
+application is still <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples/group.py" target="_blank" rel="noopener noreferrer">group.py</a>
+. To run this example, follow the steps listed here.</p>
+<h4 id="run-the-slim-controller">Run the SLIM Controller</h4>
+<p>First, start the SLIM Controller. Full details are in the <a href="../../slim-controller/">SLIM Controller</a>
+ documentation; here we reproduce the minimal setup. Create a configuration file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; ./config-controller.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">northbound:
+</span></span></span><span class="line"><span class="cl"><span class="s">  httpHost: 0.0.0.0
+</span></span></span><span class="line"><span class="cl"><span class="s">  httpPort: 50051
+</span></span></span><span class="line"><span class="cl"><span class="s">  logging:
+</span></span></span><span class="line"><span class="cl"><span class="s">    level: INFO
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">southbound:
+</span></span></span><span class="line"><span class="cl"><span class="s">  httpHost: 0.0.0.0
+</span></span></span><span class="line"><span class="cl"><span class="s">  httpPort: 50052
+</span></span></span><span class="line"><span class="cl"><span class="s">  logging:
+</span></span></span><span class="line"><span class="cl"><span class="s">    level: INFO
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">reconciler:
+</span></span></span><span class="line"><span class="cl"><span class="s">  maxRequeues: 15
+</span></span></span><span class="line"><span class="cl"><span class="s">  maxNumOfParallelReconciles: 1000
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">logging:
+</span></span></span><span class="line"><span class="cl"><span class="s">  level: INFO
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">database:
+</span></span></span><span class="line"><span class="cl"><span class="s">  filePath: /db/controlplane.db
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></div><p>This config defines two APIs exposed by the controller:</p>
+<ul>
+<li>Northbound API: used by an operator (e.g. via slimctl) to configure channels and participants, as well as the SLIM network.</li>
+<li>Southbound API: used by SLIM nodes to synchronize with the controller.</li>
+</ul>
+<p>Start the controller with Docker:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -it <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -v ./config-controller.yaml:/config.yaml -v .:/db -p 50051:50051 -p 50052:50052 <span class="se">\
+</span></span></span><span class="line"><span class="cl">    ghcr.io/agntcy/slim/control-plane:1.0.0 --config /config.yaml
+</span></span></code></pre></div><p>If everything goes fine, you should see an output like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">2026-01-28T15:26:53Z INF Starting Route Reconciler <span class="nv">thread_name</span><span class="o">=</span>reconciler
+</span></span><span class="line"><span class="cl">2026-01-28T15:26:53Z INF Northbound API Service is listening on <span class="o">[</span>::<span class="o">]</span>:50051
+</span></span><span class="line"><span class="cl">2026-01-28T15:26:53Z INF Southbound API Service is Listening on <span class="o">[</span>::<span class="o">]</span>:50052
+</span></span></code></pre></div><h4 id="run-the-slim-node">Run the SLIM Node</h4>
+<p>With the controller running, start a SLIM node configured to talk to it over the Southbound API. This node config includes two additional settings compared to the file from the previous section:</p>
+<ul>
+<li>A controller client used to connect to the Southbound API running on port 50052.</li>
+<li>A shared secret token provider that will be used by the SLIM node to send messages over the SLIM network. As with the normal application, you can use a shared secret or a proper JWT.</li>
+</ul>
+<p>Create the <code>config-slim.yaml</code> for the node using the command below. We use the <code>host.docker.internal</code> endpoint to reach the controller from inside the Docker container via the host.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; ./config-slim.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">tracing:
+</span></span></span><span class="line"><span class="cl"><span class="s">  log_level: info
+</span></span></span><span class="line"><span class="cl"><span class="s">  display_thread_names: true
+</span></span></span><span class="line"><span class="cl"><span class="s">  display_thread_ids: true
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">runtime:
+</span></span></span><span class="line"><span class="cl"><span class="s">  n_cores: 0
+</span></span></span><span class="line"><span class="cl"><span class="s">  thread_name: &#34;slim-data-plane&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  drain_timeout: 10s
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">services:
+</span></span></span><span class="line"><span class="cl"><span class="s">  slim/0:
+</span></span></span><span class="line"><span class="cl"><span class="s">    dataplane:
+</span></span></span><span class="line"><span class="cl"><span class="s">      servers:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - endpoint: &#34;0.0.0.0:46357&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          tls:
+</span></span></span><span class="line"><span class="cl"><span class="s">            insecure: true
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">      clients: []
+</span></span></span><span class="line"><span class="cl"><span class="s">    controller:
+</span></span></span><span class="line"><span class="cl"><span class="s">      servers: []
+</span></span></span><span class="line"><span class="cl"><span class="s">      clients:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - endpoint: &#34;http://host.docker.internal:50052&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          tls:
+</span></span></span><span class="line"><span class="cl"><span class="s">            insecure: true
+</span></span></span><span class="line"><span class="cl"><span class="s">      token_provider:
+</span></span></span><span class="line"><span class="cl"><span class="s">        type: shared_secret
+</span></span></span><span class="line"><span class="cl"><span class="s">        id: &#34;slim/0&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        data: &#34;very-long-shared-secret-value-0123456789abcdef&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></div><p>This starts a SLIM node that connects to the controller:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -it <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -v ./config-slim.yaml:/config.yaml -p 46357:46357 <span class="se">\
+</span></span></span><span class="line"><span class="cl">    ghcr.io/agntcy/slim:1.0.0 /slim --config /config.yaml
+</span></span></code></pre></div><p>If everything goes fine, you should see an output like this one:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">2026-01-28T15:40:45.189063Z  INFO main ThreadId<span class="o">(</span>01<span class="o">)</span> application_lifecycle: slim: 52: Runtime started
+</span></span><span class="line"><span class="cl">2026-01-28T15:40:45.189274Z  INFO main ThreadId<span class="o">(</span>01<span class="o">)</span> application_lifecycle: slim_service::service: 338: dataplane server started <span class="nv">endpoint</span><span class="o">=</span>0.0.0.0:46357
+</span></span><span class="line"><span class="cl">2026-01-28T15:40:45.189348Z  INFO main ThreadId<span class="o">(</span>01<span class="o">)</span> application_lifecycle: slim_controller::service: 1634: connecting to control plane config.endpoint<span class="o">=</span>http://host.docker.internal:50052
+</span></span><span class="line"><span class="cl">2026-01-28T15:40:45.192773Z  INFO slim-data-plane ThreadId<span class="o">(</span>03<span class="o">)</span> slim_controller::service: 1518: connected to control plane <span class="nv">endpoint</span><span class="o">=</span>http://host.docker.internal:50052
+</span></span><span class="line"><span class="cl">2026-01-28T15:40:45.192777Z  INFO            main ThreadId<span class="o">(</span>01<span class="o">)</span> application_lifecycle: slim: 65: service started <span class="nv">service</span><span class="o">=</span>slim/0
+</span></span><span class="line"><span class="cl">2026-01-28T15:40:45.196599Z  INFO slim-data-plane ThreadId<span class="o">(</span>04<span class="o">)</span> slim_controller::service: 890: Processed ConfigurationCommand <span class="nv">connections</span><span class="o">=</span><span class="m">0</span> <span class="nv">subscriptions_to_set</span><span class="o">=</span><span class="m">0</span> <span class="nv">subscriptions_to_del</span><span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></div><p>On the Controller side, you can see that the new node registers with the controller. The
+output should be similar to this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">2026-01-28T15:40:45Z INF Registering node with ID: slim/0 <span class="nv">svc</span><span class="o">=</span>southbound
+</span></span><span class="line"><span class="cl">2026-01-28T15:40:45Z INF Connection details: <span class="o">[</span>endpoint: 192.168.65.1:46357<span class="o">]</span> <span class="nv">nodeID</span><span class="o">=</span>slim/0 <span class="nv">svc</span><span class="o">=</span>southbound
+</span></span><span class="line"><span class="cl">2026-01-28T15:40:45Z INF Create generic routes <span class="k">for</span> node <span class="nv">node_id</span><span class="o">=</span>slim/0 <span class="nv">service</span><span class="o">=</span>RouteService
+</span></span><span class="line"><span class="cl">2026-01-28T15:40:45Z INF Sending routes to registered node slim/0 <span class="nv">node_id</span><span class="o">=</span>slim/0
+</span></span><span class="line"><span class="cl">2026-01-28T15:40:45Z INF Sending configuration <span class="nb">command</span> to registered node <span class="nv">connections_count</span><span class="o">=</span><span class="m">0</span> <span class="nv">message_id</span><span class="o">=</span>95c75638-aa2d-4043-8f27-cb26f453716e <span class="nv">node_id</span><span class="o">=</span>slim/0 <span class="nv">subscriptions_count</span><span class="o">=</span><span class="m">0</span> <span class="nv">subscriptions_to_delete_count</span><span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">2026-01-28T15:40:45Z INF Configuration <span class="nb">command</span> processing completed <span class="nv">node_id</span><span class="o">=</span>slim/0 <span class="nv">original_message_id</span><span class="o">=</span>95c75638-aa2d-4043-8f27-cb26f453716e
+</span></span></code></pre></div><h4 id="run-the-participants">Run the Participants</h4>
+<p>Because the controller manages the group lifecycle, no participant needs to be designated as moderator in code. Every application instance just waits for a session invite. In three separate terminals, from the folder
+<code>data-plane/bindings/python/examples</code> run:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uv run slim-bindings-group <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --local agntcy/ns/client-1 <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --shared-secret <span class="s2">&#34;very-long-shared-secret-value-0123456789abcdef&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uv run slim-bindings-group <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --local agntcy/ns/client-2 <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --shared-secret <span class="s2">&#34;very-long-shared-secret-value-0123456789abcdef&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uv run slim-bindings-group <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --local agntcy/ns/client-3 <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --shared-secret <span class="s2">&#34;very-long-shared-secret-value-0123456789abcdef&#34;</span>
+</span></span></code></pre></div><p>Each terminal should show output similar to:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">2026-01-28T15:44:59.125043Z  INFO slim slim_service::service: 402: client connected <span class="nv">endpoint</span><span class="o">=</span>http://127.0.0.1:46357 <span class="nv">conn_id</span><span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">Using shared-secret authentication.
+</span></span><span class="line"><span class="cl"><span class="m">10494544672403736104</span>                         Created app
+</span></span><span class="line"><span class="cl">Waiting <span class="k">for</span> session..
+</span></span></code></pre></div><p>At this point all applications are waiting for a new session.</p>
+<h4 id="manage-the-group-with-slimctl">Manage the Group with slimctl</h4>
+<p>Use <code>slimctl</code> (see <a href="../../slim-controller/">SLIM Controller</a>
+) to send administrative commands to the controller.</p>
+<p>First, you need to run <code>slimctl</code>. To install it see the <a href="../../slim-controller/#installing-slimctl">slimctl documentation</a>
+.</p>
+<p>To verify that <code>slimctl</code> was downloaded successfully, run the following command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slimctl version
+</span></span></code></pre></div><h5 id="create-the-group-1">Create the Group</h5>
+<p>Select any running participant to be the initial member of the group. This participant acts as the logical
+moderator of the channel, similar to the Python bindings example. However, you don&rsquo;t
+need to handle this explicitly in the code. Run the following command to create the channel:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slimctl controller channel create <span class="nv">moderators</span><span class="o">=</span>agntcy/ns/client-1/10494544672403736104 
+</span></span></code></pre></div><p>The full name of the application can be taken from the output in the console. The value
+<code>10494544672403736104</code> is the actual ID of the <code>client-1</code> application returned by
+SLIM and is visible in the logs. In your case, this value will be different.</p>
+<p>The expected response from <code>slimctl</code> is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Received response: agntcy/ns/hDxc8CKpElJUfTTief
+</span></span></code></pre></div><p>The value <code>agntcy/ns/hDxc8CKpElJUfTTief</code> is the channel (or group) identifier (name) that must be used in subsequent commands.</p>
+<p>On the application side, <code>client-1</code> was added to the session, so you should see
+something like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Welcome to the group agntcy/ns/hDxc8CKpElJUfTTief/ffffffffffffffff!
+</span></span><span class="line"><span class="cl">Commands:
+</span></span><span class="line"><span class="cl">  - Type a message to send it to the group
+</span></span><span class="line"><span class="cl">  - <span class="s1">&#39;exit&#39;</span> or <span class="s1">&#39;quit&#39;</span> to leave the group
+</span></span><span class="line"><span class="cl">agntcy/ns/client-1/91a41cc6ee17c628 &gt;
+</span></span></code></pre></div><h5 id="add-participants">Add Participants</h5>
+<p>Now that the new group is created, add the additional participants <code>client-2</code> and <code>client-3</code> using the following <code>slimctl</code> commands:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slimctl controller participant add -c agntcy/ns/xyIGhc2igNGmkeBDlZ agntcy/ns/client-2
+</span></span><span class="line"><span class="cl">slimctl controller participant add -c agntcy/ns/xyIGhc2igNGmkeBDlZ agntcy/ns/client-3
+</span></span></code></pre></div><p>The expected <code>slimctl</code> output is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Adding participant to channel ID agntcy/ns/hDxc8CKpElJUfTTief: agntcy/ns/client-2
+</span></span><span class="line"><span class="cl">Participant added successfully to channel ID agntcy/ns/hDxc8CKpElJUfTTief: agntcy/ns/client-2
+</span></span></code></pre></div><p>Now all the participants are part of the same group, and so each client log should show that the join was successful:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Welcome to the group agntcy/ns/hDxc8CKpElJUfTTief/ffffffffffffffff!
+</span></span><span class="line"><span class="cl">Commands:
+</span></span><span class="line"><span class="cl">  - Type a message to send it to the group
+</span></span><span class="line"><span class="cl">  - <span class="s1">&#39;exit&#39;</span> or <span class="s1">&#39;quit&#39;</span> to leave the group
+</span></span><span class="line"><span class="cl">agntcy/ns/client-2/e9b95e5edaee3e2c &gt;
+</span></span></code></pre></div><p>At this point, every member can send messages, and they will be received by all the other participants.</p>
+<h5 id="remove-a-participant">Remove a Participant</h5>
+<p>To remove one of the participants from the channel, run the following command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slimctl controller participant delete -c agntcy/ns/xyIGhc2igNGmkeBDlZ agntcy/ns/client-3
+</span></span></code></pre></div><p>The <code>slimctl</code> expected output is this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Deleting participant from channel ID agntcy/ns/hDxc8CKpElJUfTTief: agntcy/ns/client-3
+</span></span><span class="line"><span class="cl">Participant deleted successfully from channel ID agntcy/ns/hDxc8CKpElJUfTTief: agntcy/ns/client-3
+</span></span></code></pre></div><p>The application on <code>client-3</code> exits because the session related to the group was closed, which breaks the
+receive loop in the Python code.</p>
+<h5 id="delete-channel">Delete channel</h5>
+<p>To delete the channel, run the following command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slimctl controller channel delete agntcy/ns/xyIGhc2igNGmkeBDlZ
+</span></span></code></pre></div><p>The <code>slimctl</code> output is this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Channel deleted successfully with ID: agntcy/ns/hDxc8CKpElJUfTTief
+</span></span></code></pre></div><p>All applications connected to the group stop as their receive loops terminate.</p>
+
+  </article>
+
+        </main>
+      </div>
+      
+      <footer class="footer">
+  <div>&copy; 2026 AGNTCY Contributors. All rights reserved.</div>
+</footer>
+
+<script>
+  (function() {
+    const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+      script.onload = function() {
+        mermaidBlocks.forEach(codeBlock => {
+          const pre = codeBlock.parentNode;
+          const div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = codeBlock.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: isDark ? 'dark' : 'default',
+          securityLevel: 'loose'
+        });
+      };
+      document.body.appendChild(script);
+    }
+  })();
+</script>
+
+    </div>
+  </body>
+</html>

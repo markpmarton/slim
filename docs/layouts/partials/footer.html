@@ -1,0 +1,30 @@
+<footer class="footer">
+  <div>&copy; {{ now.Format "2006" }} AGNTCY Contributors. All rights reserved.</div>
+</footer>
+
+<script>
+  (function() {
+    const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+      script.onload = function() {
+        mermaidBlocks.forEach(codeBlock => {
+          const pre = codeBlock.parentNode;
+          const div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = codeBlock.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: isDark ? 'dark' : 'default',
+          securityLevel: 'loose'
+        });
+      };
+      document.body.appendChild(script);
+    }
+  })();
+</script>

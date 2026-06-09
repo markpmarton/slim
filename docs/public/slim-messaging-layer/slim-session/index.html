@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SLIM Sessions | SLIM Documentation</title>
+  
+  
+  <link rel="stylesheet" href="/css/styles.min.css">
+  
+  <script>
+    
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+
+  <body class="is-doc">
+    <div class="app-container">
+      <header class="header">
+  <a href="/" class="logo-container" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+    <svg class="logo-svg" viewBox="0 0 492 112" xmlns="http://www.w3.org/2000/svg" style="height: 22px; width: auto; display: block; color: var(--primary);">
+      <path d="M436.006 111.94H-0.00390625V45.31C-0.00390625 20.29 20.2861 0 45.3061 0H491.826L435.996 111.94H436.006ZM40.8361 39.2L24.2661 94.15H50.3261L55.5561 75.07H71.7961V94.15H96.8761V17.83H65.2561C51.2961 17.83 45.8461 22.52 40.8361 39.2ZM60.6861 56.54L64.2861 43.68C66.0261 37.36 66.7961 36.48 70.6061 36.48H71.8061V56.54H60.6861ZM144.746 96.33C153.146 96.33 161.756 94.69 168.406 91.97V48.8H144.416V75.62H143.106C134.386 75.62 128.606 68.42 128.606 56.87C128.606 43.46 136.456 36.92 149.536 36.92C157.606 36.92 164.256 39.54 168.506 44.22V19.25C162.836 16.85 154.766 15.65 147.026 15.65C119.556 15.65 101.776 31.89 101.776 57.52C101.776 80.09 116.826 96.33 144.736 96.33H144.746ZM175.056 94.15H199.586V55.45C214.956 70.6 219.756 80.42 219.756 94.15H243.196V17.83H218.666V43.56L196.536 17.83H175.056V94.15ZM268.056 94.15H293.676V38.55H296.186C304.146 38.55 310.146 40.29 313.626 44.22V17.84H248.106V44.22C251.596 40.3 257.596 38.55 265.546 38.55H268.056V94.15ZM315.816 55.99C315.816 79.87 332.496 96.33 356.486 96.33C363.356 96.33 369.676 94.91 373.166 92.73V67.76C370.436 72.01 365.646 74.19 359.646 74.19C349.066 74.19 342.636 67.21 342.636 55.98C342.636 44.75 349.066 37.77 359.646 37.77C365.646 37.77 370.436 39.95 373.166 44.2V19.23C369.676 17.05 363.356 15.63 356.486 15.63C332.496 15.63 315.816 32.09 315.816 55.97V55.99ZM387.776 94.15H415.036L452.866 17.83H425.396L414.166 43.34L403.046 17.83H375.356L400.646 69.07L387.786 94.15H387.776Z" fill="currentColor"/>
+    </svg>
+    <span class="logo-divider" style="height: 16px; width: 1px; background-color: var(--border); margin: 0 0.25rem; display: inline-block;"></span>
+    <span class="logo-title">SLIM</span>
+  </a>
+  
+  <ul class="nav-links">
+    
+    
+      <li class="">
+        <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-controller/">Controller</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-integrations/slim-a2a/">Integrations</a>
+      </li>
+    
+  </ul>
+  
+  <div class="controls">
+    
+    <div class="search-container" id="search-container">
+      
+      <button class="search-toggle-btn" id="search-toggle-btn" aria-label="Toggle Search">
+        <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; display: block;">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      
+      <div class="search-input-wrapper" id="search-input-wrapper">
+        <svg class="search-icon-svg desktop-only-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" id="search-query-input" placeholder="Search docs..." autocomplete="off" spellcheck="false" aria-label="Search">
+        <span class="search-shortcut">/</span>
+        
+        
+        <button class="search-close-btn" id="search-close-btn" aria-label="Close Search">&times;</button>
+      </div>
+      
+      <div class="search-results-dropdown" id="search-results"></div>
+    </div>
+    
+    <a href="https://github.com/agntcy/slim" target="_blank" rel="noopener noreferrer" class="repo-tracker" aria-label="Go to Github Repository">
+      <div class="repo-tracker-full">
+        <div class="repo-tracker-row repo-tracker-row-top">
+          <div class="repo-tracker-title">
+            <svg class="repo-git-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: block; flex-shrink: 0;">
+              <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+            </svg>
+            <span class="repo-name">agntcy/slim</span>
+          </div>
+          <span class="repo-stat repo-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <span class="repo-stars-count">---</span>
+          </span>
+        </div>
+        <div class="repo-tracker-row repo-tracker-row-bottom">
+          <span class="repo-stat repo-forks">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 15V9a4 4 0 0 0-4-4H9"></path><line x1="6" y1="9" x2="6" y2="15"></line></svg>
+            <span class="repo-forks-count">---</span>
+          </span>
+          <span class="repo-stat repo-version">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <span class="repo-version-tag">---</span>
+          </span>
+        </div>
+      </div>
+      
+      <svg class="repo-tracker-compact-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
+        <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+      </svg>
+    </a>
+
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    
+    <button class="hamburger-btn" id="sidebar-toggle" aria-label="Toggle Sidebar">☰</button>
+  </div>
+</header>
+
+<script>
+  (function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    
+    function updateThemeIcons() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+    
+    updateThemeIcons();
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcons();
+      if (document.querySelector('.mermaid')) {
+        window.location.reload();
+      }
+    });
+    
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', () => {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+          sidebar.classList.toggle('open');
+        }
+      });
+    }
+
+    
+    fetch('https://api.github.com/repos/agntcy/slim')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          document.querySelector('.repo-stars-count').textContent = data.stargazers_count;
+        } else {
+          document.querySelector('.repo-stars-count').textContent = '24';
+        }
+        if (data.forks_count !== undefined) {
+          document.querySelector('.repo-forks-count').textContent = data.forks_count;
+        } else {
+          document.querySelector('.repo-forks-count').textContent = '12';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-stars-count').textContent = '24';
+        document.querySelector('.repo-forks-count').textContent = '12';
+      });
+
+    fetch('https://api.github.com/repos/agntcy/slim/releases/latest')
+      .then(res => res.json())
+      .then(data => {
+        if (data.tag_name !== undefined) {
+          document.querySelector('.repo-version-tag').textContent = data.tag_name;
+        } else {
+          document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+      });
+
+    
+    let searchIndex = null;
+    const searchContainer = document.getElementById('search-container');
+    const searchToggleBtn = document.getElementById('search-toggle-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+    const searchInput = document.getElementById('search-query-input');
+    const searchResults = document.getElementById('search-results');
+
+    async function loadSearchIndex() {
+      if (searchIndex) return;
+      try {
+        const response = await fetch('/index.json');
+        searchIndex = await response.json();
+      } catch (e) {
+        console.error("Failed to load search index", e);
+      }
+    }
+
+    searchToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.toggle('active');
+      if (searchContainer.classList.contains('active')) {
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+
+    searchCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.remove('active');
+      searchResults.innerHTML = '';
+      searchResults.classList.remove('active');
+    });
+
+    searchInput.addEventListener('focus', () => {
+      loadSearchIndex();
+      if (searchInput.value.trim().length > 0) {
+        searchResults.classList.add('active');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!searchContainer.contains(e.target)) {
+        searchResults.classList.remove('active');
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.remove('active');
+        }
+      }
+    });
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (query.length === 0) {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('active');
+        return;
+      }
+
+      if (!searchIndex) {
+        searchResults.innerHTML = '<div class="search-no-results">Loading index...</div>';
+        searchResults.classList.add('active');
+        return;
+      }
+
+      const filtered = searchIndex.filter(page => {
+        return page.title.toLowerCase().includes(query) || 
+               page.summary.toLowerCase().includes(query) || 
+               page.content.toLowerCase().includes(query);
+      }).slice(0, 7);
+
+      searchResults.innerHTML = '';
+      if (filtered.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+      } else {
+        filtered.forEach(page => {
+          const item = document.createElement('a');
+          item.href = page.permalink;
+          item.className = 'search-result-item';
+          item.innerHTML = `
+            <div class="search-result-title">${page.title}</div>
+            <div class="search-result-summary">${page.summary}</div>
+          `;
+          searchResults.appendChild(item);
+        });
+      }
+      searchResults.classList.add('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.add('active');
+        }
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+  })();
+</script>
+
+      
+      <div class="main-wrapper">
+        <aside class="sidebar">
+  <nav class="sidebar-nav">
+    
+    
+    <div class="sidebar-global-menu">
+      <h4 class="sidebar-section-title">Navigation</h4>
+      <ul class="sidebar-pages">
+        
+          <li>
+            <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+          </li>
+        
+          <li>
+            <a href="/slim-controller/">Controller</a>
+          </li>
+        
+          <li>
+            <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+          </li>
+        
+          <li>
+            <a href="/slim-integrations/slim-a2a/">Integrations</a>
+          </li>
+        
+      </ul>
+    </div>
+    
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Core Components</h4>
+        <ul class="sidebar-pages">
+          
+            <li class="">
+              <a href="/slim-controller/">SLIM Controller</a>
+            </li>
+          
+            <li class="">
+              <a href="/slim-controller-reference/">SLIM Controller Reference</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Getting-Started-With-Slims</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-data-plane-config/">Configuration Reference</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Groups</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group/">Group Creation and Management</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group-tutorial/">Group Communication Tutorial</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Integrations</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-a2a/">SLIM A2A</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-mcp/">MCP over SLIM</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-otel/">OpenTelemetry over SLIM</a>
+              </li>
+            
+          
+            
+              
+              <li class="sidebar-subsection">
+                <span class="sidebar-subsection-title" style="font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.5rem; color: var(--text-muted); display: block;">SLIMRPC</span>
+                <ul class="sidebar-pages" style="padding-left: 0.75rem; border-left: 1px solid var(--border); margin-left: 0.5rem; list-style: none;">
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-rpc/" style="font-size: 0.85rem;">Overview</a>
+                    </li>
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-slimrpc-compiler/" style="font-size: 0.85rem;">Protoc Plugin</a>
+                    </li>
+                  
+                </ul>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Messaging-Layers</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-data-plane/">Overview</a>
+              </li>
+            
+          
+            
+              <li class="active">
+                <a href="/slim-messaging-layer/slim-session/">SLIM Sessions</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-authentication/">SLIM Authentication</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+    
+  </nav>
+</aside>
+
+        
+        <main class="content-container">
+          
+  <article class="markdown-content">
+    <h1 id="slim-sessions">SLIM Sessions</h1>
+<p>This document explains the SLIM session layer and the two supported session
+types. It helps you understand the two session interfaces, reliability, and security trade‑offs.</p>
+<p>The SLIM repository ships with practical, runnable examples for both <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples" target="_blank" rel="noopener noreferrer">Python</a>
+ and <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/go/examples" target="_blank" rel="noopener noreferrer">Go</a>
+ that demonstrate how to create sessions and exchange messages between applications. This document uses Python examples as reference.</p>
+<h2 id="point-to-point-session">Point-to-Point Session</h2>
+<p>The point-to-point session enables point-to-point communication with a specific
+instance. This session performs a discovery phase to bind to one instance and all
+subsequent traffic in the session targets that same endpoint. With reliability
+enabled, each message in the session must be acked.</p>
+<p>If MLS is enabled, the point-to-point session establishes a two‑member MLS group after
+discovery. This mirrors the Group flow but with only two participants
+(see <a href="#group-session">Group Session</a>
+).</p>
+<p>The diagram below illustrates a point-to-point session from App-A to agntcy/ns/App-B.
+App-A first discovers an available instance (App-B/1), then performs the MLS
+setup, and finally sends multiple messages to that same instance, each followed
+by an Ack. If MLS is not enabled, the MLS setup is skipped.</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+    autonumber
+
+    participant App-A
+    participant SLIM Node
+    participant App-B/1
+    participant App-B/2
+
+    Note over App-A,App-B/2: Discovery
+    App-A-&gt;&gt;App-A: Init MLS state
+    App-A-&gt;&gt;SLIM Node: Discover agntcy/ns/App-B
+    SLIM Node-&gt;&gt;App-B/1: Discover agntcy/ns/App-B
+    App-B/1-&gt;&gt;SLIM Node: Discover Reply (agntcy/ns/App-B/1)
+    SLIM Node-&gt;&gt;App-A: Discover Reply (agntcy/ns/App-B/1)
+
+    Note over App-A,App-B/2: Invite
+    App-A-&gt;&gt;SLIM Node: Invite agntcy/ns/App-B/1
+    SLIM Node-&gt;&gt;App-B/1: Invite agntcy/ns/App-B/1
+    App-B/1-&gt;&gt;App-B/1: Create new point-to-point Session
+    App-B/1-&gt;&gt;SLIM Node: Invite Reply (MLS key package)
+    SLIM Node-&gt;&gt;App-A: Invite Reply (MLS key package)
+    App-A-&gt;&gt;App-A: Update MLS state
+
+    Note over App-A,App-B/2: MLS setup
+    App-A-&gt;&gt;SLIM Node: MLS Welcome agntcy/ns/App-B/1
+    SLIM Node-&gt;&gt;App-B/1: MLS Welcome agntcy/ns/App-B/1
+    App-B/1-&gt;&gt;App-B/1: Init MLS state
+    App-B/1-&gt;&gt;SLIM Node: Ack(MLS Welcome)
+    SLIM Node-&gt;&gt;App-A: Ack(MLS Welcome)
+
+    Note over App-A,App-B/2: Message exchange
+    App-A-&gt;&gt;SLIM Node: Message to agntcy/ns/App-B/1
+    SLIM Node-&gt;&gt;App-B/1: Message to agntcy/ns/App-B/1
+    App-B/1-&gt;&gt;SLIM Node: Ack
+    SLIM Node-&gt;&gt;App-A: Ack
+
+    App-A-&gt;&gt;SLIM Node: Message to agntcy/ns/App-B/1
+    SLIM Node-&gt;&gt;App-B/1: Message to agntcy/ns/App-B/1
+    App-B/1-&gt;&gt;SLIM Node: Ack
+    SLIM Node-&gt;&gt;App-A: Ack
+</code></pre><h3 id="create-a-point-to-point-session">Create a Point-to-Point Session</h3>
+<p>Using the SLIM Python bindings, you can create a point-to-point session as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Create session configuration</span>
+</span></span><span class="line"><span class="cl"><span class="n">session_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">SessionConfig</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session_type</span><span class="o">=</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">SessionType</span><span class="o">.</span><span class="n">POINT_TO_POINT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">enable_mls</span><span class="o">=</span><span class="n">enable_mls</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">max_retries</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">interval</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">metadata</span><span class="o">=</span><span class="p">{},</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create session - returns a context with completion and session</span>
+</span></span><span class="line"><span class="cl"><span class="n">session_context</span> <span class="o">=</span> <span class="k">await</span> <span class="n">local_app</span><span class="o">.</span><span class="n">create_session_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session_config</span><span class="p">,</span> <span class="n">remote_name</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Wait for session to be established</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">session_context</span><span class="o">.</span><span class="n">completion</span><span class="o">.</span><span class="n">wait_async</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">session</span> <span class="o">=</span> <span class="n">session_context</span><span class="o">.</span><span class="n">session</span>
+</span></span></code></pre></div><p>Config Parameters:</p>
+<ul>
+<li><code>session_type</code> (required, SessionType): Either <code>POINT_TO_POINT</code> or <code>GROUP</code>.</li>
+<li><code>enable_mls</code> (optional, bool): Enable end‑to‑end encryption (MLS). Default: <code>False</code>.</li>
+<li><code>max_retries</code> (optional, int): Retry attempts per message if Ack missing. If not set, the session is best‑effort.</li>
+<li><code>interval</code> (optional, timedelta): Wait per attempt for an Ack before retry.</li>
+<li><code>metadata</code> (optional, dict): Custom metadata key-value pairs for the session.</li>
+</ul>
+<p>Create Session Parameters:</p>
+<ul>
+<li><code>session_config</code> (required, SessionConfig): The configuration object for this session.</li>
+<li><code>remote_name</code> (required, Name): Identifier of the remote participant instance.</li>
+</ul>
+<p>The <code>await session_context.completion.wait_async()</code> guarantees that once returned, all the underlying message exchange
+is done and the remote is correctly connected to the session.</p>
+<h3 id="sending-and-replying-in-a-point-to-point-session">Sending and Replying in a Point-to-Point Session</h3>
+<p>As the point-to-point session is bound to a single remote instance after discovery,
+outbound messages use the implicit destination. Use <code>publish</code> for normal sends
+and to reply back to the sender.</p>
+<p>This example shows how to send and reply in a point-to-point session:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Send a message using publish; it will reach the endpoint</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># specified at session creation</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">publish_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="sa">b</span><span class="s2">&#34;hello&#34;</span><span class="p">,</span>  <span class="c1"># payload (bytes): message data to send</span>
+</span></span><span class="line"><span class="cl">    <span class="kc">None</span><span class="p">,</span>      <span class="c1"># payload_type (str|None): content type descriptor</span>
+</span></span><span class="line"><span class="cl">    <span class="kc">None</span>       <span class="c1"># metadata (dict|None): custom key-value pairs for message metadata</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Await reply from remote (pattern depends on your control loop)</span>
+</span></span><span class="line"><span class="cl"><span class="n">received_msg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">get_message_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">timeout</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">reply</span> <span class="o">=</span> <span class="n">received_msg</span><span class="o">.</span><span class="n">payload</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">reply</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Send a correlated response back (echo style)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># The message will be sent according to the info in the session</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">publish_async</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># payload, payload_type, metadata</span>
+</span></span></code></pre></div><h3 id="point-to-point-example">Point-to-Point Example</h3>
+<p>This <a href="https://github.com/agntcy/slim/blob/slim-v1.1.0/data-plane/bindings/python/examples/point_to_point.py" target="_blank" rel="noopener noreferrer">example</a>
+ walks through the creation of a point-to-point session. When running the point-to-point example multiple times, the session binds to different running instances, while the message stream always sticks to the same endpoint.</p>
+<p>The example demonstrates how to publish messages, enable reliability, and enable MLS for end‑to‑end security. Run the example using the Taskfile provided in the repository.</p>
+<h2 id="group-session">Group Session</h2>
+<p>The Group session allows many-to-many communication on a named channel. Each
+message is delivered to all participants connected to the same session.</p>
+<p>The creator of the channel can act as a moderator, meaning that it can add or
+remove participants from the session. Moderation can be built into your application
+or delegated to a separate control service or the SLIM control plane.</p>
+<p>Below are examples using the latest Python bindings, along with explanations of
+what happens inside the session layer when a participant is added or removed
+from the channel (see <a href="../../slim-groups/slim-group/">group management</a>
+).</p>
+<h3 id="create-a-group-session">Create a Group Session</h3>
+<p>To create a group session, you need to configure the session with a topic
+name and specify reliability and security settings. Here is an
+example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Create group session configuration</span>
+</span></span><span class="line"><span class="cl"><span class="n">session_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">SessionConfig</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session_type</span><span class="o">=</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">SessionType</span><span class="o">.</span><span class="n">GROUP</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">enable_mls</span><span class="o">=</span><span class="n">enable_mls</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">max_retries</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">interval</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">metadata</span><span class="o">=</span><span class="p">{},</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create session - returns a SessionContext</span>
+</span></span><span class="line"><span class="cl"><span class="n">session</span> <span class="o">=</span> <span class="n">local_app</span><span class="o">.</span><span class="n">create_session</span><span class="p">(</span><span class="n">session_config</span><span class="p">,</span> <span class="n">chat_channel</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Wait for session to be established</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">completion</span><span class="o">.</span><span class="n">wait_async</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">created_session</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">session</span>
+</span></span></code></pre></div><p>Config Parameters:</p>
+<ul>
+<li><code>session_type</code> (required, SessionType): Set to <code>GROUP</code> for group sessions.</li>
+<li><code>enable_mls</code> (optional, bool): Enable end‑to‑end encryption (MLS). Default: <code>False</code>.</li>
+<li><code>max_retries</code> (optional, int): Retry attempts per message if Ack missing. If not set, the session is best‑effort.</li>
+<li><code>interval</code> (optional, timedelta): Wait per attempt for an Ack before retry.</li>
+<li><code>metadata</code> (optional, dict): Custom metadata key-value pairs for the session.</li>
+</ul>
+<p>Create Session Parameters:</p>
+<ul>
+<li><code>session_config</code> (required, SessionConfig): The configuration object for this session.</li>
+<li><code>chat_channel</code> (required, Name): Identifier of the group channel that all participants join.</li>
+</ul>
+<p>As in the case of point-to-point sessions, the <code>await session.completion.wait_async()</code> guarantees that once returned, all the
+underlying message exchange is completed.</p>
+<h3 id="sending-and-replying-in-a-group-session">Sending and Replying in a Group Session</h3>
+<p>In a Group, the session targets a channel: all sends are delivered to all the current
+participants. Use <code>publish_async</code> to send a message to all the participants in the group.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Broadcast to the channel</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">publish_async</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;hello&#34;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># payload, payload_type, metadata</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Handle inbound messages</span>
+</span></span><span class="line"><span class="cl"><span class="n">received_msg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">get_message_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">timeout</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ctx</span> <span class="o">=</span> <span class="n">received_msg</span><span class="o">.</span><span class="n">context</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">received_msg</span><span class="o">.</span><span class="n">payload</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;channel received:&#34;</span><span class="p">,</span> <span class="n">payload</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+</span></span></code></pre></div><h3 id="invite-a-new-participant">Invite a New Participant</h3>
+<p>The creator of the session can invite a new participant to the channel using the <code>invite</code>
+method after creating the session.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># After creating the session:</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">invite</span> <span class="ow">in</span> <span class="n">invites</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">invite_name</span> <span class="o">=</span> <span class="n">split_id</span><span class="p">(</span><span class="n">invite</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">local_app</span><span class="o">.</span><span class="n">set_route_async</span><span class="p">(</span><span class="n">invite_name</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">handle</span> <span class="o">=</span> <span class="k">await</span> <span class="n">created_session</span><span class="o">.</span><span class="n">invite_async</span><span class="p">(</span><span class="n">invite_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">handle</span><span class="o">.</span><span class="n">wait_async</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">local</span><span class="si">}</span><span class="s2"> -&gt; add </span><span class="si">{</span><span class="n">invite_name</span><span class="si">}</span><span class="s2"> to the group&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Parameters:</p>
+<ul>
+<li><code>invite_name</code> (required, Name): Identifier of the participant to add.</li>
+</ul>
+<p>Notice the <code>await local_app.set_route_async(invite_name, conn_id)</code> command before the invite.
+This instructs SLIM on how to forward a message with the specified name.
+This has to be done by the application for every invite.</p>
+<p>After <code>await handle.wait_async()</code> returns, you are guaranteed that the remote participant has been
+correctly added to the group and all the state on every participant is updated.
+When a moderator wants to add a new participant (e.g., an instance of App-C) to
+a group session, all the following steps need to be executed (see diagram below):</p>
+<ol>
+<li>
+<p><strong>Discovery Phase:</strong> The moderator initiates a discovery request to find a
+running instance of the desired application (App-C). This request is sent to
+the SLIM Node, which forwards it via anycast to one of the App-C instances.
+In the example, the message is forwarded to App-C/1 that replies with its
+full identifier. The SLIM Node relays this reply back to the moderator.</p>
+</li>
+<li>
+<p><strong>Invitation:</strong> The moderator sends an invite message for the discovered
+instance (App-C/1) to the SLIM Node, which forwards it to App-C/1. Upon
+receiving the invite, App-C/1 creates a new group session, subscribes to
+the channel, and replies with its MLS (Messaging Layer Security) key
+package. This reply is routed back to the moderator.</p>
+</li>
+<li>
+<p><strong>Group State Update:</strong> The moderator initiates an MLS commit to add App-C/1
+to the secure group. The message is sent using the channel name and so the
+SLIM Node distributes this commit to all current participants (App-B/2 and
+App-A/1), who update their MLS state and acknowledge the commit. This message
+also contains the new list of participants in the group, in particular the
+newly added participant. The
+moderator collects all acknowledgments for the update message. Once all acknowledgments are
+received, the moderator sends an MLS Welcome message to App-C/1. App-C/1
+initializes its MLS state, gets the current list of participants in the group
+and acknowledges receipt. At the end of this
+process, all participants (including the new one) share a secure group state
+and can exchange encrypted messages on the group channel. If MLS is
+disabled, the update and welcome messages are used only to exchange the new list of
+participants in the group, so that they are all aware of who is connected.</p>
+</li>
+</ol>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+    autonumber
+
+    participant Moderator
+    participant SLIM Node
+    participant App-C/1
+    participant App-C/2
+    participant App-B/2
+    participant App-A/1
+
+    Note over Moderator,App-A/1: Discovery
+    Moderator-&gt;&gt;SLIM Node: Discover agntcy/ns/App-C
+    SLIM Node-&gt;&gt;App-C/1: Discover agntcy/ns/App-C
+    App-C/1-&gt;&gt;SLIM Node: Discover Reply from agntcy/ns/App-C/1
+    SLIM Node-&gt;&gt;Moderator: Discover Reply from agntcy/ns/App-C/1
+
+    Note over Moderator,App-A/1: Invite
+    Moderator-&gt;&gt;SLIM Node: Invite agntcy/ns/App-C/1
+    SLIM Node-&gt;&gt;App-C/1: Invite agntcy/ns/App-C/1
+    App-C/1-&gt;&gt;App-C/1: Create new Group session
+    App-C/1-&gt;&gt;SLIM Node: Subscribe to Channel
+    App-C/1-&gt;&gt;SLIM Node: Invite Reply (MLS key package)
+    SLIM Node-&gt;&gt;Moderator: Invite Reply (MLS key package)
+    Moderator-&gt;&gt;Moderator: Update MLS state
+
+    Note over Moderator,App-A/1: Group State Update
+    Moderator-&gt;&gt;SLIM Node: Group Update (Add agntcy/ns/App-C/1, MLS commit) to Channel
+    par Group State Update on App-C/1
+        SLIM Node-&gt;&gt;App-B/2: Group Update (Add agntcy/ns/App-C/1, MLS commit) to Channel
+        App-B/2-&gt;&gt;App-B/2: Update Group and MLS state
+        App-B/2-&gt;&gt;SLIM Node: Ack(Group Update)
+        SLIM Node-&gt;&gt;Moderator: Ack(Group Update)
+    and Group State Update on App-A/1
+        SLIM Node-&gt;&gt;App-A/1: Group Update (Add agntcy/ns/App-C/1, MLS commit) to Channel
+        App-A/1-&gt;&gt;App-A/1: Update Group and MLS state
+        App-A/1-&gt;&gt;SLIM Node: Ack(Group Update)
+        SLIM Node-&gt;&gt;Moderator: Ack(Group Update)
+    end
+    Moderator-&gt;&gt;SLIM Node: Welcome agntcy/ns/App-C/1
+    SLIM Node-&gt;&gt;App-C/1: Welcome agntcy/ns/App-C/1
+    App-C/1-&gt;&gt;App-C/1: Init Group and MLS state
+    App-C/1-&gt;&gt;SLIM Node: Ack(Welcome)
+    SLIM Node-&gt;&gt;Moderator: Ack(Welcome)
+</code></pre><h3 id="remove-a-participant">Remove a Participant</h3>
+<p>A moderator can remove a participant from the channel using the <code>remove</code>
+method after creating the session.</p>
+<p>This example shows how to remove a participant from a group session:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># To remove a participant from the session:</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">remove_async</span><span class="p">(</span><span class="n">remove_name</span><span class="p">)</span>
+</span></span></code></pre></div><p>Parameter:</p>
+<ul>
+<li><code>remove_name</code> (required, Name): Identifier of the participant to remove.</li>
+</ul>
+<p>When a moderator wants to remove a participant (e.g., App-C/1) from a group
+session, the following steps occur. All the steps are visualized in the diagram
+below:</p>
+<ol>
+<li>
+<p><strong>Group State Update:</strong> The moderator creates an MLS commit to remove App-C/1
+from the secure group. This commit is sent to the group channel and the
+SLIM Node distributes it to all current participants (App-C/1, App-B/2, and
+App-A/1). The message also contains the name of the participant to remove so
+that all the endpoints can update their list of participants.
+Each participant updates its MLS state and acknowledges the
+commit. The moderator collects all acknowledgments. If MLS is
+disabled, only the name of the participant to remove is sent using this message.</p>
+</li>
+<li>
+<p><strong>Removal:</strong> After the MLS state is updated, the moderator sends a remove
+message to App-C/1. Upon receiving the remove message, App-C/1 unsubscribes
+from the channel, deletes its group session, and replies with a
+confirmation. The SLIM Node relays this confirmation back to the moderator.
+At the end of this process, App-C/1 is no longer a member of the group
+and cannot send or receive messages on the channel.</p>
+</li>
+</ol>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+    autonumber
+
+    participant Moderator
+    participant SLIM Node
+    participant App-C/1
+    participant App-B/2
+    participant App-A/1
+
+    Note over Moderator,App-A/1: Group State Update
+    Moderator-&gt;&gt;SLIM Node: Group Update (Remove agntcy/ns/App-C/1, MLS commit) to Channel
+    par Handle Group State Update on App-C/1
+        SLIM Node-&gt;&gt;App-C/1: Group Update (Remove agntcy/ns/App-C/1, MLS commit) to Channel
+        App-C/1-&gt;&gt;App-C/1: Update Group and MLS state
+        App-C/1-&gt;&gt;SLIM Node: Ack(Group Update)
+        SLIM Node-&gt;&gt;Moderator: Ack(Group Update)
+    and Handle Group State Update on App-B/2
+        SLIM Node-&gt;&gt;App-B/2: Group Update (Remove agntcy/ns/App-C/1, MLS commit) to Channel
+        App-B/2-&gt;&gt;App-B/2: Update Group and MLS state
+        App-B/2-&gt;&gt;SLIM Node: Ack(Group Update)
+        SLIM Node-&gt;&gt;Moderator: Ack(Group Update)
+    and Handle Group State Update on App-A/1
+        SLIM Node-&gt;&gt;App-A/1: Group Update (Remove agntcy/ns/App-C/1, MLS commit) to Channel
+        App-A/1-&gt;&gt;App-A/1: Update Group and MLS state
+        App-A/1-&gt;&gt;SLIM Node: Ack(Group Update)
+        SLIM Node-&gt;&gt;Moderator: Ack(Group Update)
+    end
+
+    Note over Moderator,App-A/1: Remove
+    Moderator-&gt;&gt;SLIM Node: Remove agntcy/ns/App-C/1
+    SLIM Node-&gt;&gt;App-C/1: Remove agntcy/ns/App-C/1
+    App-C/1-&gt;&gt;SLIM Node: Unsubscribe from Channel
+    App-C/1-&gt;&gt;App-C/1: Remove Group session
+    App-C/1-&gt;&gt;SLIM Node: Remove Reply
+    SLIM Node-&gt;&gt;Moderator: Remove Reply
+</code></pre><p>If the moderator is removed from the group, or it simply closes the session, it sends a
+close message on the channel that is received by all the group participants. Upon reception,
+all the participants acknowledge that the message was received and they close the local session,
+similar to the reception of the remove message (see the diagram). In this way, when the moderator
+stops, all participants are removed from the group.</p>
+<h3 id="group-example">Group Example</h3>
+<p>This <a href="https://github.com/agntcy/slim/blob/slim-v1.1.0/data-plane/bindings/python/examples/group.py" target="_blank" rel="noopener noreferrer">example</a>
+ demonstrates how to create a group session, invite participants, and (if enabled) establish an MLS group for end-to-end encryption. It also shows how to broadcast messages to all current members and handle inbound group messages. Run the example using the Taskfile provided in the repository.</p>
+
+  </article>
+
+        </main>
+      </div>
+      
+      <footer class="footer">
+  <div>&copy; 2026 AGNTCY Contributors. All rights reserved.</div>
+</footer>
+
+<script>
+  (function() {
+    const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+      script.onload = function() {
+        mermaidBlocks.forEach(codeBlock => {
+          const pre = codeBlock.parentNode;
+          const div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = codeBlock.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: isDark ? 'dark' : 'default',
+          securityLevel: 'loose'
+        });
+      };
+      document.body.appendChild(script);
+    }
+  })();
+</script>
+
+    </div>
+  </body>
+</html>

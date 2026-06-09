@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Slim-Integrations on SLIM Documentation</title>
+		<link>//localhost:1313/slim-integrations/</link>
+		<description>Recent content in Slim-Integrations on SLIM Documentation</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<atom:link href="//localhost:1313/slim-integrations/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>SLIM A2A</title>
+				<link>//localhost:1313/slim-integrations/slim-a2a/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/slim-integrations/slim-a2a/</guid>
+				<description>&lt;h1 id=&#34;slim-a2a&#34;&gt;SLIM A2A&lt;/h1&gt;&#xA;&lt;p&gt;SLIM A2A is a native integration of A2A built on top of SLIM. It utilizes SLIMRPC (SLIM Remote Procedure Call) and the SLIMRPC compiler to compile A2A protobuf file and generate the necessary code to enable A2A functionality on SLIM.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-are-slimrpc-and-the-slimrpc-compiler&#34;&gt;What are SLIMRPC and the SLIMRPC Compiler?&lt;/h2&gt;&#xA;&lt;p&gt;SLIMRPC is a framework that enables Protocol Buffers (protobuf) Remote Procedure Calls (RPC) over SLIM. This is similar to gRPC, which uses HTTP/2 as its transport layer for protobuf-based RPC. For more information, see the &lt;a href=&#34;../slimrpc/slim-rpc/&#34;&gt;SLIMRPC documentation&lt;/a&gt;&#xA;.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>MCP over SLIM</title>
+				<link>//localhost:1313/slim-integrations/slim-mcp/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/slim-integrations/slim-mcp/</guid>
+				<description>&lt;h1 id=&#34;slim-and-mcp-integration&#34;&gt;SLIM and MCP Integration&lt;/h1&gt;&#xA;&lt;p&gt;This tutorial demonstrates how to use SLIM to transport&#xA;MCP (Model Context Protocol) messages. SLIM offers two primary integration&#xA;options, depending on whether you&amp;rsquo;re building a new system or integrating with&#xA;an existing MCP server:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Using SLIM as an MCP Custom Transport Protocol&lt;/strong&gt;: MCP is designed to support&#xA;multiple transport protocols, with SLIM now available as one of these options.&#xA;To implement SLIM as a custom transport, you can install the&#xA;&lt;a href=&#34;https://github.com/agntcy/slim-mcp-python&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;slim-mcp&lt;/a&gt;&#xA; Python package&#xA;through pip and integrate it directly into your application. This approach is&#xA;ideal for new systems where you control both client and server components,&#xA;providing native SLIM support for efficient MCP message transport.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>OpenTelemetry over SLIM</title>
+				<link>//localhost:1313/slim-integrations/slim-otel/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/slim-integrations/slim-otel/</guid>
+				<description>&lt;h1 id=&#34;opentelemetry-integration-with-slim&#34;&gt;OpenTelemetry Integration with SLIM&lt;/h1&gt;&#xA;&lt;p&gt;The SLIM OpenTelemetry &lt;a href=&#34;https://github.com/agntcy/slim-otel&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;repository&lt;/a&gt;&#xA; provides a custom receiver and exporter&#xA;that enable the standard OpenTelemetry Collector to send and receive observability&#xA;data over secure, low-latency SLIM channels. These components can be integrated&#xA;into any OpenTelemetry Collector pipeline alongside standard receivers, processors,&#xA;and exporters, enabling secure distribution of telemetry data (traces, metrics,&#xA;and logs) using SLIM&amp;rsquo;s end-to-end encryption with Message Layer Security (MLS)&#xA;and flexible channel-based routing.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

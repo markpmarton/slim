@@ -1,0 +1,34 @@
+baseURL = '/'
+locale = 'en-us'
+title = 'SLIM Documentation'
+
+[outputs]
+  home = ["HTML", "JSON"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+    style = "github-dark"
+
+[[menu.main]]
+  name = "Getting Started"
+  url = "/getting-started-with-slim/slim-howto/"
+  weight = 20
+
+[[menu.main]]
+  name = "Controller"
+  url = "/slim-controller/"
+  weight = 30
+
+[[menu.main]]
+  name = "Messaging Layer"
+  url = "/slim-messaging-layer/slim-data-plane/"
+  weight = 40
+
+[[menu.main]]
+  name = "Integrations"
+  url = "/slim-integrations/slim-a2a/"
+  weight = 50

@@ -1,0 +1,10 @@
+[
+  {{- $list := slice -}}
+  {{- range .Site.RegularPages -}}
+    {{- $list = $list | append (dict "title" .Title "permalink" .RelPermalink "summary" (.Summary | plainify) "content" (.Plain | plainify)) -}}
+  {{- end -}}
+  {{- range $index, $item := $list -}}
+    {{- if $index -}},{{- end -}}
+    {{- $item | jsonify -}}
+  {{- end -}}
+]

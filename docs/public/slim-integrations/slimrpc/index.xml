@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>SLIMRPC on SLIM Documentation</title>
+		<link>//localhost:1313/slim-integrations/slimrpc/</link>
+		<description>Recent content in SLIMRPC on SLIM Documentation</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<atom:link href="//localhost:1313/slim-integrations/slimrpc/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Overview</title>
+				<link>//localhost:1313/slim-integrations/slimrpc/slim-rpc/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/slim-integrations/slimrpc/slim-rpc/</guid>
+				<description>&lt;h1 id=&#34;slimrpc-slim-remote-procedure-call&#34;&gt;SLIMRPC (SLIM Remote Procedure Call)&lt;/h1&gt;&#xA;&lt;p&gt;SLIMRPC, or SLIM Remote Procedure Call, is a mechanism designed to enable&#xA;Protocol Buffers (protobuf) RPC over SLIM (Secure Low-latency Inter-process&#xA;Messaging). This is analogous to gRPC, which leverages HTTP/2 as its underlying&#xA;transport layer for protobuf RPC.&lt;/p&gt;&#xA;&lt;p&gt;A key advantage of SLIMRPC lies in its ability to seamlessly integrate SLIM as&#xA;the transport protocol for inter-application message exchange. This&#xA;significantly simplifies development: a protobuf file can be compiled to&#xA;generate code that utilizes SLIM for communication. Application developers can&#xA;then interact with the generated code much like they would with standard gRPC,&#xA;while benefiting from the inherent security features and efficiency provided by&#xA;the SLIM protocol.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Protoc Plugin</title>
+				<link>//localhost:1313/slim-integrations/slimrpc/slim-slimrpc-compiler/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/slim-integrations/slimrpc/slim-slimrpc-compiler/</guid>
+				<description>&lt;h1 id=&#34;slimrpc-compiler&#34;&gt;SLIMRPC Compiler&lt;/h1&gt;&#xA;&lt;p&gt;The Slim RPC Compiler is a collection of protoc plugins that generate client&#xA;stubs and server handlers for &lt;a href=&#34;../slim-rpc/&#34;&gt;SLIMRPC (Slim RPC)&lt;/a&gt;&#xA; from Protocol&#xA;Buffer service definitions. These plugins enable you to build high-performance&#xA;RPC services using the SLIMRPC framework.&lt;/p&gt;&#xA;&lt;h2 id=&#34;supported-languages&#34;&gt;Supported Languages&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Python&lt;/strong&gt;: &lt;code&gt;protoc-gen-slimrpc-python&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Go&lt;/strong&gt;: &lt;code&gt;protoc-gen-slimrpc-go&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;&#xA;&lt;p&gt;The Slim RPC Compiler has the following features:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Generates type-safe client stubs and server handlers for SLIMRPC services.&lt;/li&gt;&#xA;&lt;li&gt;Supports all gRPC streaming patterns: unary-unary, unary-stream, stream-unary,&#xA;and stream-stream.&lt;/li&gt;&#xA;&lt;li&gt;Compatible with both &lt;code&gt;protoc&lt;/code&gt; and &lt;code&gt;buf&lt;/code&gt; build systems (buf recommended).&lt;/li&gt;&#xA;&lt;li&gt;Automatic import resolution for Protocol Buffer dependencies.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;&#xA;&lt;p&gt;You can install the SLIMRPC compiler either by downloading pre-built binaries or building from source using Cargo.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

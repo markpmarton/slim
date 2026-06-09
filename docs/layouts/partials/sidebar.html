@@ -1,0 +1,59 @@
+<aside class="sidebar">
+  <nav class="sidebar-nav">
+    
+    <!-- Global Main Menu Links (Only visible on mobile/tablet) -->
+    <div class="sidebar-global-menu">
+      <h4 class="sidebar-section-title">Navigation</h4>
+      <ul class="sidebar-pages">
+        {{ range .Site.Menus.main }}
+          <li>
+            <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+    <!-- Core Reference (Regular pages at the root level, like controllers) -->
+    {{ $rootPages := where (where .Site.RegularPages "Section" "") "RelPermalink" "!=" "/" }}
+    {{ if gt (len $rootPages) 0 }}
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Core Components</h4>
+        <ul class="sidebar-pages">
+          {{ range $rootPages }}
+            <li class="{{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+
+    <!-- Sections (getting started, messaging layer, groups, integrations) -->
+    {{ range .Site.Sections }}
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">{{ .Title }}</h4>
+        <ul class="sidebar-pages">
+          {{ range .Pages }}
+            {{ if .IsSection }}
+              <!-- Nested Subsection (like slimrpc) -->
+              <li class="sidebar-subsection">
+                <span class="sidebar-subsection-title" style="font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.5rem; color: var(--text-muted); display: block;">{{ .Title }}</span>
+                <ul class="sidebar-pages" style="padding-left: 0.75rem; border-left: 1px solid var(--border); margin-left: 0.5rem; list-style: none;">
+                  {{ range .Pages }}
+                    <li class="{{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">
+                      <a href="{{ .RelPermalink }}" style="font-size: 0.85rem;">{{ .Title }}</a>
+                    </li>
+                  {{ end }}
+                </ul>
+              </li>
+            {{ else }}
+              <li class="{{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+    
+  </nav>
+</aside>

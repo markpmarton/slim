@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SLIM A2A | SLIM Documentation</title>
+  
+  
+  <link rel="stylesheet" href="/css/styles.min.css">
+  
+  <script>
+    
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+
+  <body class="is-doc">
+    <div class="app-container">
+      <header class="header">
+  <a href="/" class="logo-container" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+    <svg class="logo-svg" viewBox="0 0 492 112" xmlns="http://www.w3.org/2000/svg" style="height: 22px; width: auto; display: block; color: var(--primary);">
+      <path d="M436.006 111.94H-0.00390625V45.31C-0.00390625 20.29 20.2861 0 45.3061 0H491.826L435.996 111.94H436.006ZM40.8361 39.2L24.2661 94.15H50.3261L55.5561 75.07H71.7961V94.15H96.8761V17.83H65.2561C51.2961 17.83 45.8461 22.52 40.8361 39.2ZM60.6861 56.54L64.2861 43.68C66.0261 37.36 66.7961 36.48 70.6061 36.48H71.8061V56.54H60.6861ZM144.746 96.33C153.146 96.33 161.756 94.69 168.406 91.97V48.8H144.416V75.62H143.106C134.386 75.62 128.606 68.42 128.606 56.87C128.606 43.46 136.456 36.92 149.536 36.92C157.606 36.92 164.256 39.54 168.506 44.22V19.25C162.836 16.85 154.766 15.65 147.026 15.65C119.556 15.65 101.776 31.89 101.776 57.52C101.776 80.09 116.826 96.33 144.736 96.33H144.746ZM175.056 94.15H199.586V55.45C214.956 70.6 219.756 80.42 219.756 94.15H243.196V17.83H218.666V43.56L196.536 17.83H175.056V94.15ZM268.056 94.15H293.676V38.55H296.186C304.146 38.55 310.146 40.29 313.626 44.22V17.84H248.106V44.22C251.596 40.3 257.596 38.55 265.546 38.55H268.056V94.15ZM315.816 55.99C315.816 79.87 332.496 96.33 356.486 96.33C363.356 96.33 369.676 94.91 373.166 92.73V67.76C370.436 72.01 365.646 74.19 359.646 74.19C349.066 74.19 342.636 67.21 342.636 55.98C342.636 44.75 349.066 37.77 359.646 37.77C365.646 37.77 370.436 39.95 373.166 44.2V19.23C369.676 17.05 363.356 15.63 356.486 15.63C332.496 15.63 315.816 32.09 315.816 55.97V55.99ZM387.776 94.15H415.036L452.866 17.83H425.396L414.166 43.34L403.046 17.83H375.356L400.646 69.07L387.786 94.15H387.776Z" fill="currentColor"/>
+    </svg>
+    <span class="logo-divider" style="height: 16px; width: 1px; background-color: var(--border); margin: 0 0.25rem; display: inline-block;"></span>
+    <span class="logo-title">SLIM</span>
+  </a>
+  
+  <ul class="nav-links">
+    
+    
+      <li class="">
+        <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-controller/">Controller</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-integrations/slim-a2a/">Integrations</a>
+      </li>
+    
+  </ul>
+  
+  <div class="controls">
+    
+    <div class="search-container" id="search-container">
+      
+      <button class="search-toggle-btn" id="search-toggle-btn" aria-label="Toggle Search">
+        <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; display: block;">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      
+      <div class="search-input-wrapper" id="search-input-wrapper">
+        <svg class="search-icon-svg desktop-only-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" id="search-query-input" placeholder="Search docs..." autocomplete="off" spellcheck="false" aria-label="Search">
+        <span class="search-shortcut">/</span>
+        
+        
+        <button class="search-close-btn" id="search-close-btn" aria-label="Close Search">&times;</button>
+      </div>
+      
+      <div class="search-results-dropdown" id="search-results"></div>
+    </div>
+    
+    <a href="https://github.com/agntcy/slim" target="_blank" rel="noopener noreferrer" class="repo-tracker" aria-label="Go to Github Repository">
+      <div class="repo-tracker-full">
+        <div class="repo-tracker-row repo-tracker-row-top">
+          <div class="repo-tracker-title">
+            <svg class="repo-git-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: block; flex-shrink: 0;">
+              <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+            </svg>
+            <span class="repo-name">agntcy/slim</span>
+          </div>
+          <span class="repo-stat repo-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <span class="repo-stars-count">---</span>
+          </span>
+        </div>
+        <div class="repo-tracker-row repo-tracker-row-bottom">
+          <span class="repo-stat repo-forks">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 15V9a4 4 0 0 0-4-4H9"></path><line x1="6" y1="9" x2="6" y2="15"></line></svg>
+            <span class="repo-forks-count">---</span>
+          </span>
+          <span class="repo-stat repo-version">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <span class="repo-version-tag">---</span>
+          </span>
+        </div>
+      </div>
+      
+      <svg class="repo-tracker-compact-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
+        <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+      </svg>
+    </a>
+
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    
+    <button class="hamburger-btn" id="sidebar-toggle" aria-label="Toggle Sidebar">☰</button>
+  </div>
+</header>
+
+<script>
+  (function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    
+    function updateThemeIcons() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+    
+    updateThemeIcons();
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcons();
+      if (document.querySelector('.mermaid')) {
+        window.location.reload();
+      }
+    });
+    
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', () => {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+          sidebar.classList.toggle('open');
+        }
+      });
+    }
+
+    
+    fetch('https://api.github.com/repos/agntcy/slim')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          document.querySelector('.repo-stars-count').textContent = data.stargazers_count;
+        } else {
+          document.querySelector('.repo-stars-count').textContent = '24';
+        }
+        if (data.forks_count !== undefined) {
+          document.querySelector('.repo-forks-count').textContent = data.forks_count;
+        } else {
+          document.querySelector('.repo-forks-count').textContent = '12';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-stars-count').textContent = '24';
+        document.querySelector('.repo-forks-count').textContent = '12';
+      });
+
+    fetch('https://api.github.com/repos/agntcy/slim/releases/latest')
+      .then(res => res.json())
+      .then(data => {
+        if (data.tag_name !== undefined) {
+          document.querySelector('.repo-version-tag').textContent = data.tag_name;
+        } else {
+          document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+      });
+
+    
+    let searchIndex = null;
+    const searchContainer = document.getElementById('search-container');
+    const searchToggleBtn = document.getElementById('search-toggle-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+    const searchInput = document.getElementById('search-query-input');
+    const searchResults = document.getElementById('search-results');
+
+    async function loadSearchIndex() {
+      if (searchIndex) return;
+      try {
+        const response = await fetch('/index.json');
+        searchIndex = await response.json();
+      } catch (e) {
+        console.error("Failed to load search index", e);
+      }
+    }
+
+    searchToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.toggle('active');
+      if (searchContainer.classList.contains('active')) {
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+
+    searchCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.remove('active');
+      searchResults.innerHTML = '';
+      searchResults.classList.remove('active');
+    });
+
+    searchInput.addEventListener('focus', () => {
+      loadSearchIndex();
+      if (searchInput.value.trim().length > 0) {
+        searchResults.classList.add('active');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!searchContainer.contains(e.target)) {
+        searchResults.classList.remove('active');
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.remove('active');
+        }
+      }
+    });
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (query.length === 0) {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('active');
+        return;
+      }
+
+      if (!searchIndex) {
+        searchResults.innerHTML = '<div class="search-no-results">Loading index...</div>';
+        searchResults.classList.add('active');
+        return;
+      }
+
+      const filtered = searchIndex.filter(page => {
+        return page.title.toLowerCase().includes(query) || 
+               page.summary.toLowerCase().includes(query) || 
+               page.content.toLowerCase().includes(query);
+      }).slice(0, 7);
+
+      searchResults.innerHTML = '';
+      if (filtered.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+      } else {
+        filtered.forEach(page => {
+          const item = document.createElement('a');
+          item.href = page.permalink;
+          item.className = 'search-result-item';
+          item.innerHTML = `
+            <div class="search-result-title">${page.title}</div>
+            <div class="search-result-summary">${page.summary}</div>
+          `;
+          searchResults.appendChild(item);
+        });
+      }
+      searchResults.classList.add('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.add('active');
+        }
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+  })();
+</script>
+
+      
+      <div class="main-wrapper">
+        <aside class="sidebar">
+  <nav class="sidebar-nav">
+    
+    
+    <div class="sidebar-global-menu">
+      <h4 class="sidebar-section-title">Navigation</h4>
+      <ul class="sidebar-pages">
+        
+          <li>
+            <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+          </li>
+        
+          <li>
+            <a href="/slim-controller/">Controller</a>
+          </li>
+        
+          <li>
+            <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+          </li>
+        
+          <li>
+            <a href="/slim-integrations/slim-a2a/">Integrations</a>
+          </li>
+        
+      </ul>
+    </div>
+    
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Core Components</h4>
+        <ul class="sidebar-pages">
+          
+            <li class="">
+              <a href="/slim-controller/">SLIM Controller</a>
+            </li>
+          
+            <li class="">
+              <a href="/slim-controller-reference/">SLIM Controller Reference</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Getting-Started-With-Slims</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-data-plane-config/">Configuration Reference</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Groups</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group/">Group Creation and Management</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group-tutorial/">Group Communication Tutorial</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Integrations</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="active">
+                <a href="/slim-integrations/slim-a2a/">SLIM A2A</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-mcp/">MCP over SLIM</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-otel/">OpenTelemetry over SLIM</a>
+              </li>
+            
+          
+            
+              
+              <li class="sidebar-subsection">
+                <span class="sidebar-subsection-title" style="font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.5rem; color: var(--text-muted); display: block;">SLIMRPC</span>
+                <ul class="sidebar-pages" style="padding-left: 0.75rem; border-left: 1px solid var(--border); margin-left: 0.5rem; list-style: none;">
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-rpc/" style="font-size: 0.85rem;">Overview</a>
+                    </li>
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-slimrpc-compiler/" style="font-size: 0.85rem;">Protoc Plugin</a>
+                    </li>
+                  
+                </ul>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Messaging-Layers</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-data-plane/">Overview</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-session/">SLIM Sessions</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-authentication/">SLIM Authentication</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+    
+  </nav>
+</aside>
+
+        
+        <main class="content-container">
+          
+  <article class="markdown-content">
+    <h1 id="slim-a2a">SLIM A2A</h1>
+<p>SLIM A2A is a native integration of A2A built on top of SLIM. It utilizes SLIMRPC (SLIM Remote Procedure Call) and the SLIMRPC compiler to compile A2A protobuf file and generate the necessary code to enable A2A functionality on SLIM.</p>
+<h2 id="what-are-slimrpc-and-the-slimrpc-compiler">What are SLIMRPC and the SLIMRPC Compiler?</h2>
+<p>SLIMRPC is a framework that enables Protocol Buffers (protobuf) Remote Procedure Calls (RPC) over SLIM. This is similar to gRPC, which uses HTTP/2 as its transport layer for protobuf-based RPC. For more information, see the <a href="../slimrpc/slim-rpc/">SLIMRPC documentation</a>
+.</p>
+<p>To compile a protobuf file and generate the clients and service stub you can use the <a href="../slimrpc/slim-slimrpc-compiler/">SLIMRPC compiler</a>
+. This works in a similar way to the protoc compiler.</p>
+<p>For SLIM A2A we compiled the <a href="https://github.com/a2aproject/A2A/blob/v0.3.0/specification/grpc/a2a.proto" target="_blank" rel="noopener noreferrer">a2a.proto</a>
+ file using the SLIMRPC compiler. The generated code is in <a href="https://github.com/agntcy/slim-a2a-python/blob/main/slima2a/types/v1/a2a_pb2_slimrpc.py" target="_blank" rel="noopener noreferrer">a2a_pb2_slimrpc.py</a>
+.</p>
+<h2 id="how-to-use-slima2a">How to use SLIMA2A</h2>
+<p>Using SLIM A2A is very similar to using the standard A2A implementation. As a reference example here we use the <a href="https://github.com/agntcy/slim-a2a-python/tree/main/examples/echo_agent" target="_blank" rel="noopener noreferrer">echo agent</a>
+ available in the SLIM A2A Python repository. In the following sections, we highlight and explain the key differences between the standard and SLIM A2A implementations.</p>
+<h3 id="server-implementation">Server Implementation</h3>
+<p>SLIM A2A provides two approaches for setting up an A2A server: a quick start method using helper functions, and an advanced method for more control.</p>
+<h4 id="quick-start">Quick Start</h4>
+<p>The quick start approach uses the <code>setup_slim_client</code> helper function to simplify SLIM initialization:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">asyncio</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">slim_bindings</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">a2a.server.request_handlers</span> <span class="kn">import</span> <span class="n">DefaultRequestHandler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">a2a.server.tasks</span> <span class="kn">import</span> <span class="n">InMemoryTaskStore</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">slima2a</span> <span class="kn">import</span> <span class="n">setup_slim_client</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">slima2a.handler</span> <span class="kn">import</span> <span class="n">SRPCHandler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">slima2a.types.a2a_pb2_slimrpc</span> <span class="kn">import</span> <span class="n">add_A2AServiceServicer_to_server</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Initialize and connect to SLIM (simplified helper)</span>
+</span></span><span class="line"><span class="cl"><span class="n">service</span><span class="p">,</span> <span class="n">local_app</span><span class="p">,</span> <span class="n">local_name</span><span class="p">,</span> <span class="n">conn_id</span> <span class="o">=</span> <span class="k">await</span> <span class="n">setup_slim_client</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">namespace</span><span class="o">=</span><span class="s2">&#34;agntcy&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">group</span><span class="o">=</span><span class="s2">&#34;demo&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">name</span><span class="o">=</span><span class="s2">&#34;echo_agent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create request handler</span>
+</span></span><span class="line"><span class="cl"><span class="n">agent_executor</span> <span class="o">=</span> <span class="n">MyAgentExecutor</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">task_store</span> <span class="o">=</span> <span class="n">InMemoryTaskStore</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">request_handler</span> <span class="o">=</span> <span class="n">DefaultRequestHandler</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">agent_executor</span><span class="o">=</span><span class="n">agent_executor</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">task_store</span><span class="o">=</span><span class="n">task_store</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create servicer</span>
+</span></span><span class="line"><span class="cl"><span class="n">servicer</span> <span class="o">=</span> <span class="n">SRPCHandler</span><span class="p">(</span><span class="n">agent_card</span><span class="p">,</span> <span class="n">request_handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create server</span>
+</span></span><span class="line"><span class="cl"><span class="n">server</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">new_with_connection</span><span class="p">(</span><span class="n">local_app</span><span class="p">,</span> <span class="n">local_name</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">add_A2AServiceServicer_to_server</span><span class="p">(</span><span class="n">servicer</span><span class="p">,</span> <span class="n">server</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Run server</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">server</span><span class="o">.</span><span class="n">serve_async</span><span class="p">()</span>
+</span></span></code></pre></div><h4 id="advanced-setup">Advanced Setup</h4>
+<details class="admonition note">
+<summary class="admonition-title">Advanced Setup - Click to expand</summary>
+<p>For more control over the SLIM configuration, you can manually initialize all components:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">asyncio</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">slim_bindings</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">a2a.server.request_handlers</span> <span class="kn">import</span> <span class="n">DefaultRequestHandler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">a2a.server.tasks</span> <span class="kn">import</span> <span class="n">InMemoryTaskStore</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">slima2a.handler</span> <span class="kn">import</span> <span class="n">SRPCHandler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">slima2a.types.a2a_pb2_slimrpc</span> <span class="kn">import</span> <span class="n">add_A2AServiceServicer_to_server</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set the event loop for slim_bindings</span>
+</span></span><span class="line"><span class="cl"><span class="n">slim_bindings</span><span class="o">.</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">uniffi_set_event_loop</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Initialize slim_bindings service</span>
+</span></span><span class="line"><span class="cl"><span class="n">tracing_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_tracing_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_runtime_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">service_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_service_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tracing_config</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s2">&#34;info&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">slim_bindings</span><span class="o">.</span><span class="n">initialize_with_configs</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tracing_config</span><span class="o">=</span><span class="n">tracing_config</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">runtime_config</span><span class="o">=</span><span class="n">runtime_config</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">service_config</span><span class="o">=</span><span class="p">[</span><span class="n">service_config</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">service</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">get_global_service</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create local name</span>
+</span></span><span class="line"><span class="cl"><span class="n">local_name</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="s2">&#34;agntcy&#34;</span><span class="p">,</span> <span class="s2">&#34;demo&#34;</span><span class="p">,</span> <span class="s2">&#34;echo_agent&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Connect to SLIM</span>
+</span></span><span class="line"><span class="cl"><span class="n">client_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_insecure_client_config</span><span class="p">(</span><span class="s2">&#34;http://localhost:46357&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">conn_id</span> <span class="o">=</span> <span class="k">await</span> <span class="n">service</span><span class="o">.</span><span class="n">connect_async</span><span class="p">(</span><span class="n">client_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create app with shared secret</span>
+</span></span><span class="line"><span class="cl"><span class="n">local_app</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">create_app_with_secret</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">local_name</span><span class="p">,</span> <span class="s2">&#34;secretsecretsecretsecretsecretsecret&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Subscribe to local name</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">local_app</span><span class="o">.</span><span class="n">subscribe_async</span><span class="p">(</span><span class="n">local_name</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create request handler</span>
+</span></span><span class="line"><span class="cl"><span class="n">agent_executor</span> <span class="o">=</span> <span class="n">MyAgentExecutor</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">task_store</span> <span class="o">=</span> <span class="n">InMemoryTaskStore</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">request_handler</span> <span class="o">=</span> <span class="n">DefaultRequestHandler</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">agent_executor</span><span class="o">=</span><span class="n">agent_executor</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">task_store</span><span class="o">=</span><span class="n">task_store</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create servicer</span>
+</span></span><span class="line"><span class="cl"><span class="n">servicer</span> <span class="o">=</span> <span class="n">SRPCHandler</span><span class="p">(</span><span class="n">agent_card</span><span class="p">,</span> <span class="n">request_handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create server</span>
+</span></span><span class="line"><span class="cl"><span class="n">server</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">new_with_connection</span><span class="p">(</span><span class="n">local_app</span><span class="p">,</span> <span class="n">local_name</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">add_A2AServiceServicer_to_server</span><span class="p">(</span><span class="n">servicer</span><span class="p">,</span> <span class="n">server</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Run server</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">server</span><span class="o">.</span><span class="n">serve_async</span><span class="p">()</span>
+</span></span></code></pre></div><p>Key differences from the standard A2A implementation:</p>
+<ul>
+<li><strong>SLIM Bindings Initialization</strong>: Set up the event loop and initialize <code>slim_bindings</code> with tracing and runtime configurations.</li>
+<li><strong>SLIM Name Creation</strong>: Create a <code>slim_bindings.Name</code> object with namespace, group, and name components.</li>
+<li><strong>Connection Setup</strong>: Connect to the SLIM server and create an app with a shared secret for MLS (Message Layer Security).</li>
+<li><strong>Server Creation</strong>: Use <code>slim_bindings.Server.new_with_connection()</code> instead of a standard HTTP server.</li>
+<li><strong>Service Registration</strong>: Register the servicer using <code>add_A2AServiceServicer_to_server()</code> from the generated SLIMRPC code.</li>
+</ul>
+</details>
+<h3 id="client-implementation">Client Implementation</h3>
+<p>Similar to the server, SLIM A2A provides both quick start and advanced client setup options.</p>
+<h4 id="quick-start-1">Quick Start</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">asyncio</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">httpx</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">a2a.client</span> <span class="kn">import</span> <span class="n">ClientFactory</span><span class="p">,</span> <span class="n">minimal_agent_card</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">a2a.types</span> <span class="kn">import</span> <span class="n">Message</span><span class="p">,</span> <span class="n">Part</span><span class="p">,</span> <span class="n">Role</span><span class="p">,</span> <span class="n">TextPart</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">slima2a</span> <span class="kn">import</span> <span class="n">setup_slim_client</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">slima2a.client_transport</span> <span class="kn">import</span> <span class="n">ClientConfig</span><span class="p">,</span> <span class="n">SRPCTransport</span><span class="p">,</span> <span class="n">slimrpc_channel_factory</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Initialize and connect to SLIM (simplified helper)</span>
+</span></span><span class="line"><span class="cl"><span class="n">service</span><span class="p">,</span> <span class="n">slim_local_app</span><span class="p">,</span> <span class="n">local_name</span><span class="p">,</span> <span class="n">conn_id</span> <span class="o">=</span> <span class="k">await</span> <span class="n">setup_slim_client</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">namespace</span><span class="o">=</span><span class="s2">&#34;agntcy&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">group</span><span class="o">=</span><span class="s2">&#34;demo&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">name</span><span class="o">=</span><span class="s2">&#34;client&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create client config</span>
+</span></span><span class="line"><span class="cl"><span class="n">httpx_client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">client_config</span> <span class="o">=</span> <span class="n">ClientConfig</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">supported_transports</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;JSONRPC&#34;</span><span class="p">,</span> <span class="s2">&#34;slimrpc&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">streaming</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">httpx_client</span><span class="o">=</span><span class="n">httpx_client</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">slimrpc_channel_factory</span><span class="o">=</span><span class="n">slimrpc_channel_factory</span><span class="p">(</span><span class="n">slim_local_app</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create client factory and register transport</span>
+</span></span><span class="line"><span class="cl"><span class="n">client_factory</span> <span class="o">=</span> <span class="n">ClientFactory</span><span class="p">(</span><span class="n">client_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">client_factory</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&#34;slimrpc&#34;</span><span class="p">,</span> <span class="n">SRPCTransport</span><span class="o">.</span><span class="n">create</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create client with minimal agent card</span>
+</span></span><span class="line"><span class="cl"><span class="n">agent_card</span> <span class="o">=</span> <span class="n">minimal_agent_card</span><span class="p">(</span><span class="s2">&#34;agntcy/demo/echo_agent&#34;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&#34;slimrpc&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">client</span> <span class="o">=</span> <span class="n">client_factory</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">card</span><span class="o">=</span><span class="n">agent_card</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Send message</span>
+</span></span><span class="line"><span class="cl"><span class="n">request</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">role</span><span class="o">=</span><span class="n">Role</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">message_id</span><span class="o">=</span><span class="s2">&#34;request-id&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parts</span><span class="o">=</span><span class="p">[</span><span class="n">Part</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">TextPart</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&#34;Hello, world!&#34;</span><span class="p">))],</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">Message</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">parts</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">TextPart</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span></code></pre></div><h4 id="advanced-setup-1">Advanced Setup</h4>
+<details class="admonition note">
+<summary class="admonition-title">Advanced Setup - Click to expand</summary>
+<p>For more control over the SLIM configuration, you can manually initialize all components:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">asyncio</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">httpx</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">slim_bindings</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">a2a.client</span> <span class="kn">import</span> <span class="n">ClientFactory</span><span class="p">,</span> <span class="n">minimal_agent_card</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">a2a.types</span> <span class="kn">import</span> <span class="n">Message</span><span class="p">,</span> <span class="n">Part</span><span class="p">,</span> <span class="n">Role</span><span class="p">,</span> <span class="n">TextPart</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">slima2a.client_transport</span> <span class="kn">import</span> <span class="n">ClientConfig</span><span class="p">,</span> <span class="n">SRPCTransport</span><span class="p">,</span> <span class="n">slimrpc_channel_factory</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set the event loop for slim_bindings</span>
+</span></span><span class="line"><span class="cl"><span class="n">slim_bindings</span><span class="o">.</span><span class="n">slim_bindings</span><span class="o">.</span><span class="n">uniffi_set_event_loop</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Initialize slim_bindings service</span>
+</span></span><span class="line"><span class="cl"><span class="n">tracing_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_tracing_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_runtime_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">service_config</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_service_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tracing_config</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s2">&#34;info&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">slim_bindings</span><span class="o">.</span><span class="n">initialize_with_configs</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tracing_config</span><span class="o">=</span><span class="n">tracing_config</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">runtime_config</span><span class="o">=</span><span class="n">runtime_config</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">service_config</span><span class="o">=</span><span class="p">[</span><span class="n">service_config</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">service</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">get_global_service</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create local name</span>
+</span></span><span class="line"><span class="cl"><span class="n">local_name</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="s2">&#34;agntcy&#34;</span><span class="p">,</span> <span class="s2">&#34;demo&#34;</span><span class="p">,</span> <span class="s2">&#34;client&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Connect to SLIM</span>
+</span></span><span class="line"><span class="cl"><span class="n">client_config_slim</span> <span class="o">=</span> <span class="n">slim_bindings</span><span class="o">.</span><span class="n">new_insecure_client_config</span><span class="p">(</span><span class="s2">&#34;http://localhost:46357&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">conn_id</span> <span class="o">=</span> <span class="k">await</span> <span class="n">service</span><span class="o">.</span><span class="n">connect_async</span><span class="p">(</span><span class="n">client_config_slim</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create app with shared secret</span>
+</span></span><span class="line"><span class="cl"><span class="n">slim_local_app</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">create_app_with_secret</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">local_name</span><span class="p">,</span> <span class="s2">&#34;secretsecretsecretsecretsecretsecret&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Subscribe to local name</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">slim_local_app</span><span class="o">.</span><span class="n">subscribe_async</span><span class="p">(</span><span class="n">local_name</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create client config</span>
+</span></span><span class="line"><span class="cl"><span class="n">httpx_client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">client_config</span> <span class="o">=</span> <span class="n">ClientConfig</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">supported_transports</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;JSONRPC&#34;</span><span class="p">,</span> <span class="s2">&#34;slimrpc&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">streaming</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">httpx_client</span><span class="o">=</span><span class="n">httpx_client</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">slimrpc_channel_factory</span><span class="o">=</span><span class="n">slimrpc_channel_factory</span><span class="p">(</span><span class="n">slim_local_app</span><span class="p">,</span> <span class="n">conn_id</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create client factory and register transport</span>
+</span></span><span class="line"><span class="cl"><span class="n">client_factory</span> <span class="o">=</span> <span class="n">ClientFactory</span><span class="p">(</span><span class="n">client_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">client_factory</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&#34;slimrpc&#34;</span><span class="p">,</span> <span class="n">SRPCTransport</span><span class="o">.</span><span class="n">create</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create client with minimal agent card</span>
+</span></span><span class="line"><span class="cl"><span class="n">agent_card</span> <span class="o">=</span> <span class="n">minimal_agent_card</span><span class="p">(</span><span class="s2">&#34;agntcy/demo/echo_agent&#34;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&#34;slimrpc&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">client</span> <span class="o">=</span> <span class="n">client_factory</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">card</span><span class="o">=</span><span class="n">agent_card</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Send message</span>
+</span></span><span class="line"><span class="cl"><span class="n">request</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">role</span><span class="o">=</span><span class="n">Role</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">message_id</span><span class="o">=</span><span class="s2">&#34;request-id&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parts</span><span class="o">=</span><span class="p">[</span><span class="n">Part</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">TextPart</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&#34;Hello, world!&#34;</span><span class="p">))],</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">Message</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">parts</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">TextPart</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span></code></pre></div><p>Key differences from the standard A2A client:</p>
+<ul>
+<li><strong>Channel Factory</strong>: Use <code>slimrpc_channel_factory</code> instead of manually creating channels, which handles the SLIM connection details.</li>
+<li><strong>Transport Registration</strong>: Register the <code>SRPCTransport</code> as the &ldquo;slimrpc&rdquo; transport in the client factory.</li>
+<li><strong>Agent Card Configuration</strong>: Specify &ldquo;slimrpc&rdquo; as the transport protocol in the agent card.</li>
+<li><strong>Supported Transports</strong>: Add &ldquo;slimrpc&rdquo; to the list of supported transports alongside &ldquo;JSONRPC&rdquo;.</li>
+</ul>
+</details>
+<h3 id="helper-functions">Helper Functions</h3>
+<p>The <code>slima2a</code> package provides convenient helper functions to simplify SLIM setup:</p>
+<ul>
+<li><code>setup_slim_client(namespace, group, name, slim_url=&quot;http://localhost:46357&quot;, secret=&quot;...&quot;, log_level=&quot;info&quot;)</code>: Complete SLIM client setup in one call. Returns <code>(service, local_app, local_name, conn_id)</code>.</li>
+<li><code>initialize_slim_service(log_level=&quot;info&quot;)</code>: Initialize SLIM service with default configuration.</li>
+<li><code>connect_and_subscribe(service, local_name, slim_url=&quot;http://localhost:46357&quot;, secret=&quot;...&quot;)</code>: Connect to SLIM server and subscribe to a local name.</li>
+<li><code>slimrpc_channel_factory(local_app, conn_id)</code>: Creates a channel factory function for use with A2A client configuration.</li>
+</ul>
+<h2 id="configuration-parameters">Configuration Parameters</h2>
+<h3 id="slim-connection">SLIM Connection</h3>
+<ul>
+<li><code>namespace</code>: The namespace component of the SLIM name (e.g., <code>agntcy</code>).</li>
+<li><code>group</code>: The group component of the SLIM name (e.g., <code>demo</code>).</li>
+<li><code>name</code>: The name component of the SLIM name (e.g., <code>echo_agent</code>).</li>
+<li><code>slim_url</code>: The endpoint URL for the SLIM server (default: <code>http://localhost:46357</code>).</li>
+<li><code>shared_secret</code>: A secret string used for MLS (Message Layer Security). Must be at least 32 characters.</li>
+</ul>
+<h3 id="logging">Logging</h3>
+<p>Set the log level through <code>tracing_config.log_level</code> with values like <code>info</code>, <code>debug</code>, <code>warn</code>, or <code>error</code>.</p>
+<h2 id="running-the-example">Running the Example</h2>
+<p>See the <a href="https://github.com/agntcy/slim-a2a-python/tree/main/examples/echo_agent" target="_blank" rel="noopener noreferrer">echo agent example</a>
+ in the SLIM A2A Python repository for a complete working implementation.</p>
+
+  </article>
+
+        </main>
+      </div>
+      
+      <footer class="footer">
+  <div>&copy; 2026 AGNTCY Contributors. All rights reserved.</div>
+</footer>
+
+<script>
+  (function() {
+    const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+      script.onload = function() {
+        mermaidBlocks.forEach(codeBlock => {
+          const pre = codeBlock.parentNode;
+          const div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = codeBlock.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: isDark ? 'dark' : 'default',
+          securityLevel: 'loose'
+        });
+      };
+      document.body.appendChild(script);
+    }
+  })();
+</script>
+
+    </div>
+  </body>
+</html>

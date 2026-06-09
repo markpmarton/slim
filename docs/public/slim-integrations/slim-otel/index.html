@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenTelemetry over SLIM | SLIM Documentation</title>
+  
+  
+  <link rel="stylesheet" href="/css/styles.min.css">
+  
+  <script>
+    
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+
+  <body class="is-doc">
+    <div class="app-container">
+      <header class="header">
+  <a href="/" class="logo-container" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+    <svg class="logo-svg" viewBox="0 0 492 112" xmlns="http://www.w3.org/2000/svg" style="height: 22px; width: auto; display: block; color: var(--primary);">
+      <path d="M436.006 111.94H-0.00390625V45.31C-0.00390625 20.29 20.2861 0 45.3061 0H491.826L435.996 111.94H436.006ZM40.8361 39.2L24.2661 94.15H50.3261L55.5561 75.07H71.7961V94.15H96.8761V17.83H65.2561C51.2961 17.83 45.8461 22.52 40.8361 39.2ZM60.6861 56.54L64.2861 43.68C66.0261 37.36 66.7961 36.48 70.6061 36.48H71.8061V56.54H60.6861ZM144.746 96.33C153.146 96.33 161.756 94.69 168.406 91.97V48.8H144.416V75.62H143.106C134.386 75.62 128.606 68.42 128.606 56.87C128.606 43.46 136.456 36.92 149.536 36.92C157.606 36.92 164.256 39.54 168.506 44.22V19.25C162.836 16.85 154.766 15.65 147.026 15.65C119.556 15.65 101.776 31.89 101.776 57.52C101.776 80.09 116.826 96.33 144.736 96.33H144.746ZM175.056 94.15H199.586V55.45C214.956 70.6 219.756 80.42 219.756 94.15H243.196V17.83H218.666V43.56L196.536 17.83H175.056V94.15ZM268.056 94.15H293.676V38.55H296.186C304.146 38.55 310.146 40.29 313.626 44.22V17.84H248.106V44.22C251.596 40.3 257.596 38.55 265.546 38.55H268.056V94.15ZM315.816 55.99C315.816 79.87 332.496 96.33 356.486 96.33C363.356 96.33 369.676 94.91 373.166 92.73V67.76C370.436 72.01 365.646 74.19 359.646 74.19C349.066 74.19 342.636 67.21 342.636 55.98C342.636 44.75 349.066 37.77 359.646 37.77C365.646 37.77 370.436 39.95 373.166 44.2V19.23C369.676 17.05 363.356 15.63 356.486 15.63C332.496 15.63 315.816 32.09 315.816 55.97V55.99ZM387.776 94.15H415.036L452.866 17.83H425.396L414.166 43.34L403.046 17.83H375.356L400.646 69.07L387.786 94.15H387.776Z" fill="currentColor"/>
+    </svg>
+    <span class="logo-divider" style="height: 16px; width: 1px; background-color: var(--border); margin: 0 0.25rem; display: inline-block;"></span>
+    <span class="logo-title">SLIM</span>
+  </a>
+  
+  <ul class="nav-links">
+    
+    
+      <li class="">
+        <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-controller/">Controller</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-integrations/slim-a2a/">Integrations</a>
+      </li>
+    
+  </ul>
+  
+  <div class="controls">
+    
+    <div class="search-container" id="search-container">
+      
+      <button class="search-toggle-btn" id="search-toggle-btn" aria-label="Toggle Search">
+        <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; display: block;">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      
+      <div class="search-input-wrapper" id="search-input-wrapper">
+        <svg class="search-icon-svg desktop-only-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" id="search-query-input" placeholder="Search docs..." autocomplete="off" spellcheck="false" aria-label="Search">
+        <span class="search-shortcut">/</span>
+        
+        
+        <button class="search-close-btn" id="search-close-btn" aria-label="Close Search">&times;</button>
+      </div>
+      
+      <div class="search-results-dropdown" id="search-results"></div>
+    </div>
+    
+    <a href="https://github.com/agntcy/slim" target="_blank" rel="noopener noreferrer" class="repo-tracker" aria-label="Go to Github Repository">
+      <div class="repo-tracker-full">
+        <div class="repo-tracker-row repo-tracker-row-top">
+          <div class="repo-tracker-title">
+            <svg class="repo-git-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: block; flex-shrink: 0;">
+              <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+            </svg>
+            <span class="repo-name">agntcy/slim</span>
+          </div>
+          <span class="repo-stat repo-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <span class="repo-stars-count">---</span>
+          </span>
+        </div>
+        <div class="repo-tracker-row repo-tracker-row-bottom">
+          <span class="repo-stat repo-forks">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 15V9a4 4 0 0 0-4-4H9"></path><line x1="6" y1="9" x2="6" y2="15"></line></svg>
+            <span class="repo-forks-count">---</span>
+          </span>
+          <span class="repo-stat repo-version">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <span class="repo-version-tag">---</span>
+          </span>
+        </div>
+      </div>
+      
+      <svg class="repo-tracker-compact-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
+        <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+      </svg>
+    </a>
+
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    
+    <button class="hamburger-btn" id="sidebar-toggle" aria-label="Toggle Sidebar">☰</button>
+  </div>
+</header>
+
+<script>
+  (function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    
+    function updateThemeIcons() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+    
+    updateThemeIcons();
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcons();
+      if (document.querySelector('.mermaid')) {
+        window.location.reload();
+      }
+    });
+    
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', () => {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+          sidebar.classList.toggle('open');
+        }
+      });
+    }
+
+    
+    fetch('https://api.github.com/repos/agntcy/slim')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          document.querySelector('.repo-stars-count').textContent = data.stargazers_count;
+        } else {
+          document.querySelector('.repo-stars-count').textContent = '24';
+        }
+        if (data.forks_count !== undefined) {
+          document.querySelector('.repo-forks-count').textContent = data.forks_count;
+        } else {
+          document.querySelector('.repo-forks-count').textContent = '12';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-stars-count').textContent = '24';
+        document.querySelector('.repo-forks-count').textContent = '12';
+      });
+
+    fetch('https://api.github.com/repos/agntcy/slim/releases/latest')
+      .then(res => res.json())
+      .then(data => {
+        if (data.tag_name !== undefined) {
+          document.querySelector('.repo-version-tag').textContent = data.tag_name;
+        } else {
+          document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+      });
+
+    
+    let searchIndex = null;
+    const searchContainer = document.getElementById('search-container');
+    const searchToggleBtn = document.getElementById('search-toggle-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+    const searchInput = document.getElementById('search-query-input');
+    const searchResults = document.getElementById('search-results');
+
+    async function loadSearchIndex() {
+      if (searchIndex) return;
+      try {
+        const response = await fetch('/index.json');
+        searchIndex = await response.json();
+      } catch (e) {
+        console.error("Failed to load search index", e);
+      }
+    }
+
+    searchToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.toggle('active');
+      if (searchContainer.classList.contains('active')) {
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+
+    searchCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.remove('active');
+      searchResults.innerHTML = '';
+      searchResults.classList.remove('active');
+    });
+
+    searchInput.addEventListener('focus', () => {
+      loadSearchIndex();
+      if (searchInput.value.trim().length > 0) {
+        searchResults.classList.add('active');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!searchContainer.contains(e.target)) {
+        searchResults.classList.remove('active');
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.remove('active');
+        }
+      }
+    });
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (query.length === 0) {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('active');
+        return;
+      }
+
+      if (!searchIndex) {
+        searchResults.innerHTML = '<div class="search-no-results">Loading index...</div>';
+        searchResults.classList.add('active');
+        return;
+      }
+
+      const filtered = searchIndex.filter(page => {
+        return page.title.toLowerCase().includes(query) || 
+               page.summary.toLowerCase().includes(query) || 
+               page.content.toLowerCase().includes(query);
+      }).slice(0, 7);
+
+      searchResults.innerHTML = '';
+      if (filtered.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+      } else {
+        filtered.forEach(page => {
+          const item = document.createElement('a');
+          item.href = page.permalink;
+          item.className = 'search-result-item';
+          item.innerHTML = `
+            <div class="search-result-title">${page.title}</div>
+            <div class="search-result-summary">${page.summary}</div>
+          `;
+          searchResults.appendChild(item);
+        });
+      }
+      searchResults.classList.add('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.add('active');
+        }
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+  })();
+</script>
+
+      
+      <div class="main-wrapper">
+        <aside class="sidebar">
+  <nav class="sidebar-nav">
+    
+    
+    <div class="sidebar-global-menu">
+      <h4 class="sidebar-section-title">Navigation</h4>
+      <ul class="sidebar-pages">
+        
+          <li>
+            <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+          </li>
+        
+          <li>
+            <a href="/slim-controller/">Controller</a>
+          </li>
+        
+          <li>
+            <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+          </li>
+        
+          <li>
+            <a href="/slim-integrations/slim-a2a/">Integrations</a>
+          </li>
+        
+      </ul>
+    </div>
+    
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Core Components</h4>
+        <ul class="sidebar-pages">
+          
+            <li class="">
+              <a href="/slim-controller/">SLIM Controller</a>
+            </li>
+          
+            <li class="">
+              <a href="/slim-controller-reference/">SLIM Controller Reference</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Getting-Started-With-Slims</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-data-plane-config/">Configuration Reference</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Groups</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group/">Group Creation and Management</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group-tutorial/">Group Communication Tutorial</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Integrations</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-a2a/">SLIM A2A</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-mcp/">MCP over SLIM</a>
+              </li>
+            
+          
+            
+              <li class="active">
+                <a href="/slim-integrations/slim-otel/">OpenTelemetry over SLIM</a>
+              </li>
+            
+          
+            
+              
+              <li class="sidebar-subsection">
+                <span class="sidebar-subsection-title" style="font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.5rem; color: var(--text-muted); display: block;">SLIMRPC</span>
+                <ul class="sidebar-pages" style="padding-left: 0.75rem; border-left: 1px solid var(--border); margin-left: 0.5rem; list-style: none;">
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-rpc/" style="font-size: 0.85rem;">Overview</a>
+                    </li>
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-slimrpc-compiler/" style="font-size: 0.85rem;">Protoc Plugin</a>
+                    </li>
+                  
+                </ul>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Messaging-Layers</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-data-plane/">Overview</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-session/">SLIM Sessions</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-authentication/">SLIM Authentication</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+    
+  </nav>
+</aside>
+
+        
+        <main class="content-container">
+          
+  <article class="markdown-content">
+    <h1 id="opentelemetry-integration-with-slim">OpenTelemetry Integration with SLIM</h1>
+<p>The SLIM OpenTelemetry <a href="https://github.com/agntcy/slim-otel" target="_blank" rel="noopener noreferrer">repository</a>
+ provides a custom receiver and exporter
+that enable the standard OpenTelemetry Collector to send and receive observability
+data over secure, low-latency SLIM channels. These components can be integrated
+into any OpenTelemetry Collector pipeline alongside standard receivers, processors,
+and exporters, enabling secure distribution of telemetry data (traces, metrics,
+and logs) using SLIM&rsquo;s end-to-end encryption with Message Layer Security (MLS)
+and flexible channel-based routing.</p>
+<h2 id="how-it-works">How It Works</h2>
+<h3 id="slim-exporter">SLIM Exporter</h3>
+<p>The <a href="https://github.com/agntcy/slim-otel/tree/v0.1.0/exporter/slimexporter" target="_blank" rel="noopener noreferrer">SLIM exporter</a>
+ operates as follows:</p>
+<ol>
+<li>Connects to a SLIM node using the configured endpoint.</li>
+<li>Registers three applications with the SLIM node (one for each signal type)
+using the names specified in <code>exporter-names</code> configuration, making them
+discoverable to other SLIM participants.</li>
+<li>Creates channels based on the configuration, with each channel handling one
+signal type (traces, metrics, or logs).</li>
+<li>Invites participants to the created channels if configured</li>
+<li>Publishes OpenTelemetry data (serialized as protobuf) to the appropriate SLIM
+channels based on signal type.</li>
+<li>Listens for invitations from other participants to join additional channels.</li>
+</ol>
+<p>The exporter can operate in multiple modes simultaneously: it can create and
+manage its own channels while also accepting invitations to join channels created
+by other participants.</p>
+<h3 id="slim-receiver">SLIM Receiver</h3>
+<p>The <a href="https://github.com/agntcy/slim-otel/tree/v0.1.0/receiver/slimreceiver" target="_blank" rel="noopener noreferrer">SLIM receiver</a>
+ operates as follows:</p>
+<ol>
+<li>Connects to a SLIM node using the configured endpoint.</li>
+<li>Registers as an application with the configured <code>receiver-name</code>, making it
+discoverable to other SLIM participants.</li>
+<li>Listens for incoming SLIM sessions from any participant that wants to send
+telemetry data.</li>
+<li>Automatically detects the signal type (traces, metrics, or logs) by inspecting
+the received data.</li>
+<li>Supports multiple concurrent sessions from different senders simultaneously.</li>
+</ol>
+<h2 id="getting-started">Getting Started</h2>
+<p>This tutorial demonstrates how to set up and run the SLIM OpenTelemetry
+Collector with a test application to send and receive telemetry data.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><a href="https://docs.docker.com/get-started/get-docker/" target="_blank" rel="noopener noreferrer">Docker</a>
+ for running the
+SLIM node.</li>
+<li><a href="https://go.dev/doc/install" target="_blank" rel="noopener noreferrer">Go</a>
+ for building the collector and test
+applications.</li>
+<li><a href="https://taskfile.dev/installation/" target="_blank" rel="noopener noreferrer">Task</a>
+ for executing build
+and run commands.</li>
+</ul>
+<h3 id="setting-up-the-slim-node">Setting Up the SLIM Node</h3>
+<p>Since the collector and applications communicate using SLIM, first deploy a SLIM
+node. Create a configuration file for the SLIM instance:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; slim-test-config.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">tracing:
+</span></span></span><span class="line"><span class="cl"><span class="s">  log_level: info
+</span></span></span><span class="line"><span class="cl"><span class="s">  display_thread_names: true
+</span></span></span><span class="line"><span class="cl"><span class="s">  display_thread_ids: true
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">runtime:
+</span></span></span><span class="line"><span class="cl"><span class="s">  n_cores: 0
+</span></span></span><span class="line"><span class="cl"><span class="s">  thread_name: &#34;slim-data-plane&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  drain_timeout: 10s
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">services:
+</span></span></span><span class="line"><span class="cl"><span class="s">  slim/0:
+</span></span></span><span class="line"><span class="cl"><span class="s">    dataplane:
+</span></span></span><span class="line"><span class="cl"><span class="s">      servers:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - endpoint: &#34;0.0.0.0:46357&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          tls:
+</span></span></span><span class="line"><span class="cl"><span class="s">            insecure: true
+</span></span></span><span class="line"><span class="cl"><span class="s">      clients: []
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></div><p>Launch the SLIM node using Docker:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -it <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -v ./slim-test-config.yaml:/config.yaml -p 46357:46357 <span class="se">\
+</span></span></span><span class="line"><span class="cl">    ghcr.io/agntcy/slim:1.0.0 /slim --config /config.yaml
+</span></span></code></pre></div><p>The SLIM instance will listen on port 46357 for incoming connections, serving as
+the communication backbone for the collector and applications.</p>
+<h3 id="building-the-collector">Building the Collector</h3>
+<p>The repository provides all the components and configuration needed to build a
+custom OpenTelemetry Collector that includes the SLIM exporter and receiver. To build it:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone --branch v0.1.0 https://github.com/agntcy/slim-otel.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> slim-otel
+</span></span><span class="line"><span class="cl">task collector:build
+</span></span></code></pre></div><p>This command will:</p>
+<ol>
+<li>Download the <a href="https://github.com/open-telemetry/opentelemetry-collector/tree/main/cmd/builder" target="_blank" rel="noopener noreferrer">OpenTelemetry Collector Builder (OCB)</a>
+ if not already present</li>
+<li>Generate collector sources based on <code>builder-config.yaml</code>, which includes the
+SLIM components alongside standard OpenTelemetry components</li>
+<li>Output the binary to <code>./slim-otelcol/slim-otelcol</code></li>
+</ol>
+<p>The <code>builder-config.yaml</code> file specifies which components to include in the custom
+collector. Here&rsquo;s the configuration from the repository:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">dist</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">slim-otelcol</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Basic OTel Collector distribution for Developers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="l">./slim-otelcol</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">otelcol_version</span><span class="p">:</span><span class="w"> </span><span class="m">0.144.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">replaces</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">github.com/agntcy/slim/otel =&gt; ..</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">github.com/agntcy/slim/otel/slimexporter =&gt; ../exporter/slimexporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">github.com/agntcy/slim/otel/slimreceiver =&gt; ../receiver/slimreceiver</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">github.com/agntcy/slim/otel/internal/sharedcomponent =&gt; ../internal/sharedcomponent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">exporters</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">gomod</span><span class="p">:</span><span class="w"> </span><span class="l">github.com/agntcy/slim/otel/slimexporter v0.0.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">gomod</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="l">go.opentelemetry.io/collector/exporter/debugexporter v0.144.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">gomod</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="l">go.opentelemetry.io/collector/exporter/otlpexporter v0.144.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">processors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">gomod</span><span class="p">:</span><span class="w"> </span><span class="l">go.opentelemetry.io/collector/processor/batchprocessor v0.144.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">receivers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">gomod</span><span class="p">:</span><span class="w"> </span><span class="l">github.com/agntcy/slim/otel/slimreceiver v0.0.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">gomod</span><span class="p">:</span><span class="w"> </span><span class="l">go.opentelemetry.io/collector/receiver/otlpreceiver v0.144.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">providers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">gomod</span><span class="p">:</span><span class="w"> </span><span class="l">go.opentelemetry.io/collector/confmap/provider/envprovider v1.48.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">gomod</span><span class="p">:</span><span class="w"> </span><span class="l">go.opentelemetry.io/collector/confmap/provider/fileprovider v1.48.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">gomod</span><span class="p">:</span><span class="w"> </span><span class="l">go.opentelemetry.io/collector/confmap/provider/httpprovider v1.48.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">gomod</span><span class="p">:</span><span class="w"> </span><span class="l">go.opentelemetry.io/collector/confmap/provider/httpsprovider v1.48.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">gomod</span><span class="p">:</span><span class="w"> </span><span class="l">go.opentelemetry.io/collector/confmap/provider/yamlprovider v1.48.0</span><span class="w">
+</span></span></span></code></pre></div><h4 id="using-slim-components-in-your-own-collector">Using SLIM Components in Your Own Collector</h4>
+<p>The SLIM exporter and receiver can be integrated into any OpenTelemetry Collector
+distribution. Add them to your own <code>builder-config.yaml</code> to create a custom
+collector that includes SLIM support alongside your other required components.</p>
+<p>For more information about the OpenTelemetry Collector Builder and standard
+configurations, see the <a href="https://opentelemetry.io/docs/collector/custom-collector/" target="_blank" rel="noopener noreferrer">OpenTelemetry Collector Builder documentation</a>
+.</p>
+<h3 id="configuring-the-collector">Configuring the Collector</h3>
+<p>The collector uses a configuration file to define its behavior. You can configure
+the SLIM exporter to send data over SLIM channels, the SLIM receiver to receive
+data from SLIM channels, or both in the same collector instance.</p>
+<p>In this tutorial, we&rsquo;ll set up two collectors. The sender collector uses the SLIM exporter to send telemetry data over SLIM channels. The receiver collector uses the SLIM receiver to accept telemetry data from SLIM channels.</p>
+<p>The following diagram shows how these components interact:</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph LR
+    OTLP[OTLP] --&gt;|gRPC/HTTP| SC[Sender Collector&lt;br/&gt;SLIM Exporter]
+    SC --&gt;|SLIM Protocol| SN((SLIM Node&lt;br/&gt;:46357))
+    SN --&gt;|SLIM Protocol| RC[Receiver Collector&lt;br/&gt;SLIM Receiver]
+</code></pre><p>The sender collector receives telemetry from applications (via OTLP). The
+receiver collector outputs data via the debug exporter (visible in logs) and can
+optionally forward to your observability backend. The SLIM node provides the secure
+messaging layer between them.</p>
+<h4 id="configuring-the-sender-collector">Configuring the Sender Collector</h4>
+<p>Create the configuration file for the sender collector with the SLIM exporter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; sender-collector-config.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">receivers:
+</span></span></span><span class="line"><span class="cl"><span class="s">  otlp:
+</span></span></span><span class="line"><span class="cl"><span class="s">    protocols:
+</span></span></span><span class="line"><span class="cl"><span class="s">      grpc:
+</span></span></span><span class="line"><span class="cl"><span class="s">        endpoint: 0.0.0.0:4317
+</span></span></span><span class="line"><span class="cl"><span class="s">      http:
+</span></span></span><span class="line"><span class="cl"><span class="s">        endpoint: 0.0.0.0:4318
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">processors:
+</span></span></span><span class="line"><span class="cl"><span class="s">  batch:
+</span></span></span><span class="line"><span class="cl"><span class="s">    timeout: 1s
+</span></span></span><span class="line"><span class="cl"><span class="s">    send_batch_size: 1024
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">exporters:
+</span></span></span><span class="line"><span class="cl"><span class="s">  slim:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint: &#34;http://127.0.0.1:46357&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    exporter-names:
+</span></span></span><span class="line"><span class="cl"><span class="s">      metrics: &#34;agntcy/otel/exporter-metrics&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">      traces: &#34;agntcy/otel/exporter-traces&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">      logs: &#34;agntcy/otel/exporter-logs&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    shared-secret: &#34;a-very-long-shared-secret-0123456789-abcdefg&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    channels: 
+</span></span></span><span class="line"><span class="cl"><span class="s">      - channel-name: &#34;agntcy/otel/channel-traces&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        signal: traces
+</span></span></span><span class="line"><span class="cl"><span class="s">        participants:
+</span></span></span><span class="line"><span class="cl"><span class="s">          - &#34;agntcy/otel/receiver&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        mls-enabled: true
+</span></span></span><span class="line"><span class="cl"><span class="s">      
+</span></span></span><span class="line"><span class="cl"><span class="s">      - channel-name: &#34;agntcy/otel/channel-metrics&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        signal: metrics
+</span></span></span><span class="line"><span class="cl"><span class="s">        participants:
+</span></span></span><span class="line"><span class="cl"><span class="s">          - &#34;agntcy/otel/receiver&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        mls-enabled: true
+</span></span></span><span class="line"><span class="cl"><span class="s">      
+</span></span></span><span class="line"><span class="cl"><span class="s">      - channel-name: &#34;agntcy/otel/channel-logs&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        signal: logs
+</span></span></span><span class="line"><span class="cl"><span class="s">        participants:
+</span></span></span><span class="line"><span class="cl"><span class="s">          - &#34;agntcy/otel/receiver&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        mls-enabled: true
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">service:
+</span></span></span><span class="line"><span class="cl"><span class="s">  telemetry:
+</span></span></span><span class="line"><span class="cl"><span class="s">    metrics:
+</span></span></span><span class="line"><span class="cl"><span class="s">      level: none
+</span></span></span><span class="line"><span class="cl"><span class="s">  
+</span></span></span><span class="line"><span class="cl"><span class="s">  pipelines:
+</span></span></span><span class="line"><span class="cl"><span class="s">    traces:
+</span></span></span><span class="line"><span class="cl"><span class="s">      receivers: [otlp]
+</span></span></span><span class="line"><span class="cl"><span class="s">      processors: [batch]
+</span></span></span><span class="line"><span class="cl"><span class="s">      exporters: [slim]
+</span></span></span><span class="line"><span class="cl"><span class="s">    
+</span></span></span><span class="line"><span class="cl"><span class="s">    metrics:
+</span></span></span><span class="line"><span class="cl"><span class="s">      receivers: [otlp]
+</span></span></span><span class="line"><span class="cl"><span class="s">      processors: [batch]
+</span></span></span><span class="line"><span class="cl"><span class="s">      exporters: [slim]
+</span></span></span><span class="line"><span class="cl"><span class="s">    
+</span></span></span><span class="line"><span class="cl"><span class="s">    logs:
+</span></span></span><span class="line"><span class="cl"><span class="s">      receivers: [otlp]
+</span></span></span><span class="line"><span class="cl"><span class="s">      processors: [batch]
+</span></span></span><span class="line"><span class="cl"><span class="s">      exporters: [slim]
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></div><p>To configure the SLIM exporter, there are required and optional settings.</p>
+<p>Required Settings:</p>
+<ul>
+<li><code>endpoint</code>: Address of the SLIM node (default: <code>http://127.0.0.1:46357</code>)</li>
+<li><code>shared-secret</code>: Shared secret for MLS and identity provider authentication</li>
+</ul>
+<p>Optional Settings:</p>
+<ul>
+<li>
+<p><code>exporter-names</code>: Names for each signal type exporter that identify this
+collector instance in SLIM channels.</p>
+<p>For each signal type, the following options can be set:</p>
+<ul>
+<li><code>metrics</code>: Name for the metrics exporter (default: <code>agntcy/otel/exporter-metrics</code>).</li>
+<li><code>traces</code>: Name for the traces exporter (default: <code>agntcy/otel/exporter-traces</code>).</li>
+<li><code>logs</code>: Name for the logs exporter (default: <code>agntcy/otel/exporter-logs</code>).</li>
+</ul>
+</li>
+<li>
+<p><code>channels</code>: Array of channel configurations (default: <code>[]</code>). When empty, the
+exporter operates in passive mode, only listening for invitations.</p>
+</li>
+</ul>
+<p>Channels can also be configured. Each channel supports the following settings:</p>
+<ul>
+<li><code>channel-name</code> (required): The name of the SLIM channel in the form
+<code>org/namespace/service</code>.</li>
+<li><code>signal</code> (required): The signal type (<code>traces</code>, <code>metrics</code>, or <code>logs</code>).</li>
+<li><code>participants</code> (required): Array of participant identifiers to invite.</li>
+<li><code>mls-enabled</code> (default: <code>false</code>): Enable MLS encryption for the channel.</li>
+</ul>
+<h4 id="configuring-the-receiver-collector">Configuring the Receiver Collector</h4>
+<p>Create the configuration file for the receiver collector that uses the SLIM receiver
+to accept telemetry data:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; receiver-collector-config.yaml
+</span></span></span><span class="line"><span class="cl"><span class="s">receivers:
+</span></span></span><span class="line"><span class="cl"><span class="s">  slim:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint: &#34;http://127.0.0.1:46357&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    receiver-name: &#34;agntcy/otel/receiver&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    shared-secret: &#34;a-very-long-shared-secret-0123456789-abcdefg&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">processors:
+</span></span></span><span class="line"><span class="cl"><span class="s">  batch:
+</span></span></span><span class="line"><span class="cl"><span class="s">    timeout: 1s
+</span></span></span><span class="line"><span class="cl"><span class="s">    send_batch_size: 1024
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">exporters:
+</span></span></span><span class="line"><span class="cl"><span class="s">  debug:
+</span></span></span><span class="line"><span class="cl"><span class="s">    verbosity: detailed
+</span></span></span><span class="line"><span class="cl"><span class="s">    sampling_initial: 5
+</span></span></span><span class="line"><span class="cl"><span class="s">    sampling_thereafter: 200
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">service:
+</span></span></span><span class="line"><span class="cl"><span class="s">  telemetry:
+</span></span></span><span class="line"><span class="cl"><span class="s">    metrics:
+</span></span></span><span class="line"><span class="cl"><span class="s">      level: none
+</span></span></span><span class="line"><span class="cl"><span class="s">  
+</span></span></span><span class="line"><span class="cl"><span class="s">  pipelines:
+</span></span></span><span class="line"><span class="cl"><span class="s">    traces:
+</span></span></span><span class="line"><span class="cl"><span class="s">      receivers: [slim]
+</span></span></span><span class="line"><span class="cl"><span class="s">      processors: [batch]
+</span></span></span><span class="line"><span class="cl"><span class="s">      exporters: [debug]
+</span></span></span><span class="line"><span class="cl"><span class="s">    
+</span></span></span><span class="line"><span class="cl"><span class="s">    metrics:
+</span></span></span><span class="line"><span class="cl"><span class="s">      receivers: [slim]
+</span></span></span><span class="line"><span class="cl"><span class="s">      processors: [batch]
+</span></span></span><span class="line"><span class="cl"><span class="s">      exporters: [debug]
+</span></span></span><span class="line"><span class="cl"><span class="s">    
+</span></span></span><span class="line"><span class="cl"><span class="s">    logs:
+</span></span></span><span class="line"><span class="cl"><span class="s">      receivers: [slim]
+</span></span></span><span class="line"><span class="cl"><span class="s">      processors: [batch]
+</span></span></span><span class="line"><span class="cl"><span class="s">      exporters: [debug]
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></div><p>To configure the SLIM receiver, there are required and optional settings.</p>
+<p>Required Settings:</p>
+<ul>
+<li><code>endpoint</code>: Address of the SLIM node (default: <code>http://127.0.0.1:46357</code>).</li>
+<li><code>shared-secret</code>: Shared secret for MLS and identity provider authentication.</li>
+</ul>
+<p>Optional Settings:</p>
+<ul>
+<li><code>receiver-name</code>: Name for the receiver to be used in SLIM channels (default:
+<code>agntcy/otel/receiver</code>). This is the identifier that other participants use to
+establish sessions with this receiver. All signal types (traces, metrics, logs)
+are handled by a single receiver instance.</li>
+</ul>
+<h3 id="running-the-collectors">Running the Collectors</h3>
+<p>You can run each collector independently using the built binary and configuration files.</p>
+<p>In one terminal, start the receiver collector:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./slim-otelcol/slim-otelcol --config receiver-collector-config.yaml
+</span></span></code></pre></div><p>The receiver collector will:</p>
+<ol>
+<li>Connect to the SLIM node.</li>
+<li>Register with the configured receiver name.</li>
+<li>Listen for incoming sessions from the sender collector.</li>
+</ol>
+<p>In another terminal, start the sender collector:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./slim-otelcol/slim-otelcol --config sender-collector-config.yaml
+</span></span></code></pre></div><p>The sender collector will:</p>
+<ol>
+<li>Start listening for OTLP data on ports 4317 (gRPC) and 4318 (HTTP).</li>
+<li>Connect to the SLIM node.</li>
+<li>Create the configured channels and invite participants.</li>
+</ol>
+<p>Once the sender collector starts, you&rsquo;ll see the receiver collector accept the incoming sessions, one for each signal.</p>
+<pre tabindex="0"><code>2026-01-29T18:57:44.070+0100	INFO	slimreceiver@v0.0.1/receiver.go:97	New session received
+2026-01-29T18:57:44.070+0100	INFO	slimreceiver@v0.0.1/receiver.go:211	Handling new session	{&#34;sessionID&#34;: 1454232866, &#34;sessionName&#34;: &#34;agntcy/otel/channel-traces/ffffffffffffffff&#34;}
+2026-01-29T18:57:44.088+0100	INFO	slimreceiver@v0.0.1/receiver.go:97	New session received
+2026-01-29T18:57:44.088+0100	INFO	slimreceiver@v0.0.1/receiver.go:211	Handling new session	{&#34;sessionID&#34;: 873926759, &#34;sessionName&#34;: &#34;agntcy/otel/channel-logs/ffffffffffffffff&#34;}
+2026-01-29T18:57:44.105+0100	INFO	slimreceiver@v0.0.1/receiver.go:97	New session received
+2026-01-29T18:57:44.105+0100	INFO	slimreceiver@v0.0.1/receiver.go:211	Handling new session	{&#34;sessionID&#34;: 156147126, &#34;sessionName&#34;: &#34;agntcy/otel/channel-metrics/ffffffffffffffff&#34;}
+</code></pre><h3 id="testing-the-integration">Testing the Integration</h3>
+<p>Now let&rsquo;s test the complete setup by running both collectors and sending telemetry
+data through them using <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/cmd/telemetrygen" target="_blank" rel="noopener noreferrer">telemetrygen</a>
+.</p>
+<p>Install <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/cmd/telemetrygen" target="_blank" rel="noopener noreferrer">telemetrygen</a>
+ by running the following command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go install github.com/open-telemetry/opentelemetry-collector-contrib/cmd/telemetrygen@latest
+</span></span></code></pre></div><p>Make sure the Go bin directory is in your PATH:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="k">$(</span>go env GOPATH<span class="k">)</span>/bin
+</span></span></code></pre></div><p>Generate telemetry data and send it to the sender collector:</p>
+<p><strong>Generate traces:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">telemetrygen traces --otlp-insecure --rate <span class="m">10</span> --duration 30s
+</span></span></code></pre></div><p><strong>Generate metrics:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">telemetrygen metrics --otlp-insecure --rate <span class="m">10</span> --duration 30s
+</span></span></code></pre></div><p><strong>Generate logs:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">telemetrygen logs --otlp-insecure --rate <span class="m">10</span> --duration 30s
+</span></span></code></pre></div><p>The telemetry data will flow through the architecture:</p>
+<p><strong>telemetrygen → Sender Collector → SLIM Node → Receiver Collector</strong></p>
+<p>You should see the telemetry data logged in the receiver collector&rsquo;s terminal output
+via the debug exporter.</p>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li><a href="https://github.com/agntcy/slim-otel" target="_blank" rel="noopener noreferrer">SLIM OpenTelemetry Collector Repository</a>
+</li>
+<li><a href="https://github.com/agntcy/slim" target="_blank" rel="noopener noreferrer">SLIM Project</a>
+</li>
+<li><a href="../../">SLIM Documentation</a>
+</li>
+<li><a href="https://opentelemetry.io/docs/collector/" target="_blank" rel="noopener noreferrer">OpenTelemetry Collector Documentation</a>
+</li>
+<li><a href="https://datatracker.ietf.org/doc/rfc9420/" target="_blank" rel="noopener noreferrer">MLS RFC 9420</a>
+</li>
+</ul>
+
+  </article>
+
+        </main>
+      </div>
+      
+      <footer class="footer">
+  <div>&copy; 2026 AGNTCY Contributors. All rights reserved.</div>
+</footer>
+
+<script>
+  (function() {
+    const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+      script.onload = function() {
+        mermaidBlocks.forEach(codeBlock => {
+          const pre = codeBlock.parentNode;
+          const div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = codeBlock.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: isDark ? 'dark' : 'default',
+          securityLevel: 'loose'
+        });
+      };
+      document.body.appendChild(script);
+    }
+  })();
+</script>
+
+    </div>
+  </body>
+</html>

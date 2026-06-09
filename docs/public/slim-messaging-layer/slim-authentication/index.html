@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SLIM Authentication | SLIM Documentation</title>
+  
+  
+  <link rel="stylesheet" href="/css/styles.min.css">
+  
+  <script>
+    
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+
+  <body class="is-doc">
+    <div class="app-container">
+      <header class="header">
+  <a href="/" class="logo-container" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+    <svg class="logo-svg" viewBox="0 0 492 112" xmlns="http://www.w3.org/2000/svg" style="height: 22px; width: auto; display: block; color: var(--primary);">
+      <path d="M436.006 111.94H-0.00390625V45.31C-0.00390625 20.29 20.2861 0 45.3061 0H491.826L435.996 111.94H436.006ZM40.8361 39.2L24.2661 94.15H50.3261L55.5561 75.07H71.7961V94.15H96.8761V17.83H65.2561C51.2961 17.83 45.8461 22.52 40.8361 39.2ZM60.6861 56.54L64.2861 43.68C66.0261 37.36 66.7961 36.48 70.6061 36.48H71.8061V56.54H60.6861ZM144.746 96.33C153.146 96.33 161.756 94.69 168.406 91.97V48.8H144.416V75.62H143.106C134.386 75.62 128.606 68.42 128.606 56.87C128.606 43.46 136.456 36.92 149.536 36.92C157.606 36.92 164.256 39.54 168.506 44.22V19.25C162.836 16.85 154.766 15.65 147.026 15.65C119.556 15.65 101.776 31.89 101.776 57.52C101.776 80.09 116.826 96.33 144.736 96.33H144.746ZM175.056 94.15H199.586V55.45C214.956 70.6 219.756 80.42 219.756 94.15H243.196V17.83H218.666V43.56L196.536 17.83H175.056V94.15ZM268.056 94.15H293.676V38.55H296.186C304.146 38.55 310.146 40.29 313.626 44.22V17.84H248.106V44.22C251.596 40.3 257.596 38.55 265.546 38.55H268.056V94.15ZM315.816 55.99C315.816 79.87 332.496 96.33 356.486 96.33C363.356 96.33 369.676 94.91 373.166 92.73V67.76C370.436 72.01 365.646 74.19 359.646 74.19C349.066 74.19 342.636 67.21 342.636 55.98C342.636 44.75 349.066 37.77 359.646 37.77C365.646 37.77 370.436 39.95 373.166 44.2V19.23C369.676 17.05 363.356 15.63 356.486 15.63C332.496 15.63 315.816 32.09 315.816 55.97V55.99ZM387.776 94.15H415.036L452.866 17.83H425.396L414.166 43.34L403.046 17.83H375.356L400.646 69.07L387.786 94.15H387.776Z" fill="currentColor"/>
+    </svg>
+    <span class="logo-divider" style="height: 16px; width: 1px; background-color: var(--border); margin: 0 0.25rem; display: inline-block;"></span>
+    <span class="logo-title">SLIM</span>
+  </a>
+  
+  <ul class="nav-links">
+    
+    
+      <li class="">
+        <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-controller/">Controller</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+      </li>
+    
+      <li class="">
+        <a href="/slim-integrations/slim-a2a/">Integrations</a>
+      </li>
+    
+  </ul>
+  
+  <div class="controls">
+    
+    <div class="search-container" id="search-container">
+      
+      <button class="search-toggle-btn" id="search-toggle-btn" aria-label="Toggle Search">
+        <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; display: block;">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      
+      <div class="search-input-wrapper" id="search-input-wrapper">
+        <svg class="search-icon-svg desktop-only-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" id="search-query-input" placeholder="Search docs..." autocomplete="off" spellcheck="false" aria-label="Search">
+        <span class="search-shortcut">/</span>
+        
+        
+        <button class="search-close-btn" id="search-close-btn" aria-label="Close Search">&times;</button>
+      </div>
+      
+      <div class="search-results-dropdown" id="search-results"></div>
+    </div>
+    
+    <a href="https://github.com/agntcy/slim" target="_blank" rel="noopener noreferrer" class="repo-tracker" aria-label="Go to Github Repository">
+      <div class="repo-tracker-full">
+        <div class="repo-tracker-row repo-tracker-row-top">
+          <div class="repo-tracker-title">
+            <svg class="repo-git-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: block; flex-shrink: 0;">
+              <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+            </svg>
+            <span class="repo-name">agntcy/slim</span>
+          </div>
+          <span class="repo-stat repo-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <span class="repo-stars-count">---</span>
+          </span>
+        </div>
+        <div class="repo-tracker-row repo-tracker-row-bottom">
+          <span class="repo-stat repo-forks">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 15V9a4 4 0 0 0-4-4H9"></path><line x1="6" y1="9" x2="6" y2="15"></line></svg>
+            <span class="repo-forks-count">---</span>
+          </span>
+          <span class="repo-stat repo-version">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 11px; height: 11px; margin-right: 2px; display: inline-block;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <span class="repo-version-tag">---</span>
+          </span>
+        </div>
+      </div>
+      
+      <svg class="repo-tracker-compact-icon" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
+        <path fill="currentColor" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/>
+      </svg>
+    </a>
+
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    
+    <button class="hamburger-btn" id="sidebar-toggle" aria-label="Toggle Sidebar">☰</button>
+  </div>
+</header>
+
+<script>
+  (function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    
+    function updateThemeIcons() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+    
+    updateThemeIcons();
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcons();
+      if (document.querySelector('.mermaid')) {
+        window.location.reload();
+      }
+    });
+    
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', () => {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+          sidebar.classList.toggle('open');
+        }
+      });
+    }
+
+    
+    fetch('https://api.github.com/repos/agntcy/slim')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          document.querySelector('.repo-stars-count').textContent = data.stargazers_count;
+        } else {
+          document.querySelector('.repo-stars-count').textContent = '24';
+        }
+        if (data.forks_count !== undefined) {
+          document.querySelector('.repo-forks-count').textContent = data.forks_count;
+        } else {
+          document.querySelector('.repo-forks-count').textContent = '12';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-stars-count').textContent = '24';
+        document.querySelector('.repo-forks-count').textContent = '12';
+      });
+
+    fetch('https://api.github.com/repos/agntcy/slim/releases/latest')
+      .then(res => res.json())
+      .then(data => {
+        if (data.tag_name !== undefined) {
+          document.querySelector('.repo-version-tag').textContent = data.tag_name;
+        } else {
+          document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+        }
+      })
+      .catch(() => {
+        document.querySelector('.repo-version-tag').textContent = 'v1.4.0';
+      });
+
+    
+    let searchIndex = null;
+    const searchContainer = document.getElementById('search-container');
+    const searchToggleBtn = document.getElementById('search-toggle-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+    const searchInput = document.getElementById('search-query-input');
+    const searchResults = document.getElementById('search-results');
+
+    async function loadSearchIndex() {
+      if (searchIndex) return;
+      try {
+        const response = await fetch('/index.json');
+        searchIndex = await response.json();
+      } catch (e) {
+        console.error("Failed to load search index", e);
+      }
+    }
+
+    searchToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.toggle('active');
+      if (searchContainer.classList.contains('active')) {
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+
+    searchCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchContainer.classList.remove('active');
+      searchResults.innerHTML = '';
+      searchResults.classList.remove('active');
+    });
+
+    searchInput.addEventListener('focus', () => {
+      loadSearchIndex();
+      if (searchInput.value.trim().length > 0) {
+        searchResults.classList.add('active');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!searchContainer.contains(e.target)) {
+        searchResults.classList.remove('active');
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.remove('active');
+        }
+      }
+    });
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (query.length === 0) {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('active');
+        return;
+      }
+
+      if (!searchIndex) {
+        searchResults.innerHTML = '<div class="search-no-results">Loading index...</div>';
+        searchResults.classList.add('active');
+        return;
+      }
+
+      const filtered = searchIndex.filter(page => {
+        return page.title.toLowerCase().includes(query) || 
+               page.summary.toLowerCase().includes(query) || 
+               page.content.toLowerCase().includes(query);
+      }).slice(0, 7);
+
+      searchResults.innerHTML = '';
+      if (filtered.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+      } else {
+        filtered.forEach(page => {
+          const item = document.createElement('a');
+          item.href = page.permalink;
+          item.className = 'search-result-item';
+          item.innerHTML = `
+            <div class="search-result-title">${page.title}</div>
+            <div class="search-result-summary">${page.summary}</div>
+          `;
+          searchResults.appendChild(item);
+        });
+      }
+      searchResults.classList.add('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        if (window.innerWidth <= 768) {
+          searchContainer.classList.add('active');
+        }
+        loadSearchIndex();
+        searchInput.focus();
+      }
+    });
+  })();
+</script>
+
+      
+      <div class="main-wrapper">
+        <aside class="sidebar">
+  <nav class="sidebar-nav">
+    
+    
+    <div class="sidebar-global-menu">
+      <h4 class="sidebar-section-title">Navigation</h4>
+      <ul class="sidebar-pages">
+        
+          <li>
+            <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+          </li>
+        
+          <li>
+            <a href="/slim-controller/">Controller</a>
+          </li>
+        
+          <li>
+            <a href="/slim-messaging-layer/slim-data-plane/">Messaging Layer</a>
+          </li>
+        
+          <li>
+            <a href="/slim-integrations/slim-a2a/">Integrations</a>
+          </li>
+        
+      </ul>
+    </div>
+    
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Core Components</h4>
+        <ul class="sidebar-pages">
+          
+            <li class="">
+              <a href="/slim-controller/">SLIM Controller</a>
+            </li>
+          
+            <li class="">
+              <a href="/slim-controller-reference/">SLIM Controller Reference</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Getting-Started-With-Slims</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-howto/">Getting Started</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/getting-started-with-slim/slim-data-plane-config/">Configuration Reference</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Groups</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group/">Group Creation and Management</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-groups/slim-group-tutorial/">Group Communication Tutorial</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Integrations</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-a2a/">SLIM A2A</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-mcp/">MCP over SLIM</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-integrations/slim-otel/">OpenTelemetry over SLIM</a>
+              </li>
+            
+          
+            
+              
+              <li class="sidebar-subsection">
+                <span class="sidebar-subsection-title" style="font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.5rem; color: var(--text-muted); display: block;">SLIMRPC</span>
+                <ul class="sidebar-pages" style="padding-left: 0.75rem; border-left: 1px solid var(--border); margin-left: 0.5rem; list-style: none;">
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-rpc/" style="font-size: 0.85rem;">Overview</a>
+                    </li>
+                  
+                    <li class="">
+                      <a href="/slim-integrations/slimrpc/slim-slimrpc-compiler/" style="font-size: 0.85rem;">Protoc Plugin</a>
+                    </li>
+                  
+                </ul>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+      <div class="sidebar-section">
+        <h4 class="sidebar-section-title">Slim-Messaging-Layers</h4>
+        <ul class="sidebar-pages">
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-data-plane/">Overview</a>
+              </li>
+            
+          
+            
+              <li class="">
+                <a href="/slim-messaging-layer/slim-session/">SLIM Sessions</a>
+              </li>
+            
+          
+            
+              <li class="active">
+                <a href="/slim-messaging-layer/slim-authentication/">SLIM Authentication</a>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+    
+  </nav>
+</aside>
+
+        
+        <main class="content-container">
+          
+  <article class="markdown-content">
+    <h1 id="identity-management">Identity Management</h1>
+<h2 id="overview">Overview</h2>
+<p>Each SLIM client needs to have a valid identity. In the <a href="/slim-groups/slim-group-tutorial/">SLIM Group
+Communication Tutorial</a>
+, we used a simple shared secret
+to quickly set up identities for the clients. In a real-world scenario, you
+would typically use a more secure method, such as tokens or certificates, to
+authenticate clients and establish their identities.</p>
+<p>SLIM supports JWT (JSON Web Tokens) for identity management. Tokens can come
+from an external identity provider or can be generated by the SLIM nodes
+directly if you provide the necessary private key for signing the tokens and
+public key for verification. Check the <a href="https://github.com/agntcy/slim/blob/slim-v1.1.0/data-plane/bindings/python/tests/test_identity.py" target="_blank" rel="noopener noreferrer">Identity
+Test</a>
+
+for an example of how to use JWT tokens with SLIM if you have your own keys.</p>
+<p>If you are running your SLIM clients in a Kubernetes environment, using
+<a href="https://spiffe.io/" target="_blank" rel="noopener noreferrer">SPIRE</a>
+ is a very common approach to give an identity
+to each client. SPIRE provides a way to issue
+<a href="https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-id" target="_blank" rel="noopener noreferrer">SPIFFE IDs</a>
+ to
+workloads, in the form of JWT tokens, which SLIM can then use to authenticate
+clients. This allows for secure and scalable identity management in distributed
+systems.</p>
+<h2 id="example-using-spire-with-slim-in-kubernetes-spire--jwt">Example: Using SPIRE with SLIM in Kubernetes (SPIRE / JWT)</h2>
+<p>SLIM integrates well with SPIRE, as it allows you to use the JWT tokens
+generated by SPIRE as client identities, and at the same time it can verify
+these tokens using the key bundle provided by SPIRE.</p>
+<p>This section shows how to use SPIRE with SLIM to manage client identities. The following topics are covered:</p>
+<ul>
+<li>Creating a local KIND cluster (with an in-cluster image registry).</li>
+<li>Installing SPIRE (server and agents).</li>
+<li>Building and pushing SLIM images to the local registry.</li>
+<li>Deploying the SLIM node (control and rendezvous components).</li>
+<li>Deploying two distinct SLIM client workloads, each with its own ServiceAccount (and thus its own SPIFFE ID).</li>
+<li>Running the point-to-point example using JWT-based authentication derived from SPIRE.</li>
+</ul>
+<p>If you already have a Kubernetes cluster or an existing SPIRE deployment, you
+can adapt only the relevant subsections.</p>
+<p>This tutorial is based on the <a href="https://github.com/agntcy/slim/blob/slim-v1.1.0/data-plane/bindings/python/examples" target="_blank" rel="noopener noreferrer">SLIM examples</a>
+.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>The following prerequisites are required:</p>
+<ul>
+<li><a href="https://docs.docker.com/get-docker/" target="_blank" rel="noopener noreferrer">Docker</a>
+</li>
+<li><a href="https://kubernetes.io/docs/tasks/tools/" target="_blank" rel="noopener noreferrer">kubectl</a>
+</li>
+<li><a href="https://helm.sh/docs/intro/install/" target="_blank" rel="noopener noreferrer">Helm</a>
+</li>
+<li><a href="https://kind.sigs.k8s.io/docs/user/quick-start/" target="_blank" rel="noopener noreferrer">KIND</a>
+</li>
+</ul>
+<h3 id="creating-a-kind-cluster-with-a-local-image-registry">Creating a KIND Cluster with a Local Image Registry</h3>
+<p>The helper script below provisions a KIND cluster and configures a local
+registry (localhost:5001) that the cluster’s container runtime can pull from:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -L https://kind.sigs.k8s.io/examples/kind-with-registry.sh <span class="p">|</span> sh
+</span></span></code></pre></div>
+<div class="callout info">
+  <div class="callout-icon">
+    
+      ℹ️
+    
+  </div>
+  <div class="callout-body">
+    <p><strong>Local Registry</strong></p>
+<p>While this tutorial doesn&rsquo;t use the local registry, it&rsquo;s available at <code>localhost:5001</code> if you need to test with custom or unpublished container images.</p>
+
+  </div>
+</div>
+
+<h3 id="installing-spire">Installing SPIRE</h3>
+<p>To install SPIRE, you need to install the server, CRDs, and agents:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">helm upgrade --install                                      <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -n spire-server                                         <span class="se">\
+</span></span></span><span class="line"><span class="cl">    spire-crds spire-crds                                   <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --repo https://spiffe.github.io/helm-charts-hardened/   <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --create-namespace
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">helm upgrade --install  <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -n spire-server     <span class="se">\
+</span></span></span><span class="line"><span class="cl">    spire spire --repo  <span class="se">\
+</span></span></span><span class="line"><span class="cl">    https://spiffe.github.io/helm-charts-hardened/
+</span></span></code></pre></div><p>Wait for the SPIRE components to become ready:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get pods -n spire-server
+</span></span></code></pre></div><p>All pods should reach Running/READY status before proceeding.</p>
+<h3 id="spiffe-id-strategy">SPIFFE ID Strategy</h3>
+<p>The default SPIRE server Helm chart installs a Cluster SPIFFE ID controller
+object (<code>spire-server-spire-default</code>) that issues workload identities following
+the pattern:</p>
+<p><code>spiffe://domain.test/ns/&lt;namespace&gt;/sa/&lt;service-account&gt;</code></p>
+<p>We rely on this object by default. If you need more granular issuance (specific label
+selectors, different trust domain, etc.), consult the <a href="https:/github.com/spiffe/spire-controller-manager/blob/main/docs/clusterspiffeid-crd/" target="_blank" rel="noopener noreferrer">ClusterSPIFFEID
+documentation</a>
+.</p>
+<h3 id="deploying-the-slim-node">Deploying the SLIM Node</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">helm install <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --create-namespace <span class="se">\
+</span></span></span><span class="line"><span class="cl">    -n slim <span class="se">\
+</span></span></span><span class="line"><span class="cl">    slim oci://ghcr.io/agntcy/slim/helm/slim:v1.1.0
+</span></span></code></pre></div><p>Confirm the pod is running:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get pods -n slim
+</span></span></code></pre></div><h3 id="deploying-two-distinct-clients-separate-serviceaccounts--separate-spiffe-ids">Deploying Two Distinct Clients (separate ServiceAccounts = separate SPIFFE IDs)</h3>
+<p>Each Deployment:</p>
+<ul>
+<li>Has its own ServiceAccount (<code>slim-client-a</code>, <code>slim-client-b</code>).</li>
+<li>Mounts the SPIRE agent socket from the host (in KIND, agent runs as a
+DaemonSet).</li>
+<li>Runs a placeholder <code>slim-client</code> container (sleep) you can exec into.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl apply -f - <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: slim-client-a
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app.kubernetes.io/name: slim-client
+</span></span></span><span class="line"><span class="cl"><span class="s">    app.kubernetes.io/component: client-a
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: slim-client-b
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app.kubernetes.io/name: slim-client
+</span></span></span><span class="line"><span class="cl"><span class="s">    app.kubernetes.io/component: client-b
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: apps/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Deployment
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: slim-client-a
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app.kubernetes.io/name: slim-client
+</span></span></span><span class="line"><span class="cl"><span class="s">    app.kubernetes.io/component: client-a
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  replicas: 1
+</span></span></span><span class="line"><span class="cl"><span class="s">  selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">      app.kubernetes.io/name: slim-client
+</span></span></span><span class="line"><span class="cl"><span class="s">      app.kubernetes.io/component: client-a
+</span></span></span><span class="line"><span class="cl"><span class="s">  template:
+</span></span></span><span class="line"><span class="cl"><span class="s">    metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">      labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">        app.kubernetes.io/name: slim-client
+</span></span></span><span class="line"><span class="cl"><span class="s">        app.kubernetes.io/component: client-a
+</span></span></span><span class="line"><span class="cl"><span class="s">    spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">      serviceAccountName: slim-client-a
+</span></span></span><span class="line"><span class="cl"><span class="s">      securityContext: {}
+</span></span></span><span class="line"><span class="cl"><span class="s">      containers:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: slim-client
+</span></span></span><span class="line"><span class="cl"><span class="s">          securityContext: {}
+</span></span></span><span class="line"><span class="cl"><span class="s">          image: &#34;python:3&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          imagePullPolicy: Always
+</span></span></span><span class="line"><span class="cl"><span class="s">          command: [&#34;/bin/sh&#34;, &#34;-c&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">          args:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - &#34;pip install &#39;slim-bindings[examples]&#39; &amp;&amp; sleep infinity&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          resources: {}
+</span></span></span><span class="line"><span class="cl"><span class="s">          volumeMounts:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - name: spire-agent-socket
+</span></span></span><span class="line"><span class="cl"><span class="s">              mountPath: /run/spire/agent-sockets
+</span></span></span><span class="line"><span class="cl"><span class="s">              readOnly: false
+</span></span></span><span class="line"><span class="cl"><span class="s">      volumes:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: spire-agent-socket
+</span></span></span><span class="line"><span class="cl"><span class="s">          hostPath:
+</span></span></span><span class="line"><span class="cl"><span class="s">            path: /run/spire/agent-sockets
+</span></span></span><span class="line"><span class="cl"><span class="s">            type: Directory
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: apps/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Deployment
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: slim-client-b
+</span></span></span><span class="line"><span class="cl"><span class="s">  labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">    app.kubernetes.io/name: slim-client
+</span></span></span><span class="line"><span class="cl"><span class="s">    app.kubernetes.io/component: client-b
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  replicas: 1
+</span></span></span><span class="line"><span class="cl"><span class="s">  selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">      app.kubernetes.io/name: slim-client
+</span></span></span><span class="line"><span class="cl"><span class="s">      app.kubernetes.io/component: client-b
+</span></span></span><span class="line"><span class="cl"><span class="s">  template:
+</span></span></span><span class="line"><span class="cl"><span class="s">    metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">      labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">        app.kubernetes.io/name: slim-client
+</span></span></span><span class="line"><span class="cl"><span class="s">        app.kubernetes.io/component: client-b
+</span></span></span><span class="line"><span class="cl"><span class="s">    spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">      serviceAccountName: slim-client-b
+</span></span></span><span class="line"><span class="cl"><span class="s">      securityContext: {}
+</span></span></span><span class="line"><span class="cl"><span class="s">      containers:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: slim-client
+</span></span></span><span class="line"><span class="cl"><span class="s">          securityContext: {}
+</span></span></span><span class="line"><span class="cl"><span class="s">          image: &#34;python:3&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          imagePullPolicy: Always
+</span></span></span><span class="line"><span class="cl"><span class="s">          command: [&#34;/bin/sh&#34;, &#34;-c&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">          args:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - &#34;pip install &#39;slim-bindings[examples]&#39; &amp;&amp; sleep infinity&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">          resources: {}
+</span></span></span><span class="line"><span class="cl"><span class="s">          volumeMounts:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - name: spire-agent-socket
+</span></span></span><span class="line"><span class="cl"><span class="s">              mountPath: /run/spire/agent-sockets
+</span></span></span><span class="line"><span class="cl"><span class="s">              readOnly: false
+</span></span></span><span class="line"><span class="cl"><span class="s">      volumes:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: spire-agent-socket
+</span></span></span><span class="line"><span class="cl"><span class="s">          hostPath:
+</span></span></span><span class="line"><span class="cl"><span class="s">            path: /run/spire/agent-sockets
+</span></span></span><span class="line"><span class="cl"><span class="s">            type: Directory
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></div><p>Check that both pods are running:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get pods -l app.kubernetes.io/name<span class="o">=</span>slim-client -o wide
+</span></span></code></pre></div><h3 id="running-the-point-to-point-example-inside-the-cluster">Running the Point-to-Point Example (inside the cluster)</h3>
+<p>Enter the first client pod (receiver):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> -c slim-client -it <span class="k">$(</span>kubectl get pods -l app.kubernetes.io/component<span class="o">=</span>client-a -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.items[0].metadata.name}&#34;</span><span class="k">)</span> -- /bin/bash
+</span></span></code></pre></div><p>Run the receiver:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slim-bindings-p2p <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --spire-socket-path /var/run/spire/agent-sockets/spire-agent.sock   <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --spire-jwt-audience slim-demo                                      <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --slim http://slim.slim:46357                                       <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --local agntcy/example/receiver
+</span></span></code></pre></div><p>Open a second shell for the sender:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> -c slim-client -it <span class="k">$(</span>kubectl get pods -l app.kubernetes.io/component<span class="o">=</span>client-b -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.items[0].metadata.name}&#34;</span><span class="k">)</span> -- /bin/bash
+</span></span></code></pre></div><p>Run the sender:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slim-bindings-p2p                                                       <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --spire-socket-path /var/run/spire/agent-sockets/spire-agent.sock   <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --spire-jwt-audience slim-demo                                      <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --slim http://slim.slim:46357                                       <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --local agntcy/example/sender                                       <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --remote agntcy/example/receiver                                    <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --enable-mls                                                        <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --message <span class="s2">&#34;hey there&#34;</span>
+</span></span></code></pre></div><p>Sample output:</p>
+<pre tabindex="0"><code>2026-02-02T16:48:39.498136Z  INFO slim slim_service::service: 402: client connected endpoint=http://slim.slim:46357 conn_id=0
+Using SPIRE dynamic identity authentication.
+2026-02-02T16:48:39.498558Z  INFO ThreadId(16) slim_auth::spire: 277: Initializing spire identity manager
+2026-02-02T16:48:39.505154Z  INFO ThreadId(16) slim_auth::spire: 303: spire provider initialized successfully
+2026-02-02T16:48:39.505166Z  INFO ThreadId(16) slim_auth::spire: 277: Initializing spire identity manager
+2026-02-02T16:48:39.506694Z  INFO ThreadId(16) slim_auth::spire: 303: spire provider initialized successfully
+14976724198355450732                         Created app
+14976724198355450732                         Sent message hey there - 1/10
+14976724198355450732                         received (from session 643283326): hey there from 902113370376718484
+...
+</code></pre><p>At this point the two workloads are securely exchanging messages authenticated
+by SPIRE-issued identities and authorized via JWT claims (audience and
+expiration). The MLS flag demonstrates establishing an end-to-end encrypted
+channel.</p>
+
+  </article>
+
+        </main>
+      </div>
+      
+      <footer class="footer">
+  <div>&copy; 2026 AGNTCY Contributors. All rights reserved.</div>
+</footer>
+
+<script>
+  (function() {
+    const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+      script.onload = function() {
+        mermaidBlocks.forEach(codeBlock => {
+          const pre = codeBlock.parentNode;
+          const div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = codeBlock.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: isDark ? 'dark' : 'default',
+          securityLevel: 'loose'
+        });
+      };
+      document.body.appendChild(script);
+    }
+  })();
+</script>
+
+    </div>
+  </body>
+</html>
