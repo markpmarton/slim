@@ -53,6 +53,10 @@
     
       <link rel="stylesheet" href="../../stylesheets/agntcy-docs.css">
     
+      <link rel="stylesheet" href="../../stylesheets/slim-landing.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/slimctl-terminal.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1522,8 +1526,6 @@
       
         
       
-        
-      
     
     
     
@@ -1584,34 +1586,6 @@
     
   
     Overview
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../slim-slimrpc-compiler/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Protoc Plugin
   
 
     
@@ -2273,8 +2247,8 @@ participants. Messages are sent to a shared channel where every member can read
 and write. All messages are end-to-end encrypted using the
 <a href="https://datatracker.ietf.org/doc/html/rfc9420">MLS protocol</a>. This tutorial is
 based on the
-<a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples/group.py">group.py</a>
-example in the SLIM repo.</p>
+<a href="https://github.com/agntcy/slim-bindings/tree/main/python/examples/group.py">group.py</a>
+example in the slim-bindings repo.</p>
 <h2 id="key-features">Key Features</h2>
 <ul>
 <li><strong>Name-based Addressing</strong>: In SLIM, all endpoints (channels and clients) have
@@ -2290,7 +2264,7 @@ example in the SLIM repo.</p>
 <p>Every participant in a group requires a unique identity for authentication and for use by the MLS protocol. This section explains how to set up identity and create a SLIM application instance.</p>
 <h3 id="slim-app">SLIM App</h3>
 <p>Every SLIM application requires both a unique identity and an authentication mechanism. The identity is used for end-to-end encryption via the MLS protocol, while authentication verifies the application to the SLIM network. In this tutorial, we use shared secret authentication for simplicity. For more advanced authentication methods (JWT, SPIRE), see the <a href="../slim-authentication/">SLIM documentation</a>.</p>
-<p>The example code provides a <code>create_local_app</code> helper function (from <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples/common.py">common.py</a>) that simplifies the app creation and connection process.</p>
+<p>The example code provides a <code>create_local_app</code> helper function (from <a href="https://github.com/agntcy/slim-bindings/tree/main/python/examples/common.py">common.py</a>) that simplifies the app creation and connection process.</p>
 <p>The <code>create_local_app</code> function handles three main tasks:</p>
 <ol>
 <li>Initialize the Global Service: Sets up the SLIM runtime and global service instance</li>
@@ -2407,7 +2381,7 @@ communication.</p>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">local</span><span class="si">}</span><span class="s2"> -&gt; add </span><span class="si">{</span><span class="n">invite_name</span><span class="si">}</span><span class="s2"> to the group&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>This code comes from the
-<a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples/group.py">group.py</a>
+<a href="https://github.com/agntcy/slim-bindings/tree/main/python/examples/group.py">group.py</a>
 example.</p>
 <p>A new group session is created by calling <code>local_app.create_session(...)</code> which returns a <code>SessionContext</code>
 object containing both the session and a completion handle. The completion handle must be awaited to ensure
@@ -2611,8 +2585,8 @@ only its local session is closed.</p>
 <h3 id="run-the-group-communication-example">Run the Group Communication Example</h3>
 <p>Now we will show how to run a new group session and
 how to enable group communication on top of SLIM. The full code can be found in
-<a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples/group.py">group.py</a>
-in the SLIM repo. To run the example, follow the steps listed here:</p>
+<a href="https://github.com/agntcy/slim-bindings/tree/main/python/examples/group.py">group.py</a>
+in the slim-bindings repo. To run the example, follow the steps listed here:</p>
 <h4 id="run-slim">Run SLIM</h4>
 <p>As all members of the group are communicating via a SLIM network, we can set
 up a SLIM instance representing the SLIM network. We use the pre-built
@@ -2662,16 +2636,16 @@ proper authentication and authorization mechanisms.</p>
 </code></pre></div>
 <h4 id="start-the-participants">Start the Participants</h4>
 <p>In this example, we use two participants: <code>agntcy/ns/client-1</code> and <code>agntcy/ns/client-2</code>.</p>
-<p>First, clone the SLIM repository and install the dependencies:</p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="w"> </span>slim-v1.1.0<span class="w"> </span>https://github.com/agntcy/slim.git
-<span class="nb">cd</span><span class="w"> </span>slim/data-plane/bindings/python
+<p>First, clone the slim-bindings repository and install the dependencies:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/agntcy/slim-bindings.git
+<span class="nb">cd</span><span class="w"> </span>slim-bindings/python
 task<span class="w"> </span>python:bindings:build
 task<span class="w"> </span>python:bindings:install-examples
 </code></pre></div>
-<p>Now run these commands in two different terminals from the <code>slim/data-plane/bindings/python</code> directory:</p>
-<div class="highlight"><pre><span></span><code>task<span class="w"> </span>python:example:group:client-1
+<p>Now run these commands in two different terminals from the <code>slim-bindings/python</code> directory:</p>
+<div class="highlight"><pre><span></span><code>task<span class="w"> </span>examples:group:client-1
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>task<span class="w"> </span>python:example:group:client-2
+<div class="highlight"><pre><span></span><code>task<span class="w"> </span>examples:group:client-2
 </code></pre></div>
 <p>This starts two participants authenticated with a shared secret.
 The output of these commands should look like this:</p>
@@ -2682,8 +2656,8 @@ Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span
 </code></pre></div>
 <h4 id="create-the-group">Create the Group</h4>
 <p>Run the moderator application to create the session and invite the two
-participants. In another terminal, from the <code>slim/data-plane/bindings/python</code> directory, run:</p>
-<div class="highlight"><pre><span></span><code>task<span class="w"> </span>python:example:group:moderator
+participants. In another terminal, from the <code>slim-bindings/python</code> directory, run:</p>
+<div class="highlight"><pre><span></span><code>task<span class="w"> </span>examples:group:moderator
 </code></pre></div>
 <p>The result should look like:</p>
 <div class="highlight"><pre><span></span><code><span class="m">2026</span>-01-28T15:22:08.907149Z<span class="w">  </span>INFO<span class="w"> </span>slim<span class="w"> </span>slim_service::service:<span class="w"> </span><span class="m">402</span>:<span class="w"> </span>client<span class="w"> </span>connected<span class="w"> </span><span class="nv">endpoint</span><span class="o">=</span>http://127.0.0.1:46357<span class="w"> </span><span class="nv">conn_id</span><span class="o">=</span><span class="m">0</span>
@@ -2720,7 +2694,7 @@ these functions can be delegated to the controller. We reuse the same group exam
 <p>With the controller, you do not need to set up a moderator in your application. All participants can be run as we did for <code>client-1</code> and <code>client-2</code> in the previous examples. In code, this means you can avoid creating a new group session (using <code>local_app.create_session</code>) and the invitation loop. You only need to implement the <code>receive_loop</code> where the application waits for new sessions. This greatly simplifies your code.</p>
 <h3 id="run-the-group-communication-example_1">Run the Group Communication Example</h3>
 <p>Now we will show how to set up a group using the SLIM Controller. The reference code for the
-application is still <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples/group.py">group.py</a>. To run this example, follow the steps listed here.</p>
+application is still <a href="https://github.com/agntcy/slim-bindings/tree/main/python/examples/group.py">group.py</a>. To run this example, follow the steps listed here.</p>
 <h4 id="run-the-slim-controller">Run the SLIM Controller</h4>
 <p>First, start the SLIM Controller. Full details are in the <a href="../slim-controller/">SLIM Controller</a> documentation; here we reproduce the minimal setup. Create a configuration file:</p>
 <div class="highlight"><pre><span></span><code>cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; ./config-controller.yaml</span>
@@ -2826,7 +2800,7 @@ output should be similar to this:</p>
 </code></pre></div>
 <h4 id="run-the-participants">Run the Participants</h4>
 <p>Because the controller manages the group lifecycle, no participant needs to be designated as moderator in code. Every application instance just waits for a session invite. In three separate terminals, from the folder
-<code>data-plane/bindings/python/examples</code> run:</p>
+<code>slim-bindings/python/examples</code> run:</p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>slim-bindings-group<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--local<span class="w"> </span>agntcy/ns/client-1<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--shared-secret<span class="w"> </span><span class="s2">&quot;very-long-shared-secret-value-0123456789abcdef&quot;</span>
@@ -2982,9 +2956,11 @@ receive loop in the Python code.</p>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div style="text-align: center; font-size: 0.75rem; margin-top: 1rem; color: var(--md-default-fg-color--light);">
-  © Copyright AGNTCY Contributors.
+      <div class="md-copyright md-copyright--centered">
+  <div class="md-copyright__highlight">
+    © 2026, Agntcy, a Series of LF Projects, LLC. All rights reserved.
 
+  </div>
 </div>
       
     </div>
@@ -3008,6 +2984,16 @@ receive loop in the Python code.</p>
         <script src="../../javascripts/card-links.js"></script>
       
         <script src="../../javascripts/external-links.js"></script>
+      
+        <script src="../../javascripts/slim-header-scroll.js"></script>
+      
+        <script src="../../javascripts/slim-hero-tagline.js"></script>
+      
+        <script src="../../javascripts/slim-graph-tooltip.js"></script>
+      
+        <script src="../../javascripts/slimctl-demo-data.js"></script>
+      
+        <script src="../../javascripts/slimctl-terminal.js"></script>
       
     
   </body>

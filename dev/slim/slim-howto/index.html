@@ -53,6 +53,10 @@
     
       <link rel="stylesheet" href="../../stylesheets/agntcy-docs.css">
     
+      <link rel="stylesheet" href="../../stylesheets/slim-landing.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/slimctl-terminal.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1344,8 +1348,6 @@
       
         
       
-        
-      
     
     
     
@@ -1406,34 +1408,6 @@
     
   
     Overview
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../slim-slimrpc-compiler/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Protoc Plugin
   
 
     
@@ -2092,7 +2066,7 @@
 <span class="c1"># ...</span>
 <span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;slim-bindings~=1.0&quot;</span><span class="p">]</span>
 </code></pre></div>
-<p>For more information on the SLIM bindings, see the <a href="../slim-data-plane/">Messaging Layer Tutorial</a> and the <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/python/examples">Python Examples</a>.</p>
+<p>For more information on the SLIM bindings, see the <a href="../slim-data-plane/">Messaging Layer Tutorial</a> and the <a href="https://github.com/agntcy/slim-bindings/tree/main/python/examples">Python Examples</a>.</p>
 </div>
 <div class="tabbed-block">
 <p>Install the Go bindings:</p>
@@ -2108,7 +2082,7 @@
 <p class="admonition-title">C Compiler Required</p>
 <p>The Go bindings use native libraries via <a href="https://pkg.go.dev/cmd/cgo">CGO</a>, so you'll need a C compiler installed on your system.</p>
 </div>
-<p>For more information on the Go bindings, see the <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/go/examples">Go Examples</a>.</p>
+<p>For more information on the Go bindings, see the <a href="https://github.com/agntcy/slim-bindings/tree/main/go/examples">Go Examples</a>.</p>
 </div>
 <div class="tabbed-block">
 <p>Add the Kotlin bindings to your Gradle project:</p>
@@ -2148,7 +2122,7 @@
 <p class="admonition-title">JDK 17+ Required</p>
 <p>The Kotlin bindings use <a href="https://github.com/java-native-access/jna">JNA</a> for native library loading and require JDK 17 or higher.</p>
 </div>
-<p>For more information on the Kotlin bindings, see the <a href="https://github.com/agntcy/slim/tree/slim-bindings-v1.2.0/data-plane/bindings/kotlin/examples">Kotlin Examples</a>.</p>
+<p>For more information on the Kotlin bindings, see the <a href="https://github.com/agntcy/slim-bindings/tree/main/kotlin/examples">Kotlin Examples</a>.</p>
 </div>
 </div>
 </div>
@@ -2249,9 +2223,9 @@ task<span class="w"> </span>control-plane:build
 <p>You've installed SLIM! Here's what to do next:</p>
 <ol>
 <li>Read the <a href="../slim-data-plane/">messaging layer documentation</a></li>
-<li>Explore the <a href="https://github.com/agntcy/slim/tree/slim-v1.1.0/data-plane/bindings/">example applications</a></li>
+<li>Explore the <a href="https://github.com/agntcy/slim-bindings">example applications</a></li>
 <li>Learn about <a href="../slim-data-plane-config/">configuration options</a></li>
-<li>Join us on <a href="https://join.slack.com/t/agntcy/shared_invite/zt-3hb4p7bo0-5H2otGjxGt9OQ1g5jzK_GQ">Slack</a></li>
+<li>Join us on <a href="https://join.slack.com/t/agntcy/shared_invite/zt-3xozr6nzq-i6LXv2P8l2kVW4_Prnny2w">Slack</a></li>
 </ol>
 <h2 id="need-help">Need Help?</h2>
 <p>If you get stuck, check the <a href="../../">detailed documentation</a>, ask questions in our <a href="https://join.slack.com/t/agntcy/shared_invite/zt-3hb4p7bo0-5H2otGjxGt9OQ1g5jzK_GQ">community forums</a>, or report issues on <a href="https://github.com/agntcy/slim">GitHub</a>.</p>
@@ -2329,9 +2303,11 @@ task<span class="w"> </span>control-plane:build
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div style="text-align: center; font-size: 0.75rem; margin-top: 1rem; color: var(--md-default-fg-color--light);">
-  © Copyright AGNTCY Contributors.
+      <div class="md-copyright md-copyright--centered">
+  <div class="md-copyright__highlight">
+    © 2026, Agntcy, a Series of LF Projects, LLC. All rights reserved.
 
+  </div>
 </div>
       
     </div>
@@ -2355,6 +2331,16 @@ task<span class="w"> </span>control-plane:build
         <script src="../../javascripts/card-links.js"></script>
       
         <script src="../../javascripts/external-links.js"></script>
+      
+        <script src="../../javascripts/slim-header-scroll.js"></script>
+      
+        <script src="../../javascripts/slim-hero-tagline.js"></script>
+      
+        <script src="../../javascripts/slim-graph-tooltip.js"></script>
+      
+        <script src="../../javascripts/slimctl-demo-data.js"></script>
+      
+        <script src="../../javascripts/slimctl-terminal.js"></script>
       
     
   </body>
